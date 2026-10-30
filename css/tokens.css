@@ -1,0 +1,43 @@
+/* Token desain Algebra-Mart: Emas/Amber + Hijau Khas #064937 */
+@font-face { font-family: 'Fredoka'; font-weight: 400 700; font-display: swap; src: url('../assets/fonts/fredoka-var.woff2') format('woff2'); }
+@font-face { font-family: 'Nunito'; font-weight: 400 900; font-display: swap; src: url('../assets/fonts/nunito-var.woff2') format('woff2'); }
+@font-face { font-family: 'Roboto'; font-weight: 400; font-display: swap; src: local('Roboto'), url('../assets/fonts/Roboto-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Roboto'; font-weight: 700; font-display: swap; src: local('Roboto Bold'), url('../assets/fonts/Roboto-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'Roboto'; font-weight: 900; font-display: swap; src: local('Roboto Black'), url('../assets/fonts/Roboto-Black.woff2') format('woff2'); }
+
+:root {
+  --am-green-900: #032b20;
+  --am-green-800: #064937;
+  --am-green-700: #0a684f;
+  --am-green-600: #0e8768;
+  --am-green-100: #d1fae5;
+  --am-green-50: #ecfdf5;
+
+  --am-amber-400: #fbbf24;
+  --am-amber-500: #f59e0b;
+  --am-amber-600: #d97706;
+  --am-amber-700: #b45309;
+  --am-brown-900: #451a03;
+  --am-brown-800: #78350f;
+  --am-brown-700: #92400e;
+  --am-cream-50: #fef3c7;
+  --am-cream-100: #fff1d0;
+  --am-cream-200: #fde68a;
+  --am-card: #fffaf0;
+  --am-ink: #172536;
+  --am-muted: #475569;
+  --am-mint: #10b981;
+  --am-blue: #3b82f6;
+  --am-wood: #3f2a22;
+
+  --font: 'Nunito', 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Fredoka', 'Nunito', 'Roboto', system-ui, sans-serif;
+  --radius-card: 26px;
+  --radius-pill: 999px;
+  --shadow-warm: 0 6px 0 rgba(6, 73, 55, .18), 0 12px 26px -8px rgba(6, 73, 55, .24);
+  --shadow-warm-lg: 0 8px 0 rgba(6, 73, 55, .26), 0 22px 44px -10px rgba(6, 73, 55, .34);
+  --header-h: 74px;
+  --header-h-small: 58px;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --pop: cubic-bezier(.34, 1.56, .64, 1);
+}
