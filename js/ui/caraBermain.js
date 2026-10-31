@@ -164,7 +164,7 @@ export function initCaraBermain() {
       <!-- Tautan Akses Buku Instruksi -->
       <div class="cara-buku-notice reveal text-center">
         <p style="margin:0;font-weight:700;color:var(--am-green-800);font-size:1.02rem">
-          Butuh panduan lengkap? <a href="#buku-instruksi" class="link-smooth-instruksi" style="color:var(--am-amber-700);text-decoration:underline;text-underline-offset:4px">Unduh Buku Instruksi &darr;</a>
+          Butuh panduan lengkap? <a href="#buku-instruksi" class="link-smooth-instruksi" style="color:var(--am-amber-700);text-decoration:underline;text-underline-offset:4px">Buku Instruksi (Baca Online &amp; Unduh PDF) &darr;</a>
         </p>
       </div>
     </div>

@@ -172,5 +172,14 @@ export async function initBukuInstruksi() {
       }
     });
   });
+
+  // Sinkronisasi tautan footer Baca Online
+  document.querySelectorAll('a.footer__link-baca-online').forEach(el => {
+    if (isBacaOnlineValid) {
+      el.href = bacaOnlineUrl;
+    } else {
+      el.closest('li')?.remove() || el.remove();
+    }
+  });
 }
 
