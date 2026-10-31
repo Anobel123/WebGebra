@@ -4,10 +4,10 @@ export { LEVELS, QUIZ_SAMPLES, BADGES } from './content-data.js';
 export const MARQUEE = ['Aljabar', 'Literasi Keuangan', 'Kurikulum Merdeka', 'Pembelajaran Mendalam', 'Android & Web', 'LIDM 2026'];
 
 export const SCREENSHOTS = [
-  { src: 'assets/img/ss-profil.png', title: 'Profil Saya', alt: 'Layar Profil Saya: pemain mengisi nama, memilih avatar, dan melihat gelar' },
-  { src: 'assets/img/ss-tantangan.png', title: 'Pilih Tantangan', alt: 'Layar Pilih Tantangan: lencana level bernomor dengan bintang' },
-  { src: 'assets/img/ss-kasir-tutorial.png', title: 'Layar Kasir', alt: 'Layar Kasir dengan petunjuk tutorial cara bermain' },
-  { src: 'assets/img/ss-kasir.png', title: 'Pesanan Pelanggan', alt: 'Pesanan pelanggan yang harus diterjemahkan menjadi bentuk aljabar' }
+  { src: 'assets/img/hero/hero-1.png', slotId: 'hero-1', title: 'Profil Saya', alt: 'Layar Profil Saya: pemain mengisi nama, memilih avatar, dan melihat gelar' },
+  { src: 'assets/img/hero/hero-2.png', slotId: 'hero-2', title: 'Pilih Tantangan', alt: 'Layar Pilih Tantangan: lencana level bernomor dengan bintang' },
+  { src: 'assets/img/hero/hero-3.png', slotId: 'hero-3', title: 'Layar Kasir', alt: 'Layar Kasir dengan petunjuk tutorial cara bermain' },
+  { src: 'assets/img/hero/hero-4.png', slotId: 'hero-4', title: 'Pesanan Pelanggan', alt: 'Pesanan pelanggan yang harus diterjemahkan menjadi bentuk aljabar' }
 ];
 
 export const PHASES = [
@@ -116,12 +116,292 @@ export const VALIDATORS = [
 export const INSTITUTION = {
   name: 'Universitas Jambi', detail: 'Kolaborasi Program Studi Pendidikan Matematika & Informatika',
   logos: [
-    { key: 'algebramart', title: 'Logo Algebra-Mart', badge: 'AM', src: 'assets/img/logo-algebramart.png', alt: 'Logo produk Algebra-Mart', desc: 'Identitas resmi gim edukasi Algebra-Mart' },
-    { key: 'tim', title: 'Logo Tim Pengembang', badge: 'TIM', src: 'assets/img/logo-tim.png', alt: 'Logo Tim Pengembang Algebra-Mart', desc: 'Identitas tim pengembang LIDM 2026' },
-    { key: 'kampus', title: 'Logo Universitas Jambi', badge: 'UNJA', src: 'assets/img/logo-kampus.png', alt: 'Logo Universitas Jambi', desc: 'Perguruan tinggi asal tim pengembang' },
-    { key: 'lidm', title: 'Logo LIDM 2026', badge: 'LIDM', src: 'assets/img/logo-lidm.png', alt: 'Logo Lomba Inovasi Digital Mahasiswa 2026', desc: 'Ajang kompetisi nasional' }
+    { key: 'algebramart', title: 'Logo Algebra-Mart', badge: 'AM', src: 'assets/logo/logo-algebra-mart.png', alt: 'Logo produk Algebra-Mart', desc: 'Identitas resmi gim edukasi Algebra-Mart' },
+    { key: 'tim', title: 'Logo Tim Pengembang', badge: 'TIM', src: 'assets/logo/logo-tim.png', alt: 'Logo Tim Pengembang Algebra-Mart', desc: 'Identitas tim pengembang LIDM 2026' },
+    { key: 'kampus', title: 'Logo Universitas Jambi', badge: 'UNJA', src: 'assets/logo/logo-kampus.png', alt: 'Logo Universitas Jambi', desc: 'Perguruan tinggi asal tim pengembang' },
+    { key: 'lidm', title: 'Logo LIDM 2026', badge: 'LIDM', src: 'assets/logo/logo-lidm.png', alt: 'Logo Lomba Inovasi Digital Mahasiswa 2026', desc: 'Ajang kompetisi nasional' }
   ]
 };
+
+// Panduan Perangkat (Device Guide)
+export const DEVICE_SPECS = {
+  landscapeNotice: {
+    title: "Putar Perangkat ke Mode Lanskap (Mendatar)",
+    desc: "Algebra-Mart dirancang untuk rasio layar 16:9 agar simulasi meja kasir, struk belanja, rak barang, dan kalkulator aljabar dapat dioperasikan secara leluasa dan nyaman."
+  },
+  specs: [
+    {
+      category: "Laptop / Komputer (PC)",
+      min: "Intel Celeron / Core i3, RAM 2 GB, Resolusi layar 1366×768",
+      opt: "Intel Core i5 / AMD Ryzen, RAM 4 GB+, Resolusi Full HD 1920×1080"
+    },
+    {
+      category: "Tablet / Smartphone",
+      min: "Android 7.0 (Nougat), RAM 2 GB, Layar 5.5 inci",
+      opt: "Android 10+, RAM 4 GB+, Tablet 10 inci untuk ruang kasir leluasa"
+    },
+    {
+      category: "Peramban Web (Browser)",
+      min: "Chrome 90+, Edge 90+, Firefox 88+, Safari 14+",
+      opt: "Google Chrome atau Microsoft Edge versi terbaru"
+    },
+    {
+      category: "Koneksi Internet",
+      min: "Offline untuk Mode Solo (setelah aset termuat); 512 Kbps untuk Mode Kelas",
+      opt: "1–2 Mbps stabil untuk sinkronisasi nilai & papan peringkat real-time"
+    },
+    {
+      category: "Orientasi Layar",
+      min: "Lanskap (Mendatar)",
+      opt: "Lanskap Layar Penuh (Fullscreen)"
+    }
+  ]
+};
+
+// Langkah Cara Bermain (Stepper 0 - 14)
+export const CARA_BERMAIN_PHASES = [
+  { id: 'tahap-a', title: 'Tahap A · Persiapan', range: [0, 3], desc: 'Memilih platform dan menyiapkan profil kasir' },
+  { id: 'tahap-b', title: 'Tahap B · Memulai Petualangan', range: [4, 6], desc: 'Memilih mode permainan dan pengenalan materi' },
+  { id: 'tahap-c', title: 'Tahap C · Memilih Tantangan', range: [7, 9], desc: 'Menentukan level dan membaca pesanan belanja' },
+  { id: 'tahap-d', title: 'Tahap D · Simulasi Kasir & Selesai', range: [10, 14], desc: 'Menyusun aljabar, menghitung kembalian, dan evaluasi' }
+];
+
+export const CARA_BERMAIN = [
+  {
+    step: 0,
+    phase: 'tahap-a',
+    title: 'Pilih Platform & Buka Gim',
+    desc: 'Buka Algebra-Mart langsung melalui peramban web modern di komputer/ponsel, atau pasang aplikasi resminya melalui Google Play Store untuk akses cepat tanpa mengetik URL.',
+    badge: 'Persiapan',
+    slotId: 'langkah-00',
+    buttonAction: 'playStore'
+  },
+  {
+    step: 1,
+    phase: 'tahap-a',
+    title: 'Gerbang Masuk Toko',
+    desc: 'Pada layar awal selamat datang, tekan tombol <strong>Mulai Game</strong> untuk membuka pintu gerbang toko kelontong Algebra-Mart.',
+    badge: 'Layar Awal',
+    slotId: 'langkah-01'
+  },
+  {
+    step: 2,
+    phase: 'tahap-a',
+    title: 'Tambah Profil Kasir Baru',
+    desc: 'Jika baru pertama kali bermain, tekan tombol <strong>Tambah Kasir</strong>. Masukkan nama panggilanmu dan pilih avatar kasir favorit untuk menyimpan rekor belanja.',
+    badge: 'Pendaftaran',
+    slotId: 'langkah-02'
+  },
+  {
+    step: 3,
+    phase: 'tahap-a',
+    title: 'Pilih Kasir yang Aktif',
+    desc: 'Klik kartu profil kasirmu untuk masuk ke dalam sesi permainan. Kamu dapat melihat gelar kasir, skor akumulasi, dan bintang yang telah diraih.',
+    badge: 'Profil Kasir',
+    slotId: 'langkah-03'
+  },
+  {
+    step: 4,
+    phase: 'tahap-b',
+    title: 'Pilih Mode Bermain',
+    desc: 'Pilih <strong>Main Solo</strong> untuk berlatih mandiri menaklukkan 20 level, atau gunakan Mode Kelas untuk bergabung ke sesi ruang kompetisi.',
+    badge: 'Pilihan Mode',
+    slotId: 'langkah-04'
+  },
+  {
+    step: 5,
+    phase: 'tahap-b',
+    title: 'Pelajari Materi & Konsep',
+    desc: 'Sebelum melayani pelanggan, tekan tombol <strong>Mulai Materi</strong> untuk membaca panduan interaktif konsep variabel toko, koefisien, dan contoh soal kontekstual.',
+    badge: 'Edukasi Aljabar',
+    slotId: 'langkah-05'
+  },
+  {
+    step: 6,
+    phase: 'tahap-b',
+    title: 'Masuk ke Meja Kasir',
+    desc: 'Setelah memahami aturan main toko, tekan tombol <strong>Mulai Permainan</strong> untuk mulai melayani pelanggan pertama yang mengantre di kasir.',
+    badge: 'Mulai Melayani',
+    slotId: 'langkah-06'
+  },
+  {
+    step: 7,
+    phase: 'tahap-c',
+    title: 'Pilih Level Tantangan',
+    desc: 'Pilih nomor level yang ingin dimainkan pada peta tantangan. Level 1 dimulai dari konsep variabel tunggal hingga Level 20 untuk ujian akhir sindikat toko.',
+    badge: 'Peta Level',
+    slotId: 'langkah-07'
+  },
+  {
+    step: 8,
+    phase: 'tahap-c',
+    title: 'Baca Pesanan Pelanggan',
+    desc: 'Perhatikan balon dialog pesanan pelanggan di sisi kiri meja kasir. Pelanggan akan menyebutkan daftar belanjaan seperti dodol nanas, beras, atau minyak goreng.',
+    badge: 'Antrean Kasir',
+    slotId: 'langkah-08'
+  },
+  {
+    step: 9,
+    phase: 'tahap-c',
+    title: 'Petakan Barang ke Simbol Aljabar',
+    desc: 'Setiap barang punya huruf variabel sendiri yang tertera di balon pesanan (mis. <em>d</em> untuk dodol nanas, <em>b</em> untuk beras, <em>i</em> untuk minyak goreng, <em>j</em> untuk kue padamaran). Jangan mencampur suku yang berbeda!',
+    badge: 'Penalaran Aljabar',
+    slotId: 'langkah-09'
+  },
+  {
+    step: 10,
+    phase: 'tahap-d',
+    title: 'Susun Persamaan di Keypad Kasir',
+    desc: 'Gunakan tombol angka dan variabel pada keypad kasir untuk menyusun bentuk aljabar yang merepresentasikan total belanjaan pelanggan.',
+    badge: 'Input Kasir',
+    slotId: 'langkah-10'
+  },
+  {
+    step: 11,
+    phase: 'tahap-d',
+    title: 'Validasi dengan Tombol Sama Dengan & Konfirmasi',
+    desc: 'Setelah persamaan aljabar terisi lengkap, tekan tombol <strong>=</strong> untuk menghitung total tagihan, lalu tekan <strong>Konfirmasi</strong> untuk mencetak struk belanja.',
+    badge: 'Hitung Tagihan',
+    slotId: 'langkah-11'
+  },
+  {
+    step: 12,
+    phase: 'tahap-d',
+    title: 'Hitung Uang Pembayaran & Kembalian',
+    desc: 'Pelanggan menyerahkan uang tunai. Masukkan pecahan uang kembalian secara tepat, tekan tombol <strong>Berikan Kembalian</strong>, lalu pilih <strong>Yakin</strong>.',
+    badge: 'Transaksi Berhasil',
+    slotId: 'langkah-12'
+  },
+  {
+    step: 13,
+    phase: 'tahap-d',
+    title: 'Lihat Evaluasi & Lanjut Level',
+    desc: 'Dapatkan 1 sampai 3 bintang berdasarkan akurasi rumus dan kembalian. Tekan tombol <strong>Lanjut</strong> atau <strong>Lanjut Level</strong> untuk membuka tantangan berikutnya.',
+    badge: 'Pencapaian',
+    slotId: 'langkah-13'
+  },
+  {
+    step: 14,
+    phase: 'tahap-d',
+    title: 'Periksa Buku Kas & Koleksi Prestasi',
+    desc: 'Kunjungi menu <strong>Buku Kas</strong> untuk meninjau riwayat transaksi keuangan tokomu, serta menu <strong>Prestasi</strong> untuk melihat 20 lencana medali yang berhasil kamu kumpulkan.',
+    badge: 'Prestasi Kasir',
+    slotId: 'langkah-14'
+  }
+];
+
+export const TIPS_BERMAIN = [
+  {
+    icon: 'lightbulb',
+    title: 'Perhatikan Huruf Simbol Barang',
+    desc: 'Setiap barang punya huruf variabel sendiri yang tertera di balon pesanan (mis. d untuk dodol nanas, i untuk minyak goreng, j untuk kue padamaran). Jangan menjumlahkan huruf yang berbeda!'
+  },
+  {
+    icon: 'star',
+    title: 'Syarat 3 Bintang Sempurna',
+    desc: 'Raih 3 bintang dengan 0 kesalahan rumus aljabar dan kembalian, serta skor kuis 100% sempurna. Jika melakukan maksimal 2 kesalahan dan kuis minimal 50%, kamu mendapat 2 bintang.'
+  },
+  {
+    icon: 'book-open',
+    title: 'Pelajari Konsep di Level 0',
+    desc: 'Level 0 memuat materi pengantar interaktif konsep aljabar (koefisien pesanan, variabel harga barang, dan konstanta biaya tambahan) tanpa batasan antrean, sangat dianjurkan dicoba sebelum melayani pelanggan.'
+  }
+];
+
+export const GURU_GUIDE = {
+  title: 'Panduan Guru & Fasilitator (Mode Kelas)',
+  badge: 'Fasilitator Kelas',
+  pinNote: 'PIN Akses Menu Fasilitator resmi di dalam gim: 1234',
+  steps: [
+    {
+      num: 1,
+      title: 'Buka Pengaturan di Layar Login',
+      desc: 'Pada layar login awal ("Siapa Kasir Kita Hari Ini?"), klik ikon gerigi di pojok kiri atas untuk membuka Pengaturan, lalu klik tombol <strong>Fasilitator</strong>.',
+      slotId: 'guru-01'
+    },
+    {
+      num: 2,
+      title: 'Masukkan PIN Fasilitator',
+      desc: 'Pada jendela masukan PIN, ketikkan 4 digit PIN keamanan (bawaan gim: <strong>1234</strong>) lalu klik tombol <strong>Masuk</strong>.',
+      slotId: 'guru-02'
+    },
+    {
+      num: 3,
+      title: 'Buat Sesi Kelas Online',
+      desc: 'Di halaman <strong>RUANG FASILITATOR</strong>, klik tombol <strong>Buat Sesi Kelas Online</strong>. Sistem membuat 6 karakter Kode Ruang unik (mis. ALJ7A1) yang tampil pada lencana "Sesi Live" dan tombol salin. Tombol selanjutnya berganti menjadi "Buat Ruang Baru".',
+      slotId: 'guru-03'
+    },
+    {
+      num: 4,
+      title: 'Bagikan Kode Ruang ke Siswa',
+      desc: 'Arahkan siswa membuka gim, masuk ke lobi kasir, klik tombol <strong>Gabung Kelas</strong>, ketikkan 6 karakter Kode Ruang, lalu klik <strong>Gabung</strong>.',
+      slotId: 'guru-04'
+    },
+    {
+      num: 5,
+      title: 'Pantau Dashboard & Unduh Laporan',
+      desc: 'Pantau statistik kelas (Rata-rata Level, skor kasir), daftar siswa aktif, sistem peringatan dini (EWS siswa yang perlu pendampingan), muat ulang sesi terdahulu lewat <strong>Muat Kelas</strong>, serta salin ringkasan ke WhatsApp atau cetak/simpan PDF.',
+      slotId: 'guru-05'
+    }
+  ]
+};
+
+// FAQ (10 Pertanyaan Spesifik)
+export const FAQ = [
+  {
+    id: 1,
+    q: 'Apakah Algebra-Mart dapat dimainkan secara offline tanpa koneksi internet?',
+    a: 'Ya! Seluruh permainan mandiri (Solo), materi pembelajaran, dan data progres tersimpan di penyimpanan lokal perangkat (localStorage). Koneksi internet hanya dibutuhkan saat pertama kali membuka web atau saat menggunakan Mode Kelas untuk sinkronisasi nilai dengan guru.'
+  },
+  {
+    id: 2,
+    q: 'Apakah gim Algebra-Mart ini gratis dan bebas iklan?',
+    a: 'Benar, 100% gratis tanpa biaya langganan, tanpa iklan komersial, dan tanpa transaksi mikro (in-app purchases). Gim ini dikembangkan murni sebagai inovasi media pembelajaran digital pendidikan.'
+  },
+  {
+    id: 3,
+    q: 'Untuk jenjang kelas dan kurikulum apa gim ini dirancang?',
+    a: 'Algebra-Mart dirancang spesifik untuk siswa SMP/MTs Kelas VII fase D sesuai Capaian Pembelajaran Kurikulum Merdeka, memadukan domain Aljabar dengan Literasi Keuangan dan Muatan Lokal.'
+  },
+  {
+    id: 4,
+    q: 'Bagaimana cara guru memantau perkembangan siswa di kelas secara langsung?',
+    a: 'Guru dapat masuk ke menu Mode Kelas dengan memasukkan PIN fasilitator (1234) untuk membuat ruang kelas. Setelah siswa memasukkan kode ruang, guru dapat memantau perolehan bintang, skor kasir, dan tingkat kesulitan siswa secara langsung di papan leaderboard.'
+  },
+  {
+    id: 5,
+    q: 'Apa saja cakupan materi matematika yang dipelajari di dalam 20 level?',
+    a: 'Materi terstruktur berjenjang dari C1 sampai C6 taksonomi Bloom: Level 1-3 (variabel tunggal & koefisien), Level 4-7 (dua variabel & suku sejenis), Level 8-10 (sifat komutatif & koefisien nol), Level 11-15 (substitusi nilai riil HOTS), hingga Level 16-20 (sifat distributif paket hajatan).'
+  },
+  {
+    id: 6,
+    q: 'Di mana saya dapat mengunduh atau memainkan gim ini?',
+    a: 'Anda dapat langsung memainkannya melalui peramban web modern di komputer maupun ponsel, atau mengunduh aplikasi resminya melalui tautan Google Play Store yang tersedia di bagian Akses Gim.'
+  },
+  {
+    id: 7,
+    q: 'Mengapa layar gim meminta saya untuk memutar perangkat ke mode lanskap?',
+    a: 'Tata letak antarmuka meja kasir dioptimalkan pada aspek rasio 16:9 agar simulasi kalkulator kasir, struk belanja, dan dialog pesanan pelanggan dapat terbaca secara proporsional dan nyaman diklik.'
+  },
+  {
+    id: 8,
+    q: 'Apakah progres permainan dan koleksi lencana saya akan hilang jika browser ditutup?',
+    a: 'Tidak. Data akun kasir, skor, bintang per level, serta 20 koleksi lencana tersimpan aman di penyimpanan peramban (localStorage) perangkat Anda.'
+  },
+  // Pertanyaan 9 & 10 jika kosong/tampil:false otomatis disembunyikan oleh sistem FAQ
+  {
+    id: 9,
+    q: 'Bagaimana cara mereset data akun kasir jika ingin mengulang dari awal?',
+    a: '', // sengaja dikosongkan untuk pengujian penyembunyian otomatis
+    tampil: false
+  },
+  {
+    id: 10,
+    q: 'Bagaimana cara melaporkan saran atau kendala teknis?',
+    a: '', // sengaja dikosongkan untuk pengujian penyembunyian otomatis
+    tampil: false
+  }
+];
 
 /** Validasi data startup; hanya ke console. */
 export function validateContent(c) {

@@ -45,19 +45,29 @@ Semua tautan ada di **`js/config.js`** (bagian `links`):
 
 Aturan: tautan harus diawali `https://`. Bila kosong/tidak valid, kartu otomatis menjadi **"Segera Hadir"** (tombol nonaktif, QR diganti koin). Bila valid, QR dibuat otomatis di browser, lengkap dengan tombol **Unduh QR (PNG)** dan **Salin tautan**.
 
-## Daftar Berkas Lampiran yang Perlu Diisi (`assets/img/`)
+## Sistem Slot Gambar & Panduan Berkas
 
-Cukup taruh berkas gambar ke dalam folder `assets/img/` dengan nama persis di bawah ini (tanpa perlu mengubah kode HTML/JS):
+Seluruh gambar di Web Algebra-Mart menggunakan sistem slot terpusat (`js/slots.js`) dengan deteksi otomatis format berkas (`.webp`, `.png`, `.jpg`, `.jpeg`, `.svg`).
 
-| Kategori | Path & Nama File | Ukuran Rekomendasi | Tempat Tampil di Website |
-|---|---|---|---|
-| **Logo Algebra-Mart** | `assets/img/logo-algebramart.png` | 512×512 px (PNG transparan) | Navbar kiri atas, seksi **Identitas Visual & Logo**, dan Footer |
-| **Logo Tim** | `assets/img/logo-tim.png` | 512×512 px (PNG transparan) | Navbar kiri atas, seksi **Identitas Visual & Logo**, dan Footer |
-| **Logo Kampus** | `assets/img/logo-kampus.png` | Tinggi ≥ 160 px (PNG transparan) | Seksi **Identitas Visual & Logo** (`#profil`) |
-| **Logo LIDM 2026** | `assets/img/logo-lidm.png` | Tinggi ≥ 160 px (PNG transparan) | Seksi **Identitas Visual & Logo** (`#profil`) |
-| **Screenshot Gim 1** | `assets/img/ss-profil.png` | 1280×720 px (16:9) | Carousel Hero Slide 1 (Profil Saya) |
-| **Screenshot Gim 2** | `assets/img/ss-tantangan.png` | 1280×720 px (16:9) | Carousel Hero Slide 2 (Pilih Tantangan) |
-| **Screenshot Gim 3** | `assets/img/ss-kasir-tutorial.png` | 1280×720 px (16:9) | Carousel Hero Slide 3 (Layar Kasir Tutorial) |
+- Panduan lengkap pengisian gambar: **[PANDUAN-ISI-GAMBAR.md](PANDUAN-ISI-GAMBAR.md)**
+- Setiap subfolder di `assets/` dilengkapi berkas panduan `README.md` lokal.
+- Jalankan audit slot gambar kapan saja dengan:
+  ```bash
+  node tools/cek-slot.mjs
+  # atau perbarui manifest & panduan markdown:
+  node tools/cek-slot.mjs --tulis
+  ```
+
+| Folder | Isi / Peruntukan |
+|---|---|
+| `assets/logo/` | Logo Algebra-Mart (persegi & horizontal), Logo Tim, Logo Kampus, Logo LIDM, Favicon |
+| `assets/tim/` | Foto 4 anggota tim (`tim-zakky-...`, `tim-ansharudin-...`, `tim-jean-...`, `tim-alfredo-...`) |
+| `assets/validator/` | Foto dosen pembimbing & validator |
+| `assets/img/hero/` | 4 screenshot utama hero carousel (`hero-1.png` s.d. `hero-4.png`) |
+| `assets/img/langkah/` | 15 screenshot stepper Cara Bermain (`langkah-00.png` s.d. `langkah-14.png`) |
+| `assets/img/guru/` | 5 screenshot Panduan Guru & Mode Kelas (`guru-01.png` s.d. `guru-05.png`) |
+| `assets/img/kelas/` | Banner / infografis fitur Mode Kelas (`kelas-preview.png`) |
+| `assets/img/og/` | Banner pratinjau sosial media OpenGraph / Twitter (`og-image.png`) |
 | **Screenshot Gim 4** | `assets/img/ss-kasir.png` | 1280×720 px (16:9) | Carousel Hero Slide 4 (Pesanan Pelanggan) |
 | **Foto Ketua Tim** | `assets/img/tim-zakky.png` | 400×400 px (1:1) | Kartu ID Zakky Fahrul Gibran (Ketua Tim - Pendidikan Matematika) |
 | **Foto Anggota 1** | `assets/img/tim-ansharudin.png` | 400×400 px (1:1) | Kartu ID Ansharudin Sahid (Anggota - Pendidikan Matematika) |
@@ -102,7 +112,17 @@ Jika kelak tim sudah memiliki data masukan dari uji coba siswa sungguhan, ikuti 
 - Jenjang ditulis "SMP (Fase D, Kurikulum Merdeka), topik bentuk aljabar", tanpa menyebut kelas.
 - Repo hanya menyebut rentang **C1-C3** untuk level 1-10, sehingga situs tidak mengarang jenjang C per level di sana.
 
-## Daftar TODO
+## Status Konfigurasi & Panduan Tambahan
 
-Cari `TODO` di proyek: `js/config.js` (link, email, kategori, checksum), `js/content.js` (peran/prodi/foto/tautan tim, fakultas), `index.html` (og:image, persyaratan perangkat).
+- **Play Store**: Tautan resmi `https://play.google.com/store/apps/details?id=com.ansharudin.algebramart` telah dihubungkan langsung ke tombol dan QR code Play Store (kartu aktif, tidak lagi "Segera Hadir").
+- **Kategori Kompetisi**: Diatur ke `"IPDP"` (Inovasi Pembelajaran Digital Pendidikan) untuk LIDM 2026.
+- **Cara Bermain & Panduan Perangkat**: Bagian interaktif 15 langkah (0–14) dengan 4 tahap, screenshot asli gim, tips cepat, dan panduan guru (PIN: 1234) telah aktif di bawah `#akses`.
+- **FAQ & SEO**: Akordeon tanya jawab lengkap dengan injeksi dinamis skema `FAQPage` dan `SoftwareApplication` telah terpasang. Pertanyaan yang kosong otomatis disembunyikan.
+- **Berbagi Tautan**: Tombol Bagikan di `#akses` dan Footer mendukung WhatsApp, Telegram, salin clipboard, serta Web Share API native.
+- **Thumbnail Medsos (OG Image)**: `assets/img/og-image.png` (1200×630) dapat dibuat ulang kapan saja menggunakan perintah `node tools/generate-og-image.mjs`.
+
+### Konfigurasi Opsional Saat Deployment Publik:
+1. `siteUrl` di `js/config.js`: Isi dengan URL publik GitHub Pages final (mis. `https://ansharudinsahid.github.io/algebra-mart/`). Bila dibiarkan kosong, sistem otomatis memakai `location.origin + location.pathname`.
+2. `demoRoomCode` di `js/config.js`: Kode ruang simulasi kelas untuk juri/guru jika ada (mis. `"DEMO-1234"`). Bila kosong, kotak kode ruang tidak ditampilkan.
+3. FAQ nomor 9 & 10 di `js/content.js`: Sengaja dikosongkan (`a: ""`, `tampil: false`). Jika tim ingin menambah FAQ baru, cukup isi teks pertanyaan dan jawaban pada objek tersebut.
 
