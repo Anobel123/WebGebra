@@ -1,4 +1,4 @@
-// js/ui/faq.js — Modul FAQ Akordeon & Skema SEO JSON-LD FAQPage
+// js/ui/faq.js — Modul FAQ Format Daftar Belanja Bergaris Dua Kolom (Sticky) & Skema SEO JSON-LD
 import { FAQ } from '../content.js';
 import { esc } from '../utils/safe.js';
 import { playSfx } from './audio.js';
@@ -8,7 +8,6 @@ export function initFaq() {
   const container = document.getElementById('faq-container');
   if (!container) return;
 
-  // Filter hanya pertanyaan yang memiliki jawaban dan tidak berstatus sembunyi/TODO
   const validFaqs = FAQ.filter(item => {
     if (!item.q || !item.a) return false;
     if (item.tampil === false) return false;
@@ -44,18 +43,25 @@ export function initFaq() {
   };
   scriptEl.textContent = JSON.stringify(faqSchema, null, 2);
 
-  // Render Accordion UI
+  // Render 2-Column Lined Shopping List Format
   container.innerHTML = `
-    <div class="faq-section reveal" data-fx="tilt">
-      <div class="section-head text-center">
-        <span class="badge-pill">Tanya Jawab</span>
-        <h3 class="faq-title">Pertanyaan Sering Diajukan (FAQ)</h3>
-        <p class="faq-subtitle">Temukan jawaban cepat seputar akses gim, mode pembelajaran, dan kurikulum.</p>
+    <div class="shopping-list-faq reveal" data-fx="tilt">
+      <!-- Kolom Kiri: Papan Clipboard Daftar Belanja Menempel (Sticky) -->
+      <div class="shopping-list-sticky-head">
+        <span class="badge-pill" style="margin-bottom:.6rem;display:inline-block">Daftar Tanya Jawab</span>
+        <h3 style="margin:0 0 .5rem;font-size:1.35rem;color:var(--am-brown-900)">Pertanyaan Sering Diajukan</h3>
+        <p style="margin:0 0 1rem;font-size:.9rem;color:var(--am-muted);line-height:1.45">
+          Panduan praktis seputar instalasi, mode offline, sinkronisasi kelas, dan kurikulum Fase D.
+        </p>
+        <div style="background:var(--am-cream-50);border:1.5px dashed var(--am-amber-600);border-radius:10px;padding:.8rem;font-size:.82rem;font-weight:700;color:var(--am-brown-800)">
+          Klik pertanyaan di sebelah kanan untuk membaca penjelasan lengkap.
+        </div>
       </div>
 
+      <!-- Kolom Kanan: Akordeon Bergaris Kertas Belanja -->
       <div class="faq-accordion" id="faq-accordion" role="region" aria-label="Daftar Pertanyaan yang Sering Diajukan">
         ${validFaqs.map((f, idx) => `
-          <div class="faq-item card ${idx === 0 ? 'is-open' : ''}" data-id="${f.id}">
+          <div class="faq-item card ${idx === 0 ? 'is-open' : ''}" data-id="${f.id}" style="margin-bottom:1rem;border-left:5px solid var(--am-amber-500)">
             <button type="button" class="faq-question" id="faq-btn-${idx}" aria-expanded="${idx === 0 ? 'true' : 'false'}" aria-controls="faq-ans-${idx}">
               <span class="faq-question-text">${esc(f.q)}</span>
               <span class="faq-chevron" aria-hidden="true">
@@ -92,13 +98,12 @@ export function initFaq() {
       if (a) a.hidden = true;
     });
 
-    // Jika sebelumnya tertutup, sekarang buka
+    // Toggle item saat ini
     if (!isOpen) {
       item.classList.add('is-open');
       btn.setAttribute('aria-expanded', 'true');
-      const ans = item.querySelector('.faq-answer');
-      if (ans) ans.hidden = false;
+      const answer = item.querySelector('.faq-answer');
+      if (answer) answer.hidden = false;
     }
   });
 }
-

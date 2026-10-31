@@ -100,6 +100,15 @@ export function initCaraBermain() {
         </div>
       </div>
 
+      <!-- Ban Berjalan Horizontal (Conveyor Belt) dengan 14 Penanda Langkah Koin -->
+      <div class="conveyor-belt-track" id="conveyor-belt" role="tablist" aria-label="Ban Berjalan Langkah Permainan">
+        ${CARA_BERMAIN.map((item, idx) => `
+          <button type="button" class="conveyor-step-coin ${idx === 0 ? 'is-active' : ''}" data-step="${idx}" role="tab" aria-selected="${idx === 0}" aria-label="Langkah ${item.step}: ${esc(item.title)}">
+            ${item.step}
+          </button>
+        `).join('')}
+      </div>
+
       <!-- Kode Ruang Demo Juri (Bila diatur di SITE_CONFIG) -->
       ${demoRoom ? `
         <div class="demo-room-box">
@@ -251,6 +260,15 @@ export function initCaraBermain() {
 
     // Update counter
     counterEl.textContent = `${currentStep + 1} / ${CARA_BERMAIN.length}`;
+    const conveyorCoins = container.querySelectorAll('.conveyor-step-coin');
+    conveyorCoins.forEach((btn, idx) => {
+      const active = idx === currentStep;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-selected', String(active));
+      if (active) {
+        btn.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+      }
+    });
 
     // Reset progress bar
     stepStartTime = Date.now();
@@ -295,6 +313,15 @@ export function initCaraBermain() {
   });
   btnPlay.addEventListener('click', () => {
     togglePlay();
+  });
+
+  const conveyorBelt = document.getElementById('conveyor-belt');
+  conveyorBelt?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.conveyor-step-coin');
+    if (btn) {
+      const s = parseInt(btn.getAttribute('data-step'), 10);
+      if (!isNaN(s)) goToStep(s, true);
+    }
   });
 
   stepperList.addEventListener('click', (e) => {

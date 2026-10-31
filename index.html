@@ -1,28 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Algebra-Mart | Gim Edukasi Literasi Matematika &amp; Keuangan</title>
-  <meta name="description" content="Algebra-Mart: gim edukasi literasi matematika dan keuangan untuk siswa SMP. Jadi kasir minimarket, tulis bentuk aljabar, dan layani pembayaran. Karya LIDM 2026.">
-  <meta name="theme-color" content="#f59e0b">
-  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico?v=2">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png?v=2">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png?v=2">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png?v=2">
-  <link rel="manifest" href="site.webmanifest">
-  <meta property="og:site_name" content="Algebra-Mart">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#451a03">
+  <title>Algebra-Mart — Belajar Aljabar Sambil Jadi Kasir Toko Kelontong Jambi</title>
+  <meta name="description" content="Algebra-Mart adalah gim edukasi literasi matematika dan keuangan untuk siswa SMP berbasis Kurikulum Merdeka Fase D dengan simulasi kasir toko kelontong Jambi.">
+  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <!-- Open Graph & Twitter Card -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Algebra-Mart | Gim Edukasi Literasi Matematika &amp; Keuangan">
-  <meta property="og:description" content="Petualangan Belajar Aljabar di Toko Kelontong Modern untuk Siswa SMP Kelas VII. Karya Inovasi Pembelajaran Digital (IPDP) LIDM 2026.">
+  <meta property="og:title" content="Algebra-Mart — Belajar Aljabar Sambil Jadi Kasir Toko Kelontong Jambi">
+  <meta property="og:description" content="Gim edukasi literasi matematika &amp; keuangan kontekstual SMP Fase D karya mahasiswa &amp; dosen Universitas Jambi.">
   <meta property="og:image" content="assets/img/og/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="id_ID">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Algebra-Mart | Gim Edukasi Literasi Matematika &amp; Keuangan">
-  <meta name="twitter:description" content="Petualangan Belajar Aljabar di Toko Kelontong Modern untuk Siswa SMP Kelas VII.">
+  <meta name="twitter:title" content="Algebra-Mart — Belajar Aljabar Sambil Jadi Kasir">
+  <meta name="twitter:description" content="Gim edukasi aljabar kontekstual toko kelontong Jambi untuk Kurikulum Merdeka.">
   <meta name="twitter:image" content="assets/img/og/og-image.png">
+  <!-- Schema.org SoftwareApplication JSON-LD -->
   <script type="application/ld+json" id="app-jsonld">
   {
     "@context": "https://schema.org",
@@ -115,6 +114,7 @@
         <a href="#beranda">Beranda</a>
         <a href="#tentang">Tentang</a>
         <a href="#materi">Materi</a>
+        <a href="#cara-bermain">Cara Bermain</a>
         <a href="#akses">Akses Game</a>
         <a href="#profil">Pengembang</a>
       </nav>
@@ -136,13 +136,14 @@
   </header>
 
   <main id="main">
-    <!-- A. BERANDA -->
+    <!-- A. BERANDA: ASYMMETRIC OFFSET PORTAL -->
     <section id="beranda" class="panel hero" aria-labelledby="h-hero">
       <div class="hero__bg" data-speed="0.15"></div>
       <div class="hero__overlay"></div>
 
       <div class="container hero__grid">
-        <div class="reveal">
+        <!-- Kolom Kiri: Judul Ber-offset Vertikal & Tombol CTA Berbeda Ukuran -->
+        <div class="hero__offset-content reveal">
           <div class="hero__brand-badges">
             <span class="chip">Karya <span data-competition>LIDM 2026</span> · Universitas Jambi</span>
           </div>
@@ -156,15 +157,29 @@
             <span class="platform-tag">Android &amp; Web</span>
             <span class="platform-meta">Dapat dimainkan luring · 20 Level C1–C6</span>
           </div>
-          <p style="font-size:.82rem;margin-top:.8rem;color:var(--am-cream-200);font-weight:700">*Bermain dapat dilakukan luring; sinkronisasi Mode Kelas membutuhkan internet. · <a href="#cara-bermain-container" style="color:#fbbf24;text-decoration:underline">Lihat cara bermain &rarr;</a></p>
+          <p style="font-size:.82rem;margin-top:.8rem;color:var(--am-cream-200);font-weight:700">*Bermain dapat dilakukan luring; sinkronisasi Mode Kelas membutuhkan internet. · <a href="#cara-bermain" style="color:#fbbf24;text-decoration:underline">Lihat cara bermain &rarr;</a></p>
         </div>
+
+        <!-- Kolom Kanan: Mockup Tablet Kasir Miring Meluap ke Kanan-Atas -->
         <div class="reveal" data-reveal="zoom">
-          <div class="device" id="carousel" role="region" aria-roledescription="carousel" aria-label="Tangkapan layar gim" tabindex="0">
-            <div class="device__screen"><div class="carousel__track"></div></div>
+          <div class="hero__mockup-wrap">
+            <div class="device" id="carousel" role="region" aria-roledescription="carousel" aria-label="Tangkapan layar gim" tabindex="0">
+              <div class="device__screen"><div class="carousel__track"></div></div>
+            </div>
+            <div class="carousel__dots" id="carousel-dots"></div>
           </div>
-          <div class="carousel__dots" id="carousel-dots"></div>
         </div>
       </div>
+
+      <!-- Karakter Kasir Wanita di Sudut Kiri Bawah Memotong Batas Seksi -->
+      <div class="hero-cashier-character reveal" data-reveal="shelf" style="--shelf-rot: 0deg">
+        <img class="hero-cashier__img" src="assets/game/character/character-female.svg" alt="Ibu Kasir Algebra-Mart" width="130" height="180" loading="eager" decoding="async">
+        <div class="hero-cashier__bubble" role="status" aria-live="polite">
+          <span class="hero-cashier__name">Ibu Kasir:</span>
+          <p>“Selamat datang di Algebra-Mart! Mari bantu Ibu hitung pesanan pelanggan hari ini.”</p>
+        </div>
+      </div>
+
       <div class="marquee" aria-hidden="true">
         <div class="marquee__inner">
           <span>Aljabar · Literasi Keuangan · Kurikulum Merdeka · Pembelajaran Mendalam · Android &amp; Web · LIDM 2026 ·</span>
@@ -175,7 +190,10 @@
       </div>
     </section>
 
-    <!-- B. TENTANG -->
+    <!-- Pemisah Kanopi Bergaris Antara Beranda & Tentang -->
+    <div class="divider--canopy" aria-hidden="true"></div>
+
+    <!-- B. TENTANG: SCROLLYTELLING SPLIT COUNTER -->
     <section id="tentang" class="panel panel--light" aria-labelledby="h-tentang">
       <div class="container">
         <div class="section-head reveal">
@@ -184,86 +202,82 @@
           <p class="lead">Gim matematika kontekstual Fase D Kurikulum Merdeka: menerjemahkan pesanan barang dagangan khas Jambi ke bentuk aljabar nyata di meja kasir.</p>
         </div>
         
-        <!-- Papan Menu Asimetris 60/40 & Dialog Toko -->
-        <div class="about-board">
-          <div class="card about-menu-board reveal" data-reveal="shelf" style="--shelf-rot:-1.2deg">
-            <div class="menu-board__head">
-              <span class="menu-board__badge">MEJA KASIR 01</span>
-              <h3 class="menu-board__title">Bagaimana Belanja Jadi Bentuk Aljabar?</h3>
-            </div>
-            <p class="menu-board__text">
-              Di warung kelontong ini, harga satu ikat dodol nanas adalah <b>d</b> rupiah, dan sebungkus tempoyak adalah <b>t</b> rupiah. Saat pembeli memesan 3 dodol nanas lalu menambah 4 dodol nanas lagi, kasir mengetikkan bentuk aljabar penjumlahan suku sejenis:
-            </p>
-            <div class="receipt-sample" aria-label="Struk Belanja Aljabar">
-              <div class="receipt-sample__head">ALGEBRA-MART · STRUK TRANSAKSI #01</div>
-              <div class="receipt-sample__line"><span>3x Dodol Nanas Muaro Jambi</span><span class="receipt-dots" aria-hidden="true"></span><b>3d</b></div>
-              <div class="receipt-sample__line"><span>4x Dodol Nanas (Pesanan Tambahan)</span><span class="receipt-dots" aria-hidden="true"></span><b>4d</b></div>
-              <div class="receipt-sample__sep" aria-hidden="true">------------------------------------------------</div>
-              <div class="receipt-sample__line receipt-sample__total"><span>Bentuk Aljabar Kasir:</span><b>3d + 4d = 7d</b></div>
-              <div class="receipt-sample__line receipt-sample__cash"><span>Uang Kertas Tunai Pembeli:</span><span>Rp20.000</span></div>
-            </div>
-          </div>
-
-          <div class="about-game-stage reveal" data-reveal="zoom">
-            <div class="customer-dialog-card card">
-              <div class="customer-dialog__bubble">
-                <span class="bubble-speaker">Pelanggan Toko:</span>
-                <p>“Tolong 3 batang dodol nanas ya kasir, eh tambah 4 batang lagi untuk oleh-oleh!”</p>
+        <!-- Dua Kolom Scrollytelling: Kiri Menempel (Sticky), Kanan Baris Pilar -->
+        <div class="scrollytelling-split">
+          <!-- Kolom Kiri: Panel Kasir Menempel (Sticky) yang Reaktif terhadap Scroll -->
+          <div class="scrolly-counter-sticky">
+            <div class="cashier-register-screen" id="about-scrolly-panel">
+              <div class="cashier-register__slot" aria-hidden="true"></div>
+              <div class="cashier-register__head">
+                <span class="cashier-register__tag">MEJA KASIR 01</span>
+                <span class="cashier-register__step-badge" id="scrolly-step-badge">Pilar 01 / 05</span>
               </div>
-              <div class="cashier-dialog__bubble">
-                <span class="bubble-speaker">Kasir (Kamu):</span>
-                <p>“Siap! Tiga d ditambah empat d sama dengan <strong>7d</strong>. Uangnya Rp20.000 ya!”</p>
+              <div class="cashier-lcd-display" id="scrolly-lcd">
+                <span class="cashier-lcd__speaker" id="scrolly-speaker">Pesanan Dodol Nanas Muaro Jambi:</span>
+                <p class="cashier-lcd__dialog" id="scrolly-dialog">“Tolong 3 ikat dodol nanas ya kasir, eh tambah 4 ikat lagi!”</p>
+                <div class="cashier-lcd__equation-box">
+                  <span class="cashier-lcd__equation-label">Bentuk Aljabar Kasir:</span>
+                  <span class="cashier-lcd__equation-value" id="scrolly-equation">3d + 4d = 7d</span>
+                </div>
               </div>
-              <div class="stage-coin-bag" aria-hidden="true">
-                <span class="coin-badge">Rp</span>
-                <span class="bag-label">Laci Kasir Aktif</span>
+              <div class="cashier-register__foot">
+                <span>Laci Kasir Aktif</span>
+                <span id="scrolly-status">Suku Sejenis Dodol (d)</span>
               </div>
             </div>
           </div>
-        </div>
 
-        <h3 class="subhead reveal">Simulasi Transaksi di Meja Kasir</h3>
-        <div class="card reveal" data-reveal="zoom" style="max-width:840px;margin:0 auto 3.2rem"><div id="demo">
-          <noscript>Demo interaktif membutuhkan JavaScript. Silakan coba gim lengkap di bagian Akses Game.</noscript>
-        </div></div>
+          <!-- Kolom Kanan: 5 Baris Pilar Narasi Panjang Bernomor Tipografi Besar -->
+          <div class="scrolly-pillars-col">
+            <article class="menu-pillar-row scrolly-pillar-item reveal is-active-pillar" data-reveal="shelf" data-scrolly-pilar="1">
+              <span class="menu-pillar-num">01</span>
+              <div class="menu-pillar-content">
+                <h4>Variabel Adalah Harga Dagangan Nyata</h4>
+                <p>Bukan sekadar huruf x dan y tanpa makna. Simbol mewakili komoditas belanja lokal Jambi: dodol nanas Muaro Jambi (<em>d</em>), kue padamaran (<em>p</em>), gandus, dan tempoyak (<em>t</em>).</p>
+              </div>
+            </article>
 
-        <h3 class="subhead reveal">Lima Aturan Main di Balik Meja Kasir</h3>
-        <div class="menu-pillars" id="pillars">
-          <article class="menu-pillar-row reveal" data-reveal="shelf">
-            <span class="menu-pillar-num">01</span>
-            <div class="menu-pillar-content">
-              <h4>Variabel Adalah Harga Dagangan Nyata</h4>
-              <p>Bukan sekadar huruf x dan y tanpa makna. Simbol mewakili komoditas belanja lokal Jambi: dodol nanas Muaro Jambi (<em>d</em>), kue padamaran (<em>p</em>), gandus, dan tempoyak (<em>t</em>).</p>
+            <article class="menu-pillar-row scrolly-pillar-item reveal" data-reveal="shelf" data-scrolly-pilar="2">
+              <span class="menu-pillar-num">02</span>
+              <div class="menu-pillar-content">
+                <h4>Bernalar Suku Sejenis di Meja Kasir</h4>
+                <p>Siswa memahami secara intuitif mengapa 3 dodol nanas + 4 dodol nanas (3d + 4d = 7d) dapat dijumlahkan, sementara dodol dan tempoyak (3d + 2t) tidak dapat dilebur.</p>
+              </div>
+            </article>
+
+            <article class="menu-pillar-row scrolly-pillar-item reveal" data-reveal="shelf" data-scrolly-pilar="3">
+              <span class="menu-pillar-num">03</span>
+              <div class="menu-pillar-content">
+                <h4>20 Level Terstruktur dari C1 hingga C6</h4>
+                <p>Scaffolding bertahap: pengenalan koefisien tunggal di Level 1-3, dua variabel di Level 4-7, sifat operasi di Level 8-10, substitusi harga riil di Level 11-15, hingga sifat distributif paket hajatan di Level 16-20.</p>
+              </div>
+            </article>
+
+            <article class="menu-pillar-row scrolly-pillar-item reveal" data-reveal="shelf" data-scrolly-pilar="4">
+              <span class="menu-pillar-num">04</span>
+              <div class="menu-pillar-content">
+                <h4>Literasi Keuangan &amp; Perhitungan Kembalian</h4>
+                <p>Belajar aljabar langsung terhubung dengan transaksi kasir: menghitung laba toko di Buku Kas, menghitung uang kembalian pecahan Rp500 hingga Rp100.000, serta menyisihkan sumbangan sosial.</p>
+              </div>
+            </article>
+
+            <article class="menu-pillar-row scrolly-pillar-item reveal" data-reveal="shelf" data-scrolly-pilar="5">
+              <span class="menu-pillar-num">05</span>
+              <div class="menu-pillar-content">
+                <h4>Akses Ringan untuk Sekolah dan Daerah 3T</h4>
+                <p>Dapat dijalankan langsung di peramban web maupun aplikasi Android luring. Seluruh aset gim dibundel lokal sehingga tidak membebani kuota data siswa.</p>
+              </div>
+            </article>
+
+            <!-- Papan Tulis Kapur: Dasar Pengembangan & Catatan Toko -->
+            <div class="chalkboard-column reveal" data-reveal="shelf" style="--shelf-rot:1.5deg">
+              <h4 style="margin:0 0 .6rem;color:var(--am-amber-400)">Dasar Pengembangan &amp; Peralatan Toko</h4>
+              <p style="font-size:.92rem;line-height:1.55;margin:0 0 1rem;color:#d1fae5">
+                Didesain berdasarkan Capaian Pembelajaran Matematika SMP Fase D (Elemen Aljabar), memadukan simulasi transaksi kasir dengan gamifikasi kenaikan pangkat kasir.
+              </p>
+              <div class="features-asymmetric" id="features"></div>
             </div>
-          </article>
-          <article class="menu-pillar-row reveal" data-reveal="shelf">
-            <span class="menu-pillar-num">02</span>
-            <div class="menu-pillar-content">
-              <h4>Bernalar Suku Sejenis di Meja Kasir</h4>
-              <p>Siswa memahami secara intuitif mengapa 3 dodol nanas + 4 dodol nanas (3d + 4d = 7d) dapat dijumlahkan, sementara dodol dan tempoyak (3d + 2t) tidak dapat dilebur.</p>
-            </div>
-          </article>
-          <article class="menu-pillar-row reveal" data-reveal="shelf">
-            <span class="menu-pillar-num">03</span>
-            <div class="menu-pillar-content">
-              <h4>20 Level Terstruktur dari C1 hingga C6</h4>
-              <p>Scaffolding bertahap: pengenalan koefisien tunggal di Level 1-3, dua variabel di Level 4-7, sifat operasi di Level 8-10, substitusi harga riil di Level 11-15, hingga sifat distributif paket hajatan di Level 16-20.</p>
-            </div>
-          </article>
-          <article class="menu-pillar-row reveal" data-reveal="shelf">
-            <span class="menu-pillar-num">04</span>
-            <div class="menu-pillar-content">
-              <h4>Literasi Keuangan &amp; Perhitungan Kembalian</h4>
-              <p>Belajar aljabar langsung terhubung dengan transaksi kasir: menghitung laba toko di Buku Kas, menghitung uang kembalian pecahan Rp500 hingga Rp100.000, serta menyisihkan sumbangan sosial.</p>
-            </div>
-          </article>
-          <article class="menu-pillar-row reveal" data-reveal="shelf">
-            <span class="menu-pillar-num">05</span>
-            <div class="menu-pillar-content">
-              <h4>Akses Ringan untuk Sekolah dan Daerah 3T</h4>
-              <p>Dapat dijalankan langsung di peramban web maupun aplikasi Android luring. Seluruh aset gim dibundel lokal sehingga tidak membebani kuota data siswa.</p>
-            </div>
-          </article>
+          </div>
         </div>
 
         <div class="shop-plaque reveal" aria-label="Ringkasan Spesifikasi Toko">
@@ -272,29 +286,34 @@
           <div class="shop-plaque__item"><b data-count="20">20</b><span>Lencana Prestasi</span></div>
           <div class="shop-plaque__item"><b data-count="6">6</b><span>Jenjang Karier Kasir</span></div>
         </div>
+      </div>
 
-        <h3 class="subhead reveal">Peralatan Kasir &amp; Catatan Toko</h3>
-        <div class="features-asymmetric" id="features"></div>
+      <!-- Pita Meja Kayu Jati Lebar Penuh (Demo Kasir) -->
+      <div class="timber-counter-band reveal" data-reveal="zoom">
+        <div class="timber-counter-band__inner">
+          <h3 class="timber-counter-band__title">Simulasi Transaksi di Meja Kasir</h3>
+          <p style="text-align:center;color:var(--am-cream-100);margin-bottom:2rem;font-weight:700">Coba ketikkan pesanan belanja di bawah untuk melihat kalkulasi mesin kasir secara langsung:</p>
+          <div id="demo">
+            <noscript>Demo interaktif membutuhkan JavaScript. Silakan coba gim lengkap di bagian Akses Game.</noscript>
+          </div>
+        </div>
+      </div>
 
-        <h3 class="subhead reveal">4 Tahap Melayani Pelanggan di Toko</h3>
-        <ol class="steps-board reveal" style="max-width:760px;margin:0 auto">
-          <li>Pilih avatar kasir dan isi nama kasir di papan nama toko.</li>
-          <li>Pahami harga barang dan aturan aljabar di Level 0 (Pengantar).</li>
-          <li>Layani pesanan pembeli: tuliskan rumus aljabar dan hitung kembalian uang rupiah.</li>
-          <li>Jawab kuis evaluasi pemahaman dan raih kenaikan gelar kasir.</li>
-        </ol>
-
-        <!-- Sub-bagian di akhir #tentang: Kelas Algebra-Mart -->
-        <div class="kelas-section" id="kelas-section">
-          <h3 class="subhead reveal" id="h-kelas">Kelas Algebra-Mart</h3>
-          <p class="lead reveal kelas-subtitle">Cerita Skenario Pembelajaran di Meja Kasir</p>
-          <p class="kelas-disclaimer reveal" id="kelas-disclaimer" data-sumber="ilustrasi">Karakter dan kutipan ini ilustrasi untuk menggambarkan skenario pembelajaran, bukan testimoni siswa.</p>
-          <div id="student-stage" class="reveal"></div>
+      <!-- Dinding Papan Tulis Hijau Kelas (Kelas Algebra-Mart) -->
+      <div class="chalkboard-classroom-band reveal" id="kelas-section">
+        <div class="chalkboard-classroom-band__inner">
+          <h3 class="subhead" id="h-kelas">Kelas Algebra-Mart</h3>
+          <p class="lead">Cerita Skenario Pembelajaran di Meja Kasir</p>
+          <p class="kelas-disclaimer" id="kelas-disclaimer" data-sumber="ilustrasi">Karakter dan kutipan ini ilustrasi untuk menggambarkan skenario pembelajaran, bukan testimoni siswa.</p>
+          <div id="student-stage"></div>
         </div>
       </div>
     </section>
 
-    <!-- C. MATERI -->
+    <!-- Pemisah Bilah Rak Kayu Jati Tipis Antara Tentang & Materi -->
+    <div class="divider--shelf-rail" aria-hidden="true"></div>
+
+    <!-- C. MATERI: RAK BARANG HORIZONTAL & ETALASE KACA -->
     <section id="materi" class="panel panel--alt" aria-labelledby="h-materi">
       <div class="container">
         <div class="section-head reveal">
@@ -313,20 +332,54 @@
           <div class="phase-receipt-catalog__row"><span>FASE 5: SIFAT DISTRIBUTIF PAKET (Level 16–20)</span><span class="receipt-dots" aria-hidden="true"></span><small>Pesanan Rombongan &amp; Paket Hajatan</small></div>
         </div>
 
+        <!-- Rak Kayu Horizontal per Fase & Navigasi Tab -->
         <div class="tabs" id="materi-tabs" role="tablist" aria-label="Fase materi"></div>
-        <div id="materi-panel" role="tabpanel" aria-live="polite"><noscript>Aktifkan JavaScript untuk melihat daftar level.</noscript></div>
+        <div id="materi-panel" role="tabpanel" aria-live="polite">
+          <noscript>Aktifkan JavaScript untuk melihat daftar level.</noscript>
+        </div>
 
-        <h3 class="subhead reveal">Lencana &amp; Gelar Kasir</h3>
+        <!-- Floating Card Detail Koin Level (Dikelola materi.js) -->
+        <div id="floating-level-card" class="floating-shelf-card" hidden role="dialog" aria-modal="true" aria-labelledby="floating-level-title">
+          <button type="button" class="btn btn--small btn--secondary floating-shelf-card__close" id="floating-level-close" aria-label="Tutup detail level">✕</button>
+          <div id="floating-level-body"></div>
+        </div>
+
+        <!-- Etalase Kaca Lencana: Tepat Satu-Satunya Grid Kartu Seragam di Seluruh Web -->
+        <h3 class="subhead reveal">Etalase Lencana &amp; Gelar Kasir</h3>
         <p class="reveal" style="text-align:center;font-weight:700">Jenjang Karier: Kasir Magang → Kasir Junior → Pedagang Ahli → Juragan Pasar → Sultan Aljabar. <b>Pedagang Dermawan</b> bagi yang aktif berbagi.</p>
         <div class="tabs" id="badge-filters" style="justify-content:center" aria-label="Filter tier lencana"></div>
-        <div class="badge-grid" id="badge-grid"></div>
+        
+        <div class="glass-showcase reveal" data-reveal="shelf">
+          <div class="badge-grid" id="badge-grid"></div>
+        </div>
 
+        <!-- Latihan Uji Nalar: Dua Struk Kasir Bertumpuk Miring -->
         <h3 class="subhead reveal">Latihan Uji Nalar Bentuk Aljabar</h3>
-        <div class="grid grid--pillars" id="quiz-list"></div>
+        <div class="receipt-stack-quiz" id="quiz-list"></div>
       </div>
     </section>
 
-    <!-- D. AKSES -->
+    <!-- Pemisah Diagonal Kayu Miring Antara Materi & Cara Bermain -->
+    <div class="divider--diagonal" aria-hidden="true"></div>
+
+    <!-- D. CARA BERMAIN: PANGGUNG INTERAKTIF MALAM (CONVEYOR) -->
+    <section id="cara-bermain" class="panel panel--night" aria-labelledby="h-cara-bermain">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Panduan Alur Permainan</span>
+          <h2 id="h-cara-bermain" class="heading-mask">Cara Bermain, Langkah demi Langkah</h2>
+          <p class="lead">Ikuti urutan ban berjalan ini untuk mencoba Algebra-Mart dari nol sampai level pertama selesai.</p>
+        </div>
+
+        <!-- Kontainer Interaktif Cara Bermain & Ban Berjalan -->
+        <div id="cara-bermain-container" class="conveyor-stage-wrap"></div>
+      </div>
+    </section>
+
+    <!-- Pemisah Diagonal Kembali ke Terang Antara Cara Bermain & Akses -->
+    <div class="divider--diagonal-alt" aria-hidden="true"></div>
+
+    <!-- E. AKSES: HUB MEJA TRANSAKSI ASIMETRIS (DIAGONAL CUT) -->
     <section id="akses" class="panel panel--light" aria-labelledby="h-akses">
       <div class="container">
         <div class="section-head reveal">
@@ -334,7 +387,11 @@
           <h2 id="h-akses" class="heading-mask">Buka Toko di Perangkatmu: Web atau Android</h2>
           <p class="lead">Pindai QR Toko dengan kamera ponsel atau klik tombol di bawah untuk langsung mencoba mesin kasir.</p>
         </div>
-        <div class="grid grid--access" id="access-grid"><noscript>Tautan gim ada di repositori: <a href="https://github.com/ansharudinsahid/algebra-mart-7">GitHub</a>.</noscript></div>
+
+        <!-- Hub Meja Transaksi Asimetris (Play Store Besar + Web + Baris Titik-Titik) -->
+        <div class="access-hub-asymmetric" id="access-grid">
+          <noscript>Tautan gim ada di repositori: <a href="https://github.com/ansharudinsahid/algebra-mart-7">GitHub</a>.</noscript>
+        </div>
 
         <!-- Tombol Aksi & Berbagi Akses -->
         <div class="access-share-bar reveal text-center" style="margin:2rem auto;display:flex;justify-content:center;gap:1rem;flex-wrap:wrap">
@@ -342,27 +399,27 @@
             <svg class="am-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98m-.01-10.98l-6.82 3.98"/></svg>
             <span>Bagikan Tautan Gim</span>
           </button>
-          <a href="#cara-bermain-container" class="btn btn--secondary" data-burst data-fx="cta magnetic">
+          <a href="#cara-bermain" class="btn btn--secondary" data-burst data-fx="cta magnetic">
             <svg class="am-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a4.5 4.5 0 000-9H7a4 4 0 010-8h11"/><circle cx="18" cy="5" r="3"/></svg>
             <span>Lihat Cara Bermain</span>
           </a>
         </div>
 
-        <!-- Sub-bagian 1: Cara Bermain Langkah demi Langkah -->
-        <div id="cara-bermain-container" style="margin-top:3.5rem;position:relative"></div>
-
-        <!-- Sub-bagian 2: Buku Instruksi (Dokumen PDF) -->
+        <!-- Sub-bagian 1: Buku Instruksi 3D Bersandar di Meja -->
         <div id="buku-instruksi-container" style="margin-top:3.5rem"></div>
 
-        <!-- Sub-bagian 3: Panduan Perangkat (Device Guide) -->
+        <!-- Sub-bagian 2: Panduan Spesifikasi Perangkat (Hanging Price Tags) -->
         <div id="device-guide-container" style="margin-top:3.5rem"></div>
 
-        <!-- Sub-bagian 4: FAQ (Tanya Jawab) -->
+        <!-- Sub-bagian 3: FAQ (Daftar Belanja Bergaris Dua Kolom) -->
         <div id="faq-container" style="margin-top:3.5rem"></div>
       </div>
     </section>
 
-    <!-- E. PROFIL & MASUKAN -->
+    <!-- Pemisah Lis Profil Kayu Toko Antara Akses & Pengembang -->
+    <div class="divider--molding" aria-hidden="true"></div>
+
+    <!-- F. PROFIL: REL GANTUNGAN LANYARD & PLAKAT AKADEMIK -->
     <section id="profil" class="panel panel--alt" aria-labelledby="h-profil">
       <div class="container">
         <div class="section-head reveal">
@@ -371,14 +428,18 @@
           <p class="lead">Inovasi pembelajaran digital matematika berbasis gamifikasi karya mahasiswa dan dosen Universitas Jambi.</p>
         </div>
 
-        <!-- Tempat Khusus Logo Algebra-Mart, Logo Tim, Logo Kampus, & Logo LIDM -->
-        <h3 class="subhead reveal">Identitas Visual &amp; Logo Toko</h3>
-        <div id="institution" style="text-align:center;margin-bottom:2.8rem" class="reveal"></div>
+        <!-- Rel Gantungan ID Card Pegawai Kasir Toko -->
+        <h3 class="subhead reveal">ID Card Pegawai Tim Pengembang</h3>
+        <div class="lanyard-overhead-rail reveal" data-reveal="shelf">
+          <div class="lanyard-cards-track" id="team-grid"></div>
+        </div>
 
-        <h3 class="subhead reveal">Kartu Pengenal Tim Pengembang</h3>
-        <div class="grid grid--team" id="team-grid"></div>
+        <!-- Plakat Akademik Dosen Pembimbing -->
         <h3 class="subhead reveal">Dosen Pembimbing Akademik</h3>
-        <div class="advisor-wrap" id="validator-grid" style="max-width:760px;margin-inline:auto"></div>
+        <div class="academic-plaque-board reveal" data-reveal="shelf" id="validator-grid"></div>
+
+        <!-- Baris Minimalis Logo Instansi Tanpa Kartu -->
+        <div class="minimal-logos-strip reveal" id="institution"></div>
 
         <!-- Kotak Masukan / Kritik & Saran -->
         <h3 class="subhead reveal" id="masukan" style="margin-top:3.8rem">Kotak Masukan, Rating &amp; Saran</h3>
@@ -392,49 +453,73 @@
     </section>
   </main>
 
+  <!-- Pemisah Gigi Struk Kasir Bergerigi Antara Pengembang & Footer -->
+  <div class="divider--receipt-zigzag" aria-hidden="true"></div>
+
+  <!-- G. FOOTER: SATU LEMBAR STRUK KASIR RAKSASA (Checkout Receipt Paper) -->
   <footer class="footer">
     <div class="container">
+      <!-- Header Monospace Nota Belanja Kasir -->
+      <div class="footer-receipt-head">
+        <h3 class="footer-receipt-title">*** STRUK BUKTI KUNJUNGAN ALGEBRA-MART ***</h3>
+        <div class="footer-receipt-meta">WARUNG KELONTONG JAMBI · KURIKULUM MERDEKA FASE D · LIDM 2026</div>
+      </div>
+
       <div class="footer__grid">
         <div>
-          <div class="footer__brand">
+          <div class="footer__brand" style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem">
             <img class="footer__logo" src="assets/logo/logo-algebra-mart.png" alt="Logo Algebra-Mart" width="44" height="44" decoding="async" onerror="this.hidden=true">
             <img class="footer__logo" src="assets/logo/logo-tim.png" alt="Logo Tim Pengembang" width="44" height="44" decoding="async" onerror="this.hidden=true">
-            <h3 style="margin:0">ALGEBRA-MART</h3>
+            <h4 style="margin:0;font-size:1.3rem;font-weight:900">ALGEBRA-MART</h4>
           </div>
-          <p>Gim edukasi literasi matematika dan keuangan untuk siswa SMP. Jadi kasir, tulis bentuk aljabar, layani pembayaran.</p>
-          <p>Acuan: Kurikulum Merdeka · Pendekatan Pembelajaran Mendalam</p>
-          <div style="margin-top:1rem">
+          <p style="margin-top:0;line-height:1.5">Gim edukasi literasi matematika dan keuangan untuk siswa SMP. Jadi kasir, tulis bentuk aljabar, layani pembayaran.</p>
+          <p style="font-size:.85rem;color:var(--am-muted);margin-bottom:1.2rem">Acuan: Kurikulum Merdeka · Pendekatan Pembelajaran Mendalam</p>
+          <div>
             <button type="button" class="btn btn--small btn--gold" data-share-trigger data-fx="cta magnetic">
               <svg class="am-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98m-.01-10.98l-6.82 3.98"/></svg>
               <span>Bagikan Algebra-Mart</span>
             </button>
           </div>
         </div>
+
         <div>
-          <h3>Menu cepat</h3>
+          <h3>Daftar Menu Kasir</h3>
           <ul>
-            <li><a href="#beranda">Beranda</a></li>
-            <li><a href="#tentang">Tentang &amp; Suara Siswa</a></li>
-            <li><a href="#materi">Materi &amp; Kuis</a></li>
-            <li><a href="#akses">Akses Game &amp; QR</a></li>
-            <li><a href="#cara-bermain-container">Cara Bermain</a></li>
-            <li><a href="assets/dokumen/buku-instruksi-algebra-mart.pdf" download="Buku-Instruksi-Algebra-Mart.pdf" class="footer__link-buku" type="application/pdf">Buku Instruksi (PDF)</a></li>
-            <li><a href="https://heyzine.com/flip-book/52f4274171.html" target="_blank" rel="noopener noreferrer" class="footer__link-baca-online" aria-label="Baca Buku Instruksi online (membuka tab baru)">Baca Buku Online (Heyzine)</a></li>
-            <li><a href="#device-guide-container">Panduan Perangkat</a></li>
-            <li><a href="#faq-container">FAQ (Tanya Jawab)</a></li>
-            <li><a href="#profil">Pengembang &amp; Pembimbing</a></li>
-            <li><a href="#masukan">Kritik &amp; Saran</a></li>
+            <li><a href="#beranda"><span>Beranda</span><span class="receipt-dots-leader" aria-hidden="true"></span><span>&rarr;</span></a></li>
+            <li><a href="#tentang"><span>Tentang &amp; Skenario</span><span class="receipt-dots-leader" aria-hidden="true"></span><span>&rarr;</span></a></li>
+            <li><a href="#materi"><span>Materi &amp; Kuis</span><span class="receipt-dots-leader" aria-hidden="true"></span><span>&rarr;</span></a></li>
+            <li><a href="#cara-bermain"><span>Cara Bermain</span><span class="receipt-dots-leader" aria-hidden="true"></span><span>&rarr;</span></a></li>
+            <li><a href="#akses"><span>Akses Game &amp; QR</span><span class="receipt-dots-leader" aria-hidden="true"></span><span>&rarr;</span></a></li>
+            <li><a href="assets/dokumen/buku-instruksi-algebra-mart.pdf" download="Buku-Instruksi-Algebra-Mart.pdf" class="footer__link-buku" type="application/pdf"><span>Buku Instruksi (PDF)</span><span class="receipt-dots-leader" aria-hidden="true"></span><span>&rarr;</span></a></li>
+            <li><a href="https://heyzine.com/flip-book/52f4274171.html" target="_blank" rel="noopener noreferrer" class="footer__link-baca-online" aria-label="Baca Buku Instruksi online (membuka tab baru)"><span>Baca Online (Heyzine)</span><span class="receipt-dots-leader" aria-hidden="true"></span><span>&rarr;</span></a></li>
+            <li><a href="#profil"><span>Pengembang &amp; Pembimbing</span><span class="receipt-dots-leader" aria-hidden="true"></span><span>&rarr;</span></a></li>
+            <li><a href="#masukan"><span>Kritik &amp; Saran</span><span class="receipt-dots-leader" aria-hidden="true"></span><span>&rarr;</span></a></li>
           </ul>
         </div>
+
         <div>
-          <h3>Kontak</h3>
+          <h3>Kontak Toko</h3>
           <ul>
-            <li><a href="https://github.com/ansharudinsahid/algebra-mart-7" target="_blank" rel="noopener">GitHub Repositori</a></li>
-            <li data-email><a href="mailto:ansharudinsahid@gmail.com">ansharudinsahid@gmail.com</a></li>
+            <li><a href="https://github.com/ansharudinsahid/algebra-mart-7" target="_blank" rel="noopener"><span>GitHub Repositori</span><span class="receipt-dots-leader" aria-hidden="true"></span><span>&rarr;</span></a></li>
+            <li data-email><a href="mailto:ansharudinsahid@gmail.com"><span>ansharudinsahid@gmail.com</span><span class="receipt-dots-leader" aria-hidden="true"></span><span>&rarr;</span></a></li>
           </ul>
         </div>
       </div>
-      <div class="footer__bottom"><span>Karya <span data-competition>LIDM 2026</span></span><span>Universitas Jambi</span></div>
+
+      <!-- Ringkasan Faktual Belanja Toko -->
+      <div class="footer-receipt-summary" aria-label="Ringkasan Spesifikasi Toko">
+        TOTAL: 20 LEVEL TOKO · 5 FASE KURIKULUM · 20 LENCANA · 6 JENJANG KASIR
+      </div>
+
+      <div class="footer__bottom">
+        <span>Karya <span data-competition>LIDM 2026</span></span>
+        <span>Universitas Jambi</span>
+      </div>
+
+      <!-- Baris Akhir Robekan Struk -->
+      <div class="footer-receipt-tear-bottom" aria-hidden="true">
+        ================== TERIMA KASIH TELAH BERKUNJUNG KE ALGEBRA-MART ==================
+      </div>
     </div>
   </footer>
 

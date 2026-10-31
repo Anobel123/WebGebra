@@ -14,6 +14,7 @@ const MODULES = [
   ['sparkFx', './ui/sparkFx.js', (m) => m.initSparkFx()],
   ['reveal', './ui/motion.js', (m) => { m.initReveal(); m.initParallax(); m.initCounters(); }],
   ['carousel', './ui/carousel.js', (m) => m.initCarousel()],
+  ['aboutScrolly', './ui/aboutScrolly.js', (m) => m.initAboutScrolly()],
   ['demo', './ui/demo.js', (m) => m.initDemo()],
   ['kelas', './ui/kelas.js', (m) => m.initKelas()],
   ['materi', './ui/materi.js', (m) => m.initMateri()],
@@ -55,7 +56,7 @@ const MODULES = [
 
 (async () => {
   // reveal harus dipasang setelah konten dinamis; urutan: konten dulu, lalu reveal
-  const order = ['config', 'content', 'sparkFx', 'opening', 'audio', 'nav', 'scrollProgress', 'effects', 'carousel', 'demo', 'kelas', 'features', 'materi', 'access', 'caraBermain', 'bukuInstruksi', 'deviceGuide', 'faq', 'share', 'team', 'feedback', 'lightbox', 'hoverFx', 'year', 'reveal', 'floaters'];
+  const order = ['config', 'content', 'sparkFx', 'opening', 'audio', 'nav', 'scrollProgress', 'effects', 'carousel', 'aboutScrolly', 'demo', 'kelas', 'features', 'materi', 'access', 'caraBermain', 'bukuInstruksi', 'deviceGuide', 'faq', 'share', 'team', 'feedback', 'lightbox', 'hoverFx', 'year', 'reveal', 'floaters'];
   for (const name of order) {
     const [, path, run] = MODULES.find((m) => m[0] === name);
     await new Promise((res) => {

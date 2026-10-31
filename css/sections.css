@@ -1,34 +1,99 @@
-/* ===== Bagian bertema "halaman" dengan Kuning-Amber Hangat & Cokelat Kayu ===== */
+/* ===== Bagian bertema "halaman" dengan Nuansa Toko Kelontong Jambi ===== */
 .panel {
-  min-height: 100svh; padding: calc(var(--header-h) + 3.2rem) 0 5.5rem;
-  position: relative; scroll-margin-top: 0; overflow: hidden;
-  overflow: clip; /* klip visual sama, tetapi bukan scroll container (agar animation-timeline: view() terikat ke viewport) */
+  min-height: 100svh;
+  padding: calc(var(--header-h) + 3.2rem) 0 5.5rem;
+  position: relative;
+  scroll-margin-top: 0;
+  overflow: clip; /* klip visual tanpa menjadi scroll container terpisah */
 }
-.panel--light {
-  background-color: var(--am-cream-100);
+
+/* ==========================================================================
+   PELAT TEMA PER BAGIAN (Time in Shop Palette)
+   ========================================================================== */
+
+/* 1. Beranda: Pagi Toko (Cokelat Jati Dalam & Emas Pagi) */
+#beranda {
+  background: var(--am-brown-900);
+  color: #fff;
+}
+
+/* 2. Tentang: Siang Meja Kasir (Krem Hangat, Tekstur Serat Nota Toko) */
+#tentang {
+  background-color: var(--theme-noon-bg, #fff1d0);
   background-image:
-    radial-gradient(rgba(120, 53, 15, .07) 1.5px, transparent 1.5px),
-    radial-gradient(rgba(245, 158, 11, .14) 1.5px, var(--am-cream-100) 1.5px);
+    radial-gradient(rgba(120, 53, 15, .08) 1.5px, transparent 1.5px),
+    radial-gradient(rgba(245, 158, 11, .14) 1.5px, var(--theme-noon-bg, #fff1d0) 1.5px);
   background-size: 28px 28px;
   background-position: 0 0, 14px 14px;
+  color: var(--am-ink);
 }
-.panel--alt {
-  background-color: var(--am-cream-50);
+
+/* 3. Materi: Sore Lorong Rak Toko (Amber Lembut & Koin Emas) */
+#materi {
+  background-color: var(--theme-afternoon-bg, #fef3c7);
   background-image:
     radial-gradient(rgba(120, 53, 15, .08) 1.5px, transparent 1.5px);
   background-size: 24px 24px;
+  color: var(--am-ink);
 }
-.panel--green {
-  background: linear-gradient(160deg, var(--am-brown-800) 0%, var(--am-brown-900) 100%);
-  color: #fff;
-}
-.panel--green h2, .panel--green h3 { color: var(--am-amber-400); }
-.panel--green .eyebrow { background: var(--am-amber-400); color: var(--am-brown-900); }
-.panel--green .lead { color: var(--am-cream-100); }
 
-/* Pita Pembatas Bagian ("Kanopi Toko"): strip garis-garis amber-krem dengan tepi bergerigi/bergelombang */
-.panel + .panel::before, .panel--shelf::before {
-  content: ''; position: absolute; top: 8px; left: 0; right: 0; height: 22px; z-index: 3;
+/* 4. Cara Bermain: Malam Ban Berjalan (Cokelat Kayu Pekat #3f2a22, Lampu Amber #fbbf24) */
+#cara-bermain {
+  background: var(--theme-night-bg, #3f2a22);
+  color: var(--theme-night-ink, #fef3c7);
+}
+#cara-bermain h2, #cara-bermain h3 {
+  color: var(--am-amber-400);
+}
+#cara-bermain .lead {
+  color: var(--am-cream-100);
+}
+#cara-bermain .eyebrow {
+  background: var(--am-amber-400);
+  color: var(--am-brown-900);
+  border-color: var(--am-amber-500);
+}
+
+/* 5. Akses Game: Terang Kembali Meja Transaksi (Krem Toko & Kayu Jati Kontras Tinggi) */
+#akses {
+  background-color: var(--theme-bright-bg, #fffaf0);
+  background-image:
+    radial-gradient(rgba(120, 53, 15, .07) 1.5px, transparent 1.5px),
+    radial-gradient(rgba(245, 158, 11, .12) 1.5px, var(--theme-bright-bg, #fffaf0) 1.5px);
+  background-size: 28px 28px;
+  color: var(--am-ink);
+}
+
+/* 6. Pengembang: Sore Hangat Rel Lanyard (Krem Kayu & Tali Lanyard) */
+#profil {
+  background-color: var(--theme-lanyard-bg, #fff1d0);
+  background-image:
+    radial-gradient(rgba(120, 53, 15, .08) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  color: var(--am-ink);
+}
+
+/* ==========================================================================
+   PEMISAH SEKSI KHUSUS (Section Transitions)
+   ========================================================================== */
+
+/* 1. Transisi Beranda -> Tentang: Kanopi Kain Toko Bergaris & Bergelombang */
+.divider--canopy {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 26px;
+  z-index: 4;
+  pointer-events: none;
+}
+.divider--canopy::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  height: 20px;
   background: repeating-linear-gradient(
     90deg,
     #f59e0b 0px,
@@ -40,133 +105,475 @@
     #fef3c7 72px,
     #fef3c7 96px
   );
-  -webkit-mask: radial-gradient(circle 12px at 12px 0, #000 98%, transparent) 0 0 / 24px 22px repeat-x;
-  mask: radial-gradient(circle 12px at 12px 0, #000 98%, transparent) 0 0 / 24px 22px repeat-x;
-  filter: drop-shadow(0 3px 4px rgba(69, 26, 3, .22));
-  clip-path: inset(0 0% 0 0%);
-  transition: clip-path var(--rv-canopy-duration, 1000ms) var(--rv-ease-in, cubic-bezier(.22, 1, .36, 1)) var(--rv-canopy-delay, 150ms);
+  -webkit-mask: radial-gradient(circle 12px at 12px 0, #000 98%, transparent) 0 0 / 24px 20px repeat-x;
+  mask: radial-gradient(circle 12px at 12px 0, #000 98%, transparent) 0 0 / 24px 20px repeat-x;
+  filter: drop-shadow(0 3px 4px rgba(69, 26, 3, .25));
 }
-.panel + .panel::after {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 9px; z-index: 4;
-  background: repeating-linear-gradient(
-    90deg,
-    #b45309 0px,
-    #b45309 24px,
-    #fde68a 24px,
-    #fde68a 48px
-  );
+.divider--canopy::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: repeating-linear-gradient(90deg, #b45309 0px, #b45309 24px, #fde68a 24px, #fde68a 48px);
   border-top: 2px solid #451a03;
   border-bottom: 2px solid #78350f;
-  clip-path: inset(0 0% 0 0%);
-  transition: clip-path var(--rv-canopy-duration, 1000ms) var(--rv-ease-in, cubic-bezier(.22, 1, .36, 1)) var(--rv-canopy-delay, 150ms);
-}
-.js-reveal .panel + .panel:not(.is-canopy-open)::before,
-.js-reveal .panel + .panel:not(.is-canopy-open)::after {
-  clip-path: inset(0 50% 0 50%);
-  transition: clip-path var(--rv-duration-out, 550ms) cubic-bezier(.4, 0, 1, 1) 0s;
-}
-.js-reveal .panel + .panel.is-canopy-open::before,
-.js-reveal .panel + .panel.is-canopy-open::after {
-  clip-path: inset(0 0% 0 0%);
-  transition: clip-path var(--rv-canopy-duration, 1000ms) var(--rv-ease-in, cubic-bezier(.22, 1, .36, 1)) var(--rv-canopy-delay, 150ms);
 }
 
-.section-head { text-align: center; max-width: 760px; margin: 0 auto 2.5rem; }
+/* 2. Transisi Tentang -> Materi: Bilah Rak Kayu Jati Tipis dengan Paku Kuningan */
+.divider--shelf-rail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background: linear-gradient(180deg, #3f2a22 0%, #2b1204 100%);
+  border-top: 2px solid #78350f;
+  border-bottom: 2px solid #1a0802;
+  box-shadow: 0 4px 8px rgba(43, 18, 4, .25);
+  z-index: 4;
+}
+.divider--shelf-rail::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background-image: radial-gradient(circle at center, #fbbf24 2px, transparent 2.5px);
+  background-size: 36px 6px;
+  opacity: .85;
+}
+
+/* 3. Transisi Materi -> Cara Bermain: Pemisah Diagonal Miring (-4°) Kayu Jati */
+.divider--diagonal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 38px;
+  background: #3f2a22;
+  clip-path: polygon(0 0, 100% 12px, 100% 100%, 0 calc(100% - 12px));
+  border-top: 3px solid #fbbf24;
+  border-bottom: 3px solid #2b1204;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, .4);
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* 4. Transisi Cara Bermain -> Akses: Pemisah Diagonal (+4°) Kembali ke Terang */
+.divider--diagonal-alt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 38px;
+  background: #fffaf0;
+  clip-path: polygon(0 12px, 100% 0, 100% calc(100% - 12px), 0 100%);
+  border-top: 3px solid #d97706;
+  border-bottom: 3px solid #78350f;
+  box-shadow: 0 8px 18px rgba(69, 26, 3, .3);
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* 5. Transisi Akses -> Pengembang: Lis Profil Kayu Toko (Wood Moulding) */
+.divider--molding {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 18px;
+  background: linear-gradient(180deg, #78350f 0%, #3f2a22 50%, #2b1204 100%);
+  border-top: 2px solid #b45309;
+  border-bottom: 2px solid #1a0802;
+  box-shadow: inset 0 2px 2px rgba(251, 191, 36, .2), 0 5px 10px rgba(43, 18, 4, .25);
+  z-index: 4;
+}
+
+/* 6. Transisi Pengembang -> Footer: Gigi Struk Kasir Bergerigi (Zigzag Teeth) */
+.divider--receipt-zigzag {
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 16px;
+  background: #fffdf5;
+  -webkit-mask: repeating-linear-gradient(45deg, #000 0px, #000 7px, transparent 7px, transparent 14px),
+                repeating-linear-gradient(-45deg, #000 0px, #000 7px, transparent 7px, transparent 14px);
+  -webkit-mask-composite: source-over;
+  mask: repeating-linear-gradient(45deg, #000 0px, #000 7px, transparent 7px, transparent 14px),
+        repeating-linear-gradient(-45deg, #000 0px, #000 7px, transparent 7px, transparent 14px);
+  mask-composite: add;
+  z-index: 5;
+  filter: drop-shadow(0 -3px 3px rgba(69, 26, 3, .12));
+}
+
+.section-head {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 2.5rem;
+}
 .eyebrow {
-  display: inline-block; font: 700 .85rem var(--font-display); letter-spacing: .12em; text-transform: uppercase;
-  background: linear-gradient(180deg, #fef3c7, var(--am-amber-400)); color: var(--am-brown-900); padding: .35em 1.1em; border-radius: var(--radius-pill);
-  border: 2px solid var(--am-brown-800); margin-bottom: .75rem; box-shadow: 0 3px 0 var(--am-brown-900);
+  display: inline-block;
+  font: 700 .85rem var(--font-display);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #fef3c7, var(--am-amber-400));
+  color: var(--am-brown-900);
+  padding: .35em 1.1em;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--am-brown-800);
+  margin-bottom: .75rem;
+  box-shadow: 0 3px 0 var(--am-brown-900);
 }
 .subhead {
-  margin: 3.2rem 0 1.3rem; text-align: center; font-size: 1.55rem;
-  display: flex; align-items: center; justify-content: center; gap: .6rem;
+  margin: 3.2rem 0 1.3rem;
+  text-align: center;
+  font-size: 1.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
 }
-.lead { font-size: 1.18rem; font-weight: 700; color: var(--am-brown-800); }
-
-/* ===== Stiker Dekoratif Barang & Uang Gim (Membuat Tampilan Ramai) ===== */
-.deco-sticker {
-  position: absolute; z-index: 1; pointer-events: none; user-select: none;
-  filter: drop-shadow(0 6px 12px rgba(69, 26, 3, .25)); opacity: .9;
-  animation: floaty 5.5s ease-in-out infinite;
-}
-.deco-pill {
-  background: var(--am-brown-800); color: var(--am-amber-400); border: 2.5px solid var(--am-amber-400);
-  padding: .3em .85em; border-radius: var(--radius-pill); font: 700 1.15rem var(--font-display);
-  box-shadow: 0 4px 0 var(--am-brown-900);
-}
-@media (max-width: 980px) {
-  .deco-sticker { opacity: .28; transform: scale(.75); }
+.lead {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--am-brown-800);
 }
 
-/* ===== Hero (Gradasi Hangat Cokelat-Amber #451a03 -> #78350f -> #b45309) ===== */
+/* ===== Hero: Asymmetric Offset Portal (#beranda) ===== */
 .hero {
-  color: #fff; display: grid; align-items: center; overflow: hidden; background: var(--am-brown-900);
-  padding-bottom: 6.5rem;
+  color: #fff;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  background: var(--am-brown-900);
+  padding-bottom: 7rem;
+  position: relative;
 }
-.hero__bg { position: absolute; inset: -40px 0; background: url('../assets/img/hero-bg.webp') center / cover no-repeat, var(--am-brown-900); will-change: transform; }
+.hero__bg {
+  position: absolute;
+  inset: -40px 0;
+  background: url('../assets/img/hero-bg.webp') center / cover no-repeat, var(--am-brown-900);
+  will-change: transform;
+}
 .hero__overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(112deg, rgba(69, 26, 3, .91) 0%, rgba(120, 53, 15, .83) 48%, rgba(180, 83, 9, .68) 100%);
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(112deg, rgba(69, 26, 3, .92) 0%, rgba(120, 53, 15, .84) 48%, rgba(180, 83, 9, .70) 100%);
 }
-.hero__grid { position: relative; z-index: 2; display: grid; gap: 2.5rem; grid-template-columns: 1.08fr 1fr; align-items: center; }
+.hero__grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 2.8rem;
+  grid-template-columns: 1.12fr 0.98fr;
+  align-items: center;
+}
+
+/* Offset Judul Beranda ke Bawah */
+.hero__offset-content {
+  margin-top: 1rem;
+  transform: translateY(6px);
+}
 .hero h1 {
-  color: #fff; text-shadow: 0 5px 0 var(--am-brown-900), 0 8px 20px rgba(43, 16, 2, .55);
+  color: #fff;
+  text-shadow: 0 5px 0 var(--am-brown-900), 0 8px 20px rgba(43, 16, 2, .55);
   letter-spacing: .01em;
+  line-height: 1.12;
+  margin: .8rem 0 1rem;
 }
-.hero h1 em { font-style: normal; color: var(--am-amber-400); text-decoration: underline wavy var(--am-amber-500) 4px; text-underline-offset: 6px; }
-.hero__sub { font-size: 1.24rem; font-weight: 700; color: var(--am-cream-100); max-width: 36ch; }
-.hero__cta { display: flex; flex-wrap: wrap; gap: .85rem; margin: 1.5rem 0; }
-.hero__chips { display: flex; flex-wrap: wrap; gap: .55rem; }
-.hero .chip { background: var(--am-cream-100); color: var(--am-brown-900); border-color: var(--am-amber-400); }
-.hero__float { position: absolute; z-index: 1; font: 700 2rem var(--font-display); color: rgba(253, 230, 138, .75); pointer-events: none; will-change: transform; user-select: none; }
-.hero__float.coin { width: 48px; height: 48px; border-radius: 50%; background: radial-gradient(circle at 30% 25%, #fef3c7, var(--am-amber-400) 50%, var(--am-amber-600)); border: 2.5px solid var(--am-brown-900); border-bottom-width: 5px; opacity: .92; }
-.hero__float span, .hero__float img { display: block; animation: floaty 5.5s ease-in-out infinite; }
+.hero h1 em {
+  font-style: normal;
+  color: var(--am-amber-400);
+  text-decoration: underline wavy var(--am-amber-500) 4px;
+  text-underline-offset: 6px;
+}
+.hero__sub {
+  font-size: 1.24rem;
+  font-weight: 700;
+  color: var(--am-cream-100);
+  max-width: 38ch;
+  line-height: 1.5;
+}
+
+/* Tombol CTA dengan hierarki ukuran jelas */
+.hero__cta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  margin: 1.8rem 0 1.2rem;
+}
+.btn--cta-primary {
+  padding: .95rem 2rem;
+  font-size: 1.15rem;
+  box-shadow: 0 6px 0 var(--am-amber-700), 0 12px 24px rgba(69, 26, 3, .45);
+}
+.hero__platform-info {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  flex-wrap: wrap;
+  margin-top: 1.1rem;
+}
+
+/* Mockup Tablet Kasir Miring & Meluap Kanan-Atas */
+.hero__mockup-wrap {
+  position: relative;
+  transform: rotate(2.2deg) scale(1.06);
+  transform-origin: center right;
+  filter: drop-shadow(0 18px 36px rgba(0, 0, 0, .55));
+  transition: transform .4s var(--ease);
+}
+.hero__mockup-wrap:hover {
+  transform: rotate(0.8deg) scale(1.08);
+}
+
+/* Karakter Kasir Wanita & Gelembung Dialog Menyambut Pembeli */
+.hero-cashier-character {
+  position: absolute;
+  bottom: -15px;
+  left: 2%;
+  z-index: 5;
+  display: flex;
+  align-items: flex-end;
+  gap: .85rem;
+  pointer-events: none;
+}
+.hero-cashier__img {
+  width: 130px;
+  height: auto;
+  max-height: 180px;
+  filter: drop-shadow(0 8px 16px rgba(43, 18, 4, .55));
+  pointer-events: auto;
+  transition: transform .3s var(--pop);
+}
+.hero-cashier__img:hover {
+  transform: scale(1.05) translateY(-4px);
+}
+.hero-cashier__bubble {
+  background: var(--am-card);
+  color: var(--am-brown-900);
+  border: 2.5px solid var(--am-amber-500);
+  border-radius: 18px 18px 18px 4px;
+  padding: .75rem 1.1rem;
+  box-shadow: 0 6px 16px rgba(43, 18, 4, .35);
+  font-size: .88rem;
+  font-weight: 800;
+  max-width: 280px;
+  line-height: 1.35;
+  pointer-events: auto;
+  position: relative;
+  margin-bottom: 2rem;
+  animation: floaty 4.5s ease-in-out infinite;
+}
+.hero-cashier__bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 12px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 2px solid transparent;
+  border-top: 10px solid var(--am-amber-500);
+}
+.hero-cashier__name {
+  display: block;
+  font: 700 .75rem var(--font-display);
+  color: var(--am-brown-800);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: .2rem;
+}
+
+/* Marquee Bar Berjalan */
 .marquee {
-  position: absolute; z-index: 3; bottom: 0; left: 0; right: 0;
-  background: var(--am-amber-400); color: var(--am-brown-900);
-  font: 700 1.05rem var(--font-display); overflow: hidden;
-  border-top: 4px solid var(--am-brown-900); padding: .65rem 0; white-space: nowrap;
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--am-amber-400);
+  color: var(--am-brown-900);
+  font: 700 1.05rem var(--font-display);
+  overflow: hidden;
+  border-top: 4px solid var(--am-brown-900);
+  padding: .65rem 0;
+  white-space: nowrap;
 }
-.marquee__inner { display: inline-flex; animation: marquee 26s linear infinite; }
-.marquee__inner span { padding-right: 2.5rem; }
-
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.1rem; margin: 2.2rem 0; text-align: center; }
-.stat {
-  background: linear-gradient(160deg, var(--am-brown-800) 0%, var(--am-brown-900) 100%); color: var(--am-cream-100); border-radius: 24px; padding: 1.25rem;
-  border: 3px solid var(--am-amber-400); border-bottom: 7px solid var(--am-brown-900);
-  box-shadow: var(--shadow-warm); font: 700 1.05rem var(--font-display);
+.marquee__inner {
+  display: inline-flex;
+  animation: marquee 26s linear infinite;
 }
-.stat b { display: block; font: 700 2.6rem var(--font-display); color: var(--am-amber-400); line-height: 1.05; text-shadow: 0 3px 0 var(--am-brown-900); }
-
-.about-split { display: grid; gap: 2rem; grid-template-columns: 1.1fr .9fr; align-items: center; margin-bottom: 2.2rem; }
-.example-box {
-  background: linear-gradient(155deg, var(--am-brown-800) 0%, var(--am-brown-900) 100%); color: var(--am-cream-100); border: 3.5px solid var(--am-amber-400);
-  border-radius: var(--radius-card); padding: 1.6rem; box-shadow: 0 8px 0 var(--am-brown-900); font-weight: 700;
+.marquee__inner span {
+  padding-right: 2.5rem;
 }
-.example-box code { display: block; margin-top: .6rem; font: 700 1.85rem var(--font-display); color: var(--am-amber-400); }
-.feature { display: flex; gap: .85rem; align-items: flex-start; }
-.feature svg { width: 36px; height: 36px; flex: none; color: var(--am-brown-900); background: var(--am-amber-400); padding: 6px; border-radius: 12px; border: 2px solid var(--am-brown-900); }
-.feature h3 { font-size: 1.08rem; margin-bottom: .2em; }
-.feature p { margin: 0; font-size: .92rem; color: var(--am-muted); }
-.mapel { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: .5rem; }
-.note { background: var(--am-cream-50); border: 2.5px solid var(--am-amber-600); border-left: 8px solid var(--am-amber-600); padding: .95rem 1.25rem; border-radius: 14px; font-size: .96rem; font-weight: 700; color: var(--am-brown-900); }
 
+/* ==========================================================================
+   FOOTER: STRUK KASIR RAKSASA (Checkout Receipt Paper)
+   ========================================================================== */
 .footer {
-  background: linear-gradient(180deg, var(--am-brown-800) 0%, var(--am-brown-900) 100%); color: var(--am-cream-100);
-  border-top: 6px solid var(--am-amber-400); padding: 3.2rem 0 calc(2.2rem + env(safe-area-inset-bottom, 0px)); position: relative; overflow: hidden;
+  background: var(--theme-receipt-bg, #fffdf5);
+  color: var(--theme-receipt-ink, #2b1204);
+  padding: 4.5rem 0 calc(2.4rem + env(safe-area-inset-bottom, 0px));
+  position: relative;
   overflow: clip;
+  border-top: 3px dashed rgba(120, 53, 15, .35);
 }
-.footer a { color: var(--am-amber-400); }
-.footer__grid { display: grid; gap: 2rem; grid-template-columns: 2fr 1fr 1fr; }
-.footer h3 { color: var(--am-amber-400); font-size: 1.12rem; }
-.footer ul { list-style: none; padding: 0; margin: 0; }
-.footer li a { display: inline-flex; min-height: 36px; align-items: center; }
-.footer__bottom { border-top: 2px solid rgba(253, 230, 138, .28); margin-top: 2rem; padding-top: 1.1rem; font-size: .9rem; font-weight: 700; display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; justify-content: space-between; }
+.footer::before {
+  /* Tepi bergerigi struk atas */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #3f2a22 0px,
+    #3f2a22 7px,
+    transparent 7px,
+    transparent 14px
+  );
+  opacity: .15;
+}
+.footer a {
+  color: var(--am-brown-800);
+  text-decoration: none;
+  transition: color .2s var(--ease);
+}
+.footer a:hover {
+  color: var(--am-amber-600);
+  text-decoration: underline;
+}
 
-.logos { display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 2rem; }
-.logos img { height: 64px; width: auto; }
+/* Header Monospace Struk Toko */
+.footer-receipt-head {
+  text-align: center;
+  font-family: 'Fredoka', monospace, system-ui;
+  letter-spacing: .08em;
+  border-bottom: 2px dashed rgba(120, 53, 15, .3);
+  padding-bottom: 1.4rem;
+  margin-bottom: 2.2rem;
+}
+.footer-receipt-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--am-brown-900);
+}
+.footer-receipt-meta {
+  font-size: .85rem;
+  color: var(--am-muted);
+  font-weight: 700;
+  margin-top: .3rem;
+}
 
-@media (max-width: 860px) {
-  .hero__grid, .about-split, .footer__grid { grid-template-columns: 1fr; }
-  .panel { padding-top: calc(var(--header-h) + 2rem); }
+.footer__grid {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1.8fr 1.2fr 1fr;
+  align-items: start;
+}
+.footer h3 {
+  color: var(--am-brown-900);
+  font-size: 1.15rem;
+  margin-top: 0;
+  border-bottom: 1.5px solid rgba(120, 53, 15, .2);
+  padding-bottom: .4rem;
+}
+.footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer li {
+  margin-bottom: .35rem;
+}
+.footer li a {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  font-size: .95rem;
+  font-weight: 600;
+}
+.receipt-dots-leader {
+  flex-grow: 1;
+  border-bottom: 1.5px dotted rgba(120, 53, 15, .3);
+  margin: 0 .5rem;
+  height: 1px;
+}
+
+/* Ringkasan Faktual Belanja Toko di Footer */
+.footer-receipt-summary {
+  background: var(--am-cream-50);
+  border: 2px dashed var(--am-amber-600);
+  border-radius: 12px;
+  padding: .9rem 1.2rem;
+  margin: 1.6rem 0;
+  text-align: center;
+  font-family: monospace, system-ui;
+  font-size: .92rem;
+  font-weight: 800;
+  color: var(--am-brown-900);
+  letter-spacing: .04em;
+}
+
+.footer__bottom {
+  border-top: 2px dashed rgba(120, 53, 15, .3);
+  margin-top: 2.5rem;
+  padding-top: 1.4rem;
+  font-size: .92rem;
+  font-weight: 800;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.5rem;
+  justify-content: space-between;
+  color: var(--am-muted);
+}
+.footer-receipt-tear-bottom {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-family: monospace, system-ui;
+  font-size: .85rem;
+  font-weight: 800;
+  color: var(--am-brown-800);
+  letter-spacing: .1em;
+}
+
+/* Responsivitas Media Query */
+@media (max-width: 980px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .hero__mockup-wrap {
+    transform: none;
+    max-width: 92%;
+    margin: 0 auto;
+  }
+  .hero-cashier-character {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin-top: 1.5rem;
+  }
+  .footer__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-cashier-character {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-cashier__bubble::after {
+    display: none;
+  }
 }

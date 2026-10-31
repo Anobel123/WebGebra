@@ -1,5 +1,5 @@
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: var(--header-h-small); -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-h-small); -webkit-text-size-adjust: 100%; overflow-x: clip; }
 body {
   margin: 0; font-family: var(--font); font-weight: var(--weight-body); color: var(--am-ink); background: var(--am-cream-100);
   line-height: 1.6; overflow-x: hidden; font-size: var(--text-base);

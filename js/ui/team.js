@@ -7,12 +7,6 @@ const initials = (n) => n.replace(/\b(Dr|M\.Kom|M\.Pd)\.?,?/g, '').split(/\s+/).
 
 const isTodo = (v) => typeof v === 'string' && /^\s*TODO/i.test(v);
 
-/** Label lencana peran: diambil dari data `role` (content.js); hanya tampil sekali per kartu. */
-function roleLabel(p, kind) {
-  if (p.role && !isTodo(p.role)) return p.role;
-  return kind === 'val' ? 'Dosen Pembimbing' : (p.isLead ? 'Ketua Tim' : 'Anggota Tim');
-}
-
 function card(p, kind) {
   const links = p.links || {};
   const l = [];
@@ -24,7 +18,7 @@ function card(p, kind) {
   const slotFolder = kind === 'val' ? 'assets/validator' : 'assets/tim';
   const slotId = kind === 'val' ? `validator-${slug}` : `tim-${slug}`;
 
-  // Tata letak khusus Dosen Pembimbing: Plakat Sertifikat Akademis (bukan ID card lanyard)
+  // Plakat Akademis Dosen Pembimbing
   if (kind === 'val') {
     return `<article class="advisor-card card reveal" data-reveal="shelf" style="--shelf-rot:1.5deg">
       <div class="advisor-card__inner">
@@ -39,30 +33,30 @@ function card(p, kind) {
           <h3 class="advisor-card__name">${esc(p.name)}</h3>
           ${prodi ? `<div class="advisor-card__meta">${prodi} · Universitas Jambi</div>` : ''}
           <p class="advisor-card__note">Supervisi pedagogis materi aljabar &amp; keterpaduan Kurikulum Merdeka Fase D.</p>
-          ${l.length ? `<div class="advisor-card__links">${l.join('')}</div>` : ''}
+          ${l.length ? `<div class="advisor-card__links" style="display:flex;gap:.8rem;margin-top:.6rem">${l.join('')}</div>` : ''}
         </div>
       </div>
     </article>`;
   }
 
-  // ID Card Pegawai Kasir Tim Pengembang: Ketua tim ditonjolkan & posisi sedikit miring asimetris
+  // ID Card Pegawai Kasir Tim Pengembang: Tali Lanyard Menggantung dari Rel
   const isLead = Boolean(p.isLead);
-  const tiltDeg = isLead ? '-2.8deg' : (slug.includes('ansharudin') ? '2.2deg' : (slug.includes('jean') ? '-1.8deg' : '2.4deg'));
+  const tiltDeg = isLead ? '-1.8deg' : (slug.includes('ansharudin') ? '2deg' : (slug.includes('jean') ? '-1.2deg' : '2.4deg'));
   const leadClass = isLead ? 'id-card--lead' : '';
   const badgeLabel = isLead ? 'Ketua Tim / Project Lead' : 'Anggota Tim Pengembang';
   const badgeClass = isLead ? 'chip chip--gold id-card__badge--lead' : 'chip id-card__badge';
 
-  return `<article class="card id-card ${leadClass} reveal" data-reveal="shelf" style="--tilt:${tiltDeg};" data-tilt-allowed>
-    <div class="id-card__lanyard" aria-hidden="true"></div>
-    <div class="id-card__photo">
+  return `<article class="card id-card ${leadClass} reveal" data-reveal="shelf" style="--tilt:${tiltDeg};position:relative" data-tilt-allowed>
+    <div class="id-card__lanyard-strap" aria-hidden="true"></div>
+    <div class="id-card__photo" style="margin-top:.4rem">
       <figure class="slot-container slot-container--round" data-slot="${slotId}" data-folder="${slotFolder}" data-file="${slug}" data-ratio="1:1" data-width="800" data-height="800" data-alt="Foto ${esc(p.name)}" data-fallback="initials">
         <div class="img-fallback img-fallback--round" role="img" aria-label="Inisial ${esc(p.name)}">${initials(p.name)}</div>
       </figure>
     </div>
     <span class="${badgeClass}">${esc(badgeLabel)}</span>
-    <h3 class="id-card__name">${esc(p.name)}</h3>
+    <h4 class="id-card__name" style="margin:.4rem 0 .2rem;font-size:1.15rem">${esc(p.name)}</h4>
     ${prodi ? `<div class="id-card__meta">${prodi}</div>` : ''}
-    ${l.length ? `<div class="id-card__links">${l.join('')}</div>` : ''}
+    ${l.length ? `<div class="id-card__links" style="display:flex;gap:.7rem;justify-content:center;margin-top:.5rem">${l.join('')}</div>` : ''}
   </article>`;
 }
 
@@ -78,64 +72,21 @@ export function initTeam() {
   }
   document.querySelectorAll('.id-card img').forEach((img) => attachImgFallback(img, img.alt.replace('Foto ', '')));
 
+  // Baris Minimalis Logo Instansi Tanpa Kartu di Bawah Plakat Pembimbing
   const inst = document.getElementById('institution');
   if (inst) {
-    const logoCards = INSTITUTION.logos.map((lg) => {
-      // Detail institusi (prodi/fakultas) cukup tampil sekali: pada kartu logo kampus
-      const desc = lg.key === 'kampus' && INSTITUTION.detail && !isTodo(INSTITUTION.detail) ? INSTITUTION.detail : (lg.desc || '');
-      return `
-      <article class="card card--tilt logo-card" data-fx="tilt" data-logo-key="${esc(lg.key || '')}">
-        <div class="logo-card__box">
-          <img class="logo-card__img" src="${esc(lg.src)}" alt="${esc(lg.alt)}" width="96" height="96" loading="lazy" hidden>
-          <div class="logo-card__fallback" aria-label="Placeholder ${esc(lg.title)}">
-            <span class="logo-card__emblem">${esc(lg.badge || 'LOGO')}</span>
-            <small class="logo-card__status">Menunggu file logo</small>
-          </div>
-        </div>
-        <h4 class="logo-card__title">${esc(lg.title)}</h4>
-        ${desc ? `<p class="logo-card__desc">${esc(desc)}</p>` : ''}
-        <code class="logo-card__path">${esc(lg.src)}</code>
-      </article>`;
-    }).join('');
+    const logosHtml = INSTITUTION.logos.map((lg) => `
+      <img src="${esc(lg.src)}" alt="${esc(lg.alt)}" title="${esc(lg.title)}" width="64" height="64" loading="lazy" onerror="this.style.display='none'">
+    `).join('');
 
     const comp = SITE_CONFIG.competition || {};
     const category = comp.category && !isTodo(comp.category) ? String(comp.category).trim() : '';
+
     inst.innerHTML = `
-      <div class="logo-showcase">${logoCards}</div>
-      <div class="institution-meta">
-        <p class="note" id="competition-banner" style="max-width:740px;margin:0 auto">Dikembangkan untuk ${esc(comp.name)} ${esc(comp.year)}${category ? ' · Kategori ' + esc(category) : ''}</p>
-      </div>`;
-
-    inst.querySelectorAll('.logo-card').forEach((cardEl) => {
-      const img = cardEl.querySelector('.logo-card__img');
-      const fb = cardEl.querySelector('.logo-card__fallback');
-      if (!img) return;
-
-      const initialSrc = img.getAttribute('src');
-      const candidates = [initialSrc];
-
-      let idx = 0;
-      function tryLoad() {
-        if (idx >= candidates.length) {
-          img.hidden = true;
-          if (fb) fb.hidden = false;
-          return;
-        }
-        const srcToTry = candidates[idx++];
-        const probe = new Image();
-        probe.onload = () => {
-          img.src = srcToTry;
-          img.hidden = false;
-          if (fb) fb.hidden = true;
-          cardEl.classList.add('has-logo');
-        };
-        probe.onerror = () => {
-          tryLoad();
-        };
-        probe.src = srcToTry;
-      }
-      tryLoad();
-    });
+      <div style="text-align:center;width:100%">
+        <div class="minimal-logos-strip">${logosHtml}</div>
+        <p class="note" id="competition-banner" style="max-width:740px;margin:0 auto">Dikembangkan untuk ${esc(comp.name)} ${esc(comp.year)}${category ? ' · Kategori ' + esc(category) : ''} · Universitas Jambi</p>
+      </div>
+    `;
   }
 }
-

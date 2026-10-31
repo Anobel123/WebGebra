@@ -115,7 +115,7 @@ export const SECTION_FLOATERS = [
   },
   {
     sectionId: 'cara-bermain',
-    selector: '#cara-bermain-container',
+    selector: '#cara-bermain',
     seed: 404,
     counts: { desktop: 7, tablet: 4, mobile: 3 },
     items: [

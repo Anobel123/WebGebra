@@ -56,6 +56,42 @@
   --ease: cubic-bezier(.22, 1, .36, 1);
   --pop: cubic-bezier(.34, 1.56, .64, 1);
 
+  /* Pelat tema per bagian (Time in Shop) */
+  --theme-morning-bg: #fffaf0;
+  --theme-morning-surface: #fff8e1;
+  --theme-morning-ink: #2b1204;
+  --theme-morning-accent: #fbbf24;
+
+  --theme-noon-bg: #fff1d0;
+  --theme-noon-surface: #fffaf0;
+  --theme-noon-ink: #2b1204;
+  --theme-noon-wood: #3f2a22;
+
+  --theme-afternoon-bg: #fef3c7;
+  --theme-afternoon-surface: #fffdf5;
+  --theme-afternoon-ink: #2b1204;
+  --theme-afternoon-coin: #f59e0b;
+
+  --theme-night-bg: #3f2a22;
+  --theme-night-surface: #4a3229;
+  --theme-night-ink: #fef3c7;
+  --theme-night-accent: #fbbf24;
+
+  --theme-bright-bg: #fffaf0;
+  --theme-bright-surface: #fff1d0;
+  --theme-bright-ink: #2b1204;
+  --theme-bright-border: #78350f;
+
+  --theme-lanyard-bg: #fff1d0;
+  --theme-lanyard-surface: #fffdf5;
+  --theme-lanyard-ink: #2b1204;
+  --theme-lanyard-rail: #3f2a22;
+
+  --theme-receipt-bg: #fffdf5;
+  --theme-receipt-surface: #fffaf0;
+  --theme-receipt-ink: #2b1204;
+  --theme-receipt-border: #92400e;
+
   /* ==========================================================================
      TOKEN WAKTU & TIMING ANIMASI REVEAL (Pusat Pengaturan Sentral)
      Ubah angka di sini untuk menyetel kecepatan dan jeda seluruh efek reveal.
