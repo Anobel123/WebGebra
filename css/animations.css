@@ -69,13 +69,24 @@ body.is-floaters-off .fx-floaters {
   place-items: center;
   transform: scale(0);
   opacity: 0;
-  transition: transform .48s cubic-bezier(.34, 1.56, .64, 1), opacity .38s var(--ease);
-  transition-delay: var(--fl-stagger, 0ms);
+  transition: transform var(--rv-floater-duration, 800ms) var(--rv-ease-pop, cubic-bezier(.34, 1.56, .64, 1)),
+              opacity var(--rv-floater-duration, 800ms) var(--rv-ease-in, cubic-bezier(.22, 1, .36, 1));
+  transition-delay: var(--fl-stagger, var(--rv-floater-delay, 250ms));
 }
 .fx-floater.is-entered .fx-floater__inner {
   transform: scale(1);
   opacity: var(--fl-opacity, .9);
+  transition: transform var(--rv-floater-duration, 800ms) var(--rv-ease-pop, cubic-bezier(.34, 1.56, .64, 1)),
+              opacity var(--rv-floater-duration, 800ms) var(--rv-ease-in, cubic-bezier(.22, 1, .36, 1));
+  transition-delay: var(--fl-stagger, var(--rv-floater-delay, 250ms));
 }
+/* Keluar kembali melalui tepi bawah: durasi --rv-duration-out (550ms), TANPA jeda dasar dan stagger dipersingkat (~40% dari 140ms = 56ms) */
+.fx-floater:not(.is-entered) .fx-floater__inner {
+  transition: transform var(--rv-duration-out, 550ms) cubic-bezier(.4, 0, 1, 1),
+              opacity var(--rv-duration-out, 550ms) ease-in;
+  transition-delay: var(--fl-out-stagger, 0ms);
+}
+.fx-floater.fl-instant .fx-floater__inner { transition: none !important; }
 .fx-floater.is-shattered {
   pointer-events: none;
 }
@@ -173,92 +184,160 @@ body.is-floaters-off .fx-floaters {
    Progressive enhancement: hanya aktif bila JS menambah .js-reveal pada <html>
    ============================================================================ */
 
-/* Default reveal fallback */
-.js-reveal .reveal {
-  opacity: 0;
-  transform: translateY(28px) scale(.97);
-  transition: opacity .65s var(--ease), transform .65s var(--ease);
-  transition-delay: calc(var(--i, 0) * 65ms);
+/* ----------------------------------------------------------------------------
+   REVEAL DUA ARAH (reversible)
+   - Mode utama  : html.rv-sda  -> CSS scroll-driven animation (animation-timeline: view())
+                   otomatis maju saat scroll turun & mundur saat scroll naik.
+   - Mode cadangan: html.rv-io  -> kelas .is-in ditambah/dihapus IntersectionObserver.
+   - Elemen di lipatan pertama (.rv-static) hanya fade-in sekali saat muat.
+   - Hanya menganimasikan opacity, translate/rotate/scale (keluarga transform) &
+     clip-path. Properti transform milik hover/tilt tidak disentuh sama sekali.
+   - Tanpa JS / prefers-reduced-motion: .js-reveal tidak dipasang -> semua tampil.
+   ---------------------------------------------------------------------------- */
+:root { --rv-len: 220px; }
+
+/* Variabel gerak per gaya reveal */
+:is(.reveal, [data-reveal="shelf"], .reveal--shelf, [data-reveal="zoom"]) {
+  --rv-y: 28px; --rv-s: .97; --rv-rot: 0deg; --rv-ease: var(--rv-ease-in, cubic-bezier(.22, 1, .36, 1));
 }
-.js-reveal .reveal.is-in {
-  opacity: 1;
-  transform: none;
+:is([data-reveal="shelf"], .reveal--shelf) {
+  --rv-y: 38px; --rv-s: .95; --rv-rot: var(--shelf-rot, -3deg); --rv-ease: var(--rv-ease-pop, cubic-bezier(.34, 1.56, .64, 1));
+}
+[data-reveal="zoom"] {
+  --rv-y: 18px; --rv-s: .92; --rv-rot: 0deg; --rv-ease: var(--rv-ease-in, cubic-bezier(.22, 1, .36, 1));
+}
+@media (max-width: 640px) {
+  :root { --rv-len: 160px; }
+  :is(.reveal, [data-reveal="shelf"], .reveal--shelf) { --rv-y: 16px; --rv-s: .98; --rv-rot: 0deg; }
+  [data-reveal="zoom"] { --rv-y: 10px; --rv-s: .96; --rv-rot: 0deg; }
 }
 
-/* (a) Judul Bagian (data-reveal="mask" / .heading-mask): kata naik dari balik garis pembatas */
+/* Mode transisi masuk: jeda dasar (--rv-delay-base) + stagger (--rv-stagger) dibatasi (--rv-stagger-max) */
+.js-reveal :is(.reveal, [data-reveal="shelf"], .reveal--shelf, [data-reveal="zoom"]) {
+  transition-property: opacity, translate, rotate, scale, transform, box-shadow;
+  transition-duration: var(--rv-duration-in, 900ms), var(--rv-duration-in, 900ms), var(--rv-duration-in, 900ms), var(--rv-duration-in, 900ms), .3s, .35s;
+  transition-timing-function: var(--ease), var(--rv-ease), var(--rv-ease), var(--rv-ease), var(--ease), var(--ease);
+  transition-delay: calc(var(--rv-delay-base, 150ms) + min(var(--i, 0) * var(--rv-stagger, 110ms), var(--rv-stagger-max, 900ms)));
+}
+
+/* Khusus kartu rak (data-reveal="shelf"): durasi 900ms dengan easing pantul, stagger 120ms, jeda dasar 150ms, bayangan menyusul 150ms */
+.js-reveal :is([data-reveal="shelf"], .reveal--shelf) {
+  transition-duration: var(--rv-shelf-duration, 900ms), var(--rv-shelf-duration, 900ms), var(--rv-shelf-duration, 900ms), var(--rv-shelf-duration, 900ms), .3s, .35s;
+  transition-timing-function: var(--ease), var(--rv-ease-pop, cubic-bezier(.34, 1.56, .64, 1)), var(--rv-ease-pop, cubic-bezier(.34, 1.56, .64, 1)), var(--rv-ease-pop, cubic-bezier(.34, 1.56, .64, 1)), var(--ease), var(--ease);
+  transition-delay:
+    calc(var(--rv-shelf-delay, 150ms) + min(var(--i, 0) * var(--rv-shelf-stagger, 120ms), var(--rv-stagger-max, 900ms))),
+    calc(var(--rv-shelf-delay, 150ms) + min(var(--i, 0) * var(--rv-shelf-stagger, 120ms), var(--rv-stagger-max, 900ms))),
+    calc(var(--rv-shelf-delay, 150ms) + min(var(--i, 0) * var(--rv-shelf-stagger, 120ms), var(--rv-stagger-max, 900ms))),
+    calc(var(--rv-shelf-delay, 150ms) + min(var(--i, 0) * var(--rv-shelf-stagger, 120ms), var(--rv-stagger-max, 900ms))),
+    0s,
+    calc(var(--rv-shelf-delay, 150ms) + min(var(--i, 0) * var(--rv-shelf-stagger, 120ms), var(--rv-stagger-max, 900ms)) + var(--rv-shelf-shadow-delay, 150ms));
+}
+
+/* Keadaan awal / mundur: durasi = --rv-duration-out (550ms), TANPA jeda dasar, stagger dipersingkat 40% */
+.js-reveal :is(.reveal, [data-reveal="shelf"], .reveal--shelf, [data-reveal="zoom"]):not(.is-in) {
+  opacity: 0;
+  translate: 0 var(--rv-y);
+  rotate: var(--rv-rot);
+  scale: var(--rv-s);
+  transition-duration: var(--rv-duration-out, 550ms);
+  transition-timing-function: cubic-bezier(.4, 0, 1, 1);
+  transition-delay: min(var(--i, 0) * calc(var(--rv-stagger, 110ms) * 0.4), calc(var(--rv-stagger-max, 900ms) * 0.4));
+}
+
+/* Elemen di atas lipatan saat pertama muat (.rv-static): mulai tanpa jeda dasar, tetapi tetap pakai durasi & stagger baru */
+.js-reveal .rv-static:is(.reveal, [data-reveal="shelf"], .reveal--shelf, [data-reveal="zoom"]) {
+  transition-delay: min(var(--i, 0) * var(--rv-stagger, 110ms), var(--rv-stagger-max, 900ms));
+}
+.js-reveal .rv-static:is([data-reveal="shelf"], .reveal--shelf) {
+  transition-delay: min(var(--i, 0) * var(--rv-shelf-stagger, 120ms), var(--rv-stagger-max, 900ms));
+}
+
+/* (a) Judul Bagian (data-reveal="mask" / .heading-mask): durasi 1000ms, stagger 90ms, jeda dasar 200ms */
 .reveal-word-mask {
   display: inline-block;
   overflow: hidden;
+  overflow: clip;
   vertical-align: bottom;
   padding-bottom: .08em;
   margin-bottom: -.08em;
 }
 .reveal-word {
   display: inline-block;
-  will-change: transform, opacity;
+  will-change: translate, opacity;
 }
-.js-reveal .heading-mask:not(.is-in) .reveal-word,
-.js-reveal [data-reveal="mask"]:not(.is-in) .reveal-word {
-  transform: translateY(108%);
+.js-reveal :is(.heading-mask, [data-reveal="mask"]) .reveal-word {
+  transition: translate var(--rv-mask-duration, 1000ms) var(--rv-ease-in, cubic-bezier(.22, 1, .36, 1)),
+              opacity calc(var(--rv-mask-duration, 1000ms) * .72) var(--ease);
+  transition-delay: calc(var(--rv-mask-delay, 200ms) + min(var(--w-i, 0) * var(--rv-mask-stagger, 90ms), var(--rv-stagger-max, 900ms)));
+}
+.js-reveal .rv-static:is(.heading-mask, [data-reveal="mask"]) .reveal-word {
+  transition-delay: min(var(--w-i, 0) * var(--rv-mask-stagger, 90ms), var(--rv-stagger-max, 900ms));
+}
+.js-reveal :is(.heading-mask, [data-reveal="mask"]):not(.is-in) .reveal-word {
+  translate: 0 108%;
   opacity: 0;
-}
-.js-reveal .reveal.is-in .heading-mask .reveal-word,
-.js-reveal .heading-mask.is-in .reveal-word,
-.js-reveal [data-reveal="mask"].is-in .reveal-word {
-  transform: translateY(0);
-  opacity: 1;
-  transition: transform .58s cubic-bezier(.22, 1, .36, 1), opacity .42s var(--ease);
-  transition-delay: calc(var(--w-i, 0) * 68ms);
+  transition-duration: var(--rv-duration-out, 550ms), calc(var(--rv-duration-out, 550ms) * .75);
+  transition-delay: min(var(--w-i, 0) * calc(var(--rv-mask-stagger, 90ms) * 0.4), calc(var(--rv-stagger-max, 900ms) * 0.4));
 }
 
-/* (b) Kartu Rak Toko (data-reveal="shelf"): rotasi ±3° -> 0° dengan pantulan cubic-bezier(0.34, 1.56, 0.64, 1) */
-.js-reveal [data-reveal="shelf"],
-.js-reveal .reveal--shelf {
-  opacity: 0;
-  transform: translateY(38px) rotate(var(--shelf-rot, -3deg)) scale(.95);
-  transition:
-    opacity .62s var(--ease),
-    transform .68s cubic-bezier(.34, 1.56, .64, 1),
-    box-shadow .32s var(--ease);
-  transition-delay: calc(var(--i, 0) * 70ms);
-}
-.js-reveal [data-reveal="shelf"].is-in,
-.js-reveal .reveal--shelf.is-in {
-  opacity: 1;
-  transform: translateY(0) rotate(0deg) scale(1);
-}
-.js-reveal .id-card[data-reveal="shelf"].is-in {
-  transform: rotate(var(--tilt, -2.2deg));
-}
-@media (max-width: 640px) {
-  .js-reveal [data-reveal="shelf"],
-  .js-reveal .reveal--shelf {
-    transform: translateY(28px) rotate(0deg) scale(.97);
-  }
+/* Scroll cepat: lewati / percepat transisi agar tidak ada elemen tertinggal */
+.rv-fast-scroll .js-reveal :is(.reveal, [data-reveal="shelf"], .reveal--shelf, [data-reveal="zoom"], .heading-mask, [data-reveal="mask"]),
+.rv-fast-scroll .js-reveal :is(.heading-mask, [data-reveal="mask"]) .reveal-word {
+  transition-duration: .15s !important;
+  transition-delay: 0s !important;
 }
 
-/* (d) Mockup Hero, Screenshot, Buku Instruksi, & Demo Kasir (data-reveal="zoom"): skala 0.92 -> 1 */
-.js-reveal [data-reveal="zoom"] {
-  opacity: 0;
-  transform: scale(.92) translateY(18px);
-  transition:
-    opacity .68s var(--ease),
-    transform .72s cubic-bezier(.22, 1, .36, 1),
-    box-shadow .45s var(--ease);
-}
-.js-reveal [data-reveal="zoom"].is-in {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
+/* Lompatan besar (klik menu): ubah keadaan di luar layar tanpa animasi */
+.js-reveal .rv-instant,
+.js-reveal .rv-instant .reveal-word,
+.js-reveal .rv-instant::before,
+.js-reveal .rv-instant::after { transition: none !important; }
 
-/* Progressive enhancement dengan CSS animation-timeline: view() bila browser mendukung */
+/* Mode scroll-driven: dua arah otomatis, tanpa JavaScript per frame */
+@keyframes rvEnter {
+  from { opacity: 0; translate: 0 var(--rv-y, 28px); rotate: var(--rv-rot, 0deg); scale: var(--rv-s, .97); }
+  to { opacity: 1; translate: 0 0; rotate: 0deg; scale: 1; }
+}
+@keyframes rvWord {
+  from { opacity: 0; translate: 0 108%; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes rvCanopy {
+  from { clip-path: inset(0 50% 0 50%); }
+  to { clip-path: inset(0 0% 0 0%); }
+}
 @supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .js-reveal [data-reveal="zoom"].is-in {
-      animation: zoomEnterView linear both;
-      animation-timeline: view();
-      animation-range: entry 5% cover 28%;
-    }
+  .rv-sda :is(.reveal, [data-reveal="shelf"], .reveal--shelf):not(.rv-static):not(.rv-io-el) {
+    animation: rvEnter both;
+    animation-timing-function: var(--rv-ease);
+    animation-timeline: view();
+    animation-range: entry calc(10% + min(var(--i, 0) * 12px, 80px)) entry calc(70% + min(var(--i, 0) * 12px, 80px));
+  }
+  .rv-sda [data-reveal="zoom"]:not(.rv-static):not(.rv-io-el) {
+    animation: rvEnter both;
+    animation-timing-function: var(--rv-ease-in, cubic-bezier(.22, 1, .36, 1));
+    animation-timeline: view();
+    animation-range: entry 15% entry 85%;
+  }
+  .rv-sda :is(.heading-mask, [data-reveal="mask"]):not(.rv-static):not(.rv-io-el) {
+    view-timeline: --rv-head block;
+  }
+  .rv-sda :is(.heading-mask, [data-reveal="mask"]):not(.rv-static):not(.rv-io-el) .reveal-word {
+    animation: rvWord both;
+    animation-timing-function: var(--rv-ease-in, cubic-bezier(.22, 1, .36, 1));
+    animation-timeline: --rv-head;
+    animation-range: entry calc(10% + min(var(--w-i, 0) * 14px, 120px)) entry calc(70% + min(var(--w-i, 0) * 14px, 120px));
+  }
+  .rv-sda .panel + .panel:not(.rv-static):not(.rv-io-el) {
+    view-timeline: --rv-panel block;
+  }
+  .rv-sda .panel + .panel:not(.rv-static):not(.rv-io-el)::before,
+  .rv-sda .panel + .panel:not(.rv-static):not(.rv-io-el)::after {
+    transition: none;
+    animation: rvCanopy both;
+    animation-timing-function: var(--rv-ease-in, cubic-bezier(.22, 1, .36, 1));
+    animation-timeline: --rv-panel;
+    animation-range: entry 10% entry 75%;
   }
 }
 
@@ -296,10 +375,20 @@ body.is-floaters-off .fx-floaters {
   transition: stroke-dashoffset .25s ease-out;
   filter: drop-shadow(0 0 6px rgba(245, 158, 11, .65));
 }
+.stepper-coin,
+.level-card .coin-num {
+  transition: background .35s var(--ease), box-shadow .35s var(--ease);
+  transition-delay: 0s;
+}
 .stepper-coin.is-lit,
 .level-card .coin-num.is-lit {
   background: radial-gradient(circle at 30% 25%, #fffbeb, #fbbf24 50%, #d97706);
   box-shadow: 0 3px 0 #451a03, 0 0 12px rgba(251, 191, 36, .75);
+  transition-delay: var(--rv-draw-coin-delay, 120ms);
+}
+.stepper-coin:not(.is-lit),
+.level-card .coin-num:not(.is-lit) {
+  transition-delay: 0s;
 }
 
 .particle { position: fixed; z-index: 400; pointer-events: none; font: 700 1rem var(--font-display); color: var(--am-amber-600); animation: particle .85s var(--ease) forwards; will-change: transform, opacity; }
@@ -364,17 +453,28 @@ body.is-floaters-off .fx-floaters {
   .fx-floater__inner { transform: scale(1) !important; opacity: var(--fl-opacity, .85) !important; }
   .js-reveal .reveal,
   .js-reveal [data-reveal="shelf"],
+  .js-reveal .reveal--shelf,
   .js-reveal [data-reveal="zoom"],
   .js-reveal .heading-mask .reveal-word,
   .js-reveal [data-reveal="mask"] .reveal-word {
-    transform: none !important;
+    translate: none !important;
+    rotate: none !important;
+    scale: none !important;
     opacity: 1 !important;
+    animation: none !important;
     transition: none !important;
     transition-delay: 0s !important;
   }
   .js-reveal .panel + .panel::before,
   .js-reveal .panel + .panel::after {
     clip-path: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .stepper-coin,
+  .level-card .coin-num {
+    transition: none !important;
+    transition-delay: 0s !important;
   }
   .card--tilt:hover, .id-card:hover, .smp-char:hover, .card--tilt.is-tilting, .level-card.is-tilting, .id-card.is-tilting { transform: none !important; }
   .btn, .store-badge { transform: none !important; }

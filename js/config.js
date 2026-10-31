@@ -26,6 +26,7 @@ export const SITE_CONFIG = {
   dokumen: {
     bukuInstruksi: {
       berkas: "assets/dokumen/buku-instruksi-algebra-mart.pdf",
+      bacaOnlineUrl: "https://heyzine.com/flip-book/52f4274171.html",
       judul: "Buku Instruksi Algebra-Mart",
       deskripsi: "Panduan lengkap penggunaan Algebra-Mart mulai dari instalasi, navigasi antarmuka, hingga petunjuk bermain setiap mode.",
       namaUnduh: "Buku-Instruksi-Algebra-Mart.pdf",

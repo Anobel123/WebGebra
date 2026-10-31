@@ -391,7 +391,7 @@ export const FAQ = [
   {
     id: 9,
     q: 'Di mana saya bisa mendapat panduan lengkap?',
-    a: 'Anda dapat mengunduh Buku Instruksi Algebra-Mart dalam format PDF pada kartu <a href="#buku-instruksi">Buku Instruksi</a> di bagian Akses Game untuk panduan menyeluruh mulai dari instalasi hingga strategi menyelesaikan level.'
+    a: 'Anda dapat membaca Buku Instruksi secara online melalui tautan interaktif atau mengunduhnya dalam format PDF pada kartu <a href="#buku-instruksi">Buku Instruksi</a> di bagian Akses Game untuk panduan menyeluruh mulai dari instalasi hingga strategi menyelesaikan level.'
   },
   // Pertanyaan 10 & 11 jika kosong/tampil:false otomatis disembunyikan oleh sistem FAQ
   {

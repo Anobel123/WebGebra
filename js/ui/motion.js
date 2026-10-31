@@ -6,6 +6,8 @@
 // ============================================================================
 
 import { prefersReducedMotion } from '../utils/safe.js';
+import { REVEAL_TIMING } from './reveal.js';
+export { REVEAL_TIMING };
 
 /**
  * Pecah teks heading per kata di balik garis mask dengan stagger 60-80ms,
@@ -84,11 +86,218 @@ function prepareShelfCards(root = document) {
   });
 }
 
+/* ============================================================================
+   REVEAL DUA ARAH (reversible)
+   - Mode 'sda' : CSS scroll-driven animation (animation-timeline: view()).
+                  Maju saat scroll turun, mundur saat scroll naik, tanpa JS per frame.
+   - Mode 'io'  : cadangan IntersectionObserver dua arah (tambah/hapus .is-in)
+                  dengan histeresis (-10% / -3%) + jeda 80 ms anti-kedip.
+   - Elemen lipatan pertama (.rv-static) hanya fade-in sekali saat dimuat.
+   - prefers-reduced-motion / JS mati: .js-reveal tidak dipasang -> semua tampil.
+   ============================================================================ */
+
+const REVEAL_SELECTOR = [
+  '.reveal', '[data-reveal="shelf"]', '.reveal--shelf', '[data-reveal="zoom"]',
+  '.heading-mask', '[data-reveal="mask"]'
+].join(', ');
+
+const RV = {
+  mode: 'off',       // 'sda' | 'io' | 'off'
+  io: null,          // observer dua arah untuk elemen reveal (.is-in)
+  canopyIo: null     // observer dua arah untuk kanopi toko (.is-canopy-open)
+};
+
+/** Deteksi dukungan CSS scroll-driven animation (bisa dipaksa cadangan via ?reveal=io). */
+export function supportsScrollDrivenReveal() {
+  try {
+    if (/[?&]reveal=io\b/.test(window.location.search || '')) return false;
+    return Boolean(
+      window.CSS && typeof CSS.supports === 'function' &&
+      CSS.supports('animation-timeline: view()') &&
+      CSS.supports('animation-range: entry 0% entry 60%')
+    );
+  } catch {
+    return false;
+  }
+}
+
+/* --- Elemen di dalam scroll container lain (overflow hidden/auto) tidak bisa memakai
+       view() terhadap viewport; elemen seperti itu otomatis memakai cadangan IO. --- */
+const scrollerCache = new WeakMap();
+function isInnerScroller(node) {
+  if (scrollerCache.has(node)) return scrollerCache.get(node);
+  const cs = window.getComputedStyle(node);
+  const v = /(hidden|auto|scroll)/.test(`${cs.overflowX} ${cs.overflowY}`);
+  scrollerCache.set(node, v);
+  return v;
+}
+function hasInnerScrollContainer(el) {
+  let n = el.parentElement;
+  while (n && n !== document.body && n !== document.documentElement) {
+    if (isInnerScroller(n)) return true;
+    n = n.parentElement;
+  }
+  return false;
+}
+
+function afterTwoFrames(fn) {
+  requestAnimationFrame(() => requestAnimationFrame(fn));
+}
+
 /**
- * Update progres scroll untuk elemen data-reveal="draw" (garis emas Cara Bermain & jalur level Materi)
- * serta nyalakan koin langkah/level saat terlewati.
+ * Observer dua arah berbasis kelas.
+ * - Masuk: elemen melewati garis 90% tinggi layar (rootMargin bawah -10%).
+ * - Keluar lewat BAWAH: bagian atas elemen turun melewati 97% layar -> tunggu 80 ms,
+ *   periksa ulang, baru hapus kelas (histeresis 7% mencegah kedip di batas).
+ * - Keluar lewat ATAS: kelas dipertahankan (konten yang sudah terlewati tetap tampil).
+ * - Lompatan jauh (klik menu): disapu sekali setelah scroll berhenti, tanpa animasi.
  */
-function initScrollDrawAndZoom() {
+function createTwoWayObserver(cls) {
+  const HIDE_LINE = 0.97;
+  const targets = new Set();
+  const pendingHide = new Set();
+  let hideTimer = 0;
+  let sweepTimer = 0;
+
+  const setShown = (el, on, instant = false) => {
+    if (el.classList.contains(cls) === on) return;
+    if (instant) el.classList.add('rv-instant');
+    el.classList.toggle(cls, on);
+    if (instant) afterTwoFrames(() => el.classList.remove('rv-instant'));
+  };
+
+  const flushHide = () => {
+    hideTimer = 0;
+    const vh = window.innerHeight || 800;
+    const list = [...pendingHide];
+    pendingHide.clear();
+    const rects = list.map((el) => (el.isConnected ? el.getBoundingClientRect() : null));
+    list.forEach((el, k) => {
+      const r = rects[k];
+      if (r && r.top > vh * HIDE_LINE) setShown(el, false);
+    });
+  };
+
+  const showIo = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      const el = e.target;
+      if (e.isIntersecting) {
+        pendingHide.delete(el);
+        setShown(el, true);
+      } else {
+        const rootTop = e.rootBounds ? e.rootBounds.top : 0;
+        if (e.boundingClientRect.bottom <= rootTop) setShown(el, true, true);
+      }
+    }
+  }, { rootMargin: `0px 0px ${REVEAL_TIMING.rootMarginBottomPct}% 0px`, threshold: REVEAL_TIMING.triggerRatio });
+
+  const hideIo = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      const el = e.target;
+      if (e.isIntersecting) {
+        pendingHide.delete(el);
+        continue;
+      }
+      const rootTop = e.rootBounds ? e.rootBounds.top : 0;
+      if (e.boundingClientRect.top > rootTop && el.classList.contains(cls)) {
+        pendingHide.add(el);
+      }
+    }
+    if (pendingHide.size && !hideTimer) hideTimer = setTimeout(flushHide, 80);
+  }, { rootMargin: '0px 0px -2% 0px', threshold: 0 });
+
+  const sweep = () => {
+    sweepTimer = 0;
+    const vh = window.innerHeight || 800;
+    const list = [...targets].filter((el) => el.isConnected);
+    const rects = list.map((el) => el.getBoundingClientRect());
+    list.forEach((el, k) => {
+      const r = rects[k];
+      if (r.bottom <= 0) setShown(el, true, true);
+      else if (r.top > vh) setShown(el, false, true);
+    });
+  };
+  window.addEventListener('scroll', () => {
+    clearTimeout(sweepTimer);
+    sweepTimer = setTimeout(sweep, 140);
+  }, { passive: true });
+
+  return {
+    observe(el) {
+      if (targets.has(el)) return;
+      targets.add(el);
+      showIo.observe(el);
+      hideIo.observe(el);
+    },
+    unobserve(el) {
+      targets.delete(el);
+      pendingHide.delete(el);
+      showIo.unobserve(el);
+      hideIo.unobserve(el);
+    },
+    sweep
+  };
+}
+
+/* ----------------------------------------------------------------------------
+   Garis emas (data-reveal="draw"), koin langkah, & koin level: terikat posisi
+   scroll sehingga otomatis mundur & padam saat scroll ke atas.
+   ---------------------------------------------------------------------------- */
+let drawEls = [];
+let levelCoins = [];
+let drawTicking = false;
+let drawReady = false;
+
+function collectDrawTargets() {
+  drawEls = [...document.querySelectorAll('[data-reveal="draw"]')];
+  levelCoins = [...document.querySelectorAll('#materi-panel .level-card .coin-num')];
+}
+
+function updateScrollDraw() {
+  drawTicking = false;
+  const vh = window.innerHeight || 800;
+
+  // Batch baca layout dahulu
+  const drawRects = drawEls.map((el) => (el.isConnected ? el.getBoundingClientRect() : null));
+  const coinTops = levelCoins.map((c) => (c.isConnected ? c.getBoundingClientRect().top : Infinity));
+
+  // Lalu tulis (hanya custom property & kelas)
+  drawEls.forEach((el, k) => {
+    const r = drawRects[k];
+    if (!r || r.height <= 0) return;
+    const startY = vh * 0.92;
+    const endY = vh * 0.12;
+    const raw = (startY - r.top) / Math.max(140, (startY - endY) + r.height * 0.65);
+    const prog = Math.max(0, Math.min(1, raw));
+    el.style.setProperty('--draw-progress', prog.toFixed(3));
+    el.classList.toggle('is-in', prog > 0.05);
+
+    const coins = el.querySelectorAll('.stepper-coin');
+    if (coins.length) {
+      const litCount = prog <= 0.001 ? 0 : Math.ceil(prog * coins.length);
+      coins.forEach((c, idx) => {
+        const isActive = prog > 0.001 && Boolean(c.closest('.stepper-item.is-active'));
+        c.classList.toggle('is-lit', idx < litCount || isActive);
+      });
+    }
+  });
+
+  levelCoins.forEach((coin, k) => {
+    coin.classList.toggle('is-lit', coinTops[k] < vh * 0.82);
+  });
+}
+
+/** Minta pembaruan garis/koin (mis. setelah carousel berganti langkah atau DOM baru). */
+export function refreshScrollDraw() {
+  if (!drawReady) return;
+  collectDrawTargets();
+  if (!drawTicking) {
+    drawTicking = true;
+    requestAnimationFrame(updateScrollDraw);
+  }
+}
+
+function initScrollDraw() {
   if (prefersReducedMotion()) {
     document.querySelectorAll('[data-reveal="draw"]').forEach((el) => {
       el.style.setProperty('--draw-progress', '1');
@@ -97,159 +306,178 @@ function initScrollDrawAndZoom() {
     document.querySelectorAll('.stepper-coin, .level-card .coin-num').forEach((c) => c.classList.add('is-lit'));
     return;
   }
-
-  let ticking = false;
-  const updateOnScroll = () => {
-    ticking = false;
-    const vh = window.innerHeight || 800;
-
-    // 1. Update garis penghubung (data-reveal="draw")
-    const drawEls = document.querySelectorAll('[data-reveal="draw"]');
-    drawEls.forEach((el) => {
-      const r = el.getBoundingClientRect();
-      if (r.height <= 0) return;
-      // Hitung progres 0..1 saat elemen melintasi viewport
-      const startY = vh * 0.85;
-      const endY = vh * 0.25;
-      const raw = (startY - r.top) / Math.max(120, (startY - endY) + r.height * 0.55);
-      const prog = Math.max(0, Math.min(1, raw));
-      el.style.setProperty('--draw-progress', prog.toFixed(3));
-      if (prog > 0.05) el.classList.add('is-in');
-
-      // Nyalakan koin nomor langkah di dalam stepper bila sudah terlewati
-      const coins = el.querySelectorAll('.stepper-coin');
-      if (coins.length) {
-        const thresholdCount = Math.max(1, Math.ceil(prog * coins.length));
-        coins.forEach((c, idx) => {
-          if (idx < thresholdCount || c.closest('.stepper-item.is-active')) {
-            c.classList.add('is-lit');
-          }
-        });
-      }
-    });
-
-    // Nyalakan koin nomor level di Materi saat kartu melewati batas baca viewport
-    const levelCoins = document.querySelectorAll('#materi-panel .level-card .coin-num');
-    levelCoins.forEach((coin) => {
-      const r = coin.getBoundingClientRect();
-      if (r.top < vh * 0.82) {
-        coin.classList.add('is-lit');
-      }
-    });
-
-    // 2. Update bayangan & skala halus untuk elemen data-reveal="zoom"
-    const zoomEls = document.querySelectorAll('[data-reveal="zoom"]');
-    zoomEls.forEach((el) => {
-      const r = el.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > vh) return;
-      const prog = Math.max(0, Math.min(1, (vh * 0.92 - r.top) / (vh * 0.45)));
-      el.style.setProperty('--zoom-progress', prog.toFixed(3));
-    });
-  };
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(updateOnScroll);
+  drawReady = true;
+  collectDrawTargets();
+  const onScroll = () => {
+    if (!drawTicking) {
+      drawTicking = true;
+      requestAnimationFrame(updateScrollDraw);
     }
-  }, { passive: true });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+}
 
-  requestAnimationFrame(updateOnScroll);
+/* ----------------------------------------------------------------------------
+   Pemasangan elemen ke mode yang sesuai
+   ---------------------------------------------------------------------------- */
+function bindRevealElements(els, { initial }) {
+  const vh = window.innerHeight || 800;
+  const sy = window.scrollY || 0;
+  const fresh = els.filter((el) => el.dataset.rvBound !== '1');
+  const rects = fresh.map((el) => el.getBoundingClientRect()); // batch baca
+  const staticEls = [];
+
+  fresh.forEach((el, k) => {
+    el.dataset.rvBound = '1';
+    const r = rects[k];
+    // Di lipatan pertama dokumen: tidak mungkin keluar lewat bawah -> cukup fade-in sekali
+    if (initial && r.top + sy < vh * 0.9) {
+      el.classList.add('rv-static');
+      staticEls.push(el);
+      return;
+    }
+    if (RV.mode === 'sda' && !hasInnerScrollContainer(el) && (initial || r.top >= vh * 0.9)) {
+      el.classList.add('is-in'); // tampilan akhir dikendalikan animasi scroll-driven
+      return;
+    }
+    // Cadangan IO: browser tanpa view(), elemen di scroll container lain, atau elemen
+    // dinamis yang dibuat langsung di dalam layar (mis. ganti tab Materi) agar tetap fade-in.
+    if (RV.mode === 'sda') el.classList.add('rv-io-el');
+    if (r.bottom <= 0) el.classList.add('is-in'); // sudah terlewati (mis. muat dengan #hash)
+    RV.io.observe(el);
+  });
+
+  if (staticEls.length) afterTwoFrames(() => staticEls.forEach((el) => el.classList.add('is-in')));
+}
+
+function bindCanopies(panels) {
+  const vh = window.innerHeight || 800;
+  const sy = window.scrollY || 0;
+  const rects = panels.map((p) => p.getBoundingClientRect());
+  panels.forEach((p, k) => {
+    if (p.dataset.rvBound === '1') return;
+    p.dataset.rvBound = '1';
+    const r = rects[k];
+    if (r.top + sy < vh * 0.9) {
+      p.classList.add('rv-static');
+      afterTwoFrames(() => p.classList.add('is-canopy-open'));
+      return;
+    }
+    if (RV.mode === 'sda' && !hasInnerScrollContainer(p)) {
+      p.classList.add('is-canopy-open');
+      return;
+    }
+    if (RV.mode === 'sda') p.classList.add('rv-io-el');
+    if (r.bottom <= 0) p.classList.add('is-canopy-open');
+    RV.canopyIo.observe(p);
+  });
+}
+
+function setStaggerIndex(els) {
+  const counts = new Map();
+  const maxIdx = Math.max(4, Math.floor(REVEAL_TIMING.staggerMaxMs / REVEAL_TIMING.staggerMs));
+  els.forEach((el) => {
+    const p = el.parentElement;
+    const i = counts.get(p) || 0;
+    counts.set(p, i + 1);
+    el.style.setProperty('--i', String(Math.min(i, maxIdx)));
+  });
 }
 
 export function initReveal() {
+  const html = document.documentElement;
   try {
     prepareMaskHeadings(document);
     prepareShelfCards(document);
 
-    const els = [...document.querySelectorAll('.reveal, [data-reveal]')];
+    const els = [...document.querySelectorAll(REVEAL_SELECTOR)];
     const panels = [...document.querySelectorAll('.panel + .panel')];
 
-    if (!('IntersectionObserver' in window)) {
+    // Tanpa IO atau pengguna meminta gerak minimal: tampil biasa tanpa animasi
+    if (!('IntersectionObserver' in window) || prefersReducedMotion()) {
       els.forEach((el) => el.classList.add('is-in'));
       panels.forEach((p) => p.classList.add('is-canopy-open'));
+      initScrollDraw();
       return;
     }
 
-    document.documentElement.classList.add('js-reveal');
+    RV.mode = supportsScrollDrivenReveal() ? 'sda' : 'io';
+    RV.io = createTwoWayObserver('is-in');
+    RV.canopyIo = createTwoWayObserver('is-canopy-open');
 
-    // Stagger per parent
-    const counts = new Map();
-    els.forEach((el) => {
-      const p = el.parentElement;
-      const i = counts.get(p) || 0;
-      counts.set(p, i + 1);
-      el.style.setProperty('--i', String(Math.min(i, 12)));
-    });
+    setStaggerIndex(els);
 
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-in');
-          // Jika parent .reveal masuk viewport, aktifkan juga heading-mask di dalamnya
-          e.target.querySelectorAll?.('.heading-mask, [data-reveal="mask"]').forEach((h) => h.classList.add('is-in'));
-          io.unobserve(e.target);
+    // Ukur dahulu (sebelum kelas penyembunyi aktif), baru pasang kelas mode
+    html.classList.add('js-reveal', RV.mode === 'sda' ? 'rv-sda' : 'rv-io');
+    bindRevealElements(els, { initial: true });
+    bindCanopies(panels);
+    html.dataset.revealMode = RV.mode;
+
+    initScrollDraw();
+
+    // Deteksi scroll cepat (kecepatan scroll tinggi): percepat animasi agar konten tidak tertinggal
+    let lastScrollY = window.scrollY || 0;
+    let lastScrollTime = performance.now();
+    let isFastScrolling = false;
+    let fastScrollTimer = 0;
+
+    window.addEventListener('scroll', () => {
+      const now = performance.now();
+      const dt = Math.max(1, now - lastScrollTime);
+      const sy = window.scrollY || 0;
+      const v = Math.abs(sy - lastScrollY) / dt;
+      lastScrollY = sy;
+      lastScrollTime = now;
+
+      if (v > 1.8) {
+        if (!isFastScrolling) {
+          isFastScrolling = true;
+          document.documentElement.classList.add('rv-fast-scroll');
         }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+        clearTimeout(fastScrollTimer);
+        fastScrollTimer = setTimeout(() => {
+          isFastScrolling = false;
+          document.documentElement.classList.remove('rv-fast-scroll');
+        }, 160);
+      }
+    }, { passive: true });
 
-    els.forEach((el) => io.observe(el));
+    // Klik menu navigasi lompat jauh: jangan tumpuk antrean animasi, sweep elemen yang terlewati
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+      const hash = link.getAttribute('href');
+      if (!hash || hash === '#') return;
+      if (RV.io) RV.io.sweep();
+      if (RV.canopyIo) RV.canopyIo.sweep();
+    }, { capture: true });
 
-    // Observer khusus untuk membuka "Kanopi Toko" (.panel + .panel) dari tengah ke kiri-kanan
-    const canopyIo = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-canopy-open');
-          canopyIo.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.02, rootMargin: '0px 0px -20px 0px' });
-
-    panels.forEach((p) => canopyIo.observe(p));
-
-    initScrollDrawAndZoom();
-
-    // Pengaman: tampilkan elemen yang sudah di dalam viewport bila observer terlambat
+    // Pengaman: elemen yang sudah di dalam viewport pasti tampil bila observer terlambat
     setTimeout(() => {
-      els.forEach((el) => {
-        if (el.getBoundingClientRect().top < window.innerHeight * 1.05) {
-          el.classList.add('is-in');
-          el.querySelectorAll?.('.heading-mask, [data-reveal="mask"]').forEach((h) => h.classList.add('is-in'));
-        }
+      const vh = window.innerHeight || 800;
+      document.querySelectorAll('.js-reveal :is(.reveal, [data-reveal], .heading-mask):not(.is-in)').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < vh * 0.9 && r.bottom > 0) el.classList.add('is-in');
       });
-      panels.forEach((p) => {
-        if (p.getBoundingClientRect().top < window.innerHeight * 1.05) {
-          p.classList.add('is-canopy-open');
-        }
-      });
-    }, 900);
+    }, 1200);
   } catch (e) {
     console.error('[modul:reveal]', e);
-    document.documentElement.classList.remove('js-reveal');
+    html.classList.remove('js-reveal', 'rv-sda', 'rv-io');
   }
 }
 
-/** Observe elemen yang dibuat dinamis oleh JS. */
+/** Pasang reveal dua arah untuk elemen yang dibuat dinamis oleh JS. */
 export function revealNew(root) {
   if (!root) return;
   prepareMaskHeadings(root);
   prepareShelfCards(root);
-  if (!document.documentElement.classList.contains('js-reveal')) return;
-  const els = [...root.querySelectorAll('.reveal:not(.is-in), [data-reveal]:not(.is-in)')];
+  refreshScrollDraw();
+  if (!document.documentElement.classList.contains('js-reveal') || !RV.io) return;
+  const els = [...root.querySelectorAll(REVEAL_SELECTOR)].filter((el) => el.dataset.rvBound !== '1');
   els.forEach((el, i) => el.style.setProperty('--i', String(Math.min(i, 12))));
-  if (!('IntersectionObserver' in window)) {
-    els.forEach((el) => el.classList.add('is-in'));
-    return;
-  }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        e.target.classList.add('is-in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  els.forEach((el) => io.observe(el));
+  bindRevealElements(els, { initial: false });
 }
 
 export function initParallax() {

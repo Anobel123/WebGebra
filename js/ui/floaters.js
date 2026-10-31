@@ -8,6 +8,7 @@
 import { SECTION_FLOATERS, FLOATER_SVG } from '../data/floaters.js';
 import { esc, prefersReducedMotion } from '../utils/safe.js';
 import { spawnClickBurst, isSparkFxEnabled } from './sparkFx.js';
+import { REVEAL_TIMING } from './reveal.js';
 
 export const FLOATER_CONFIG = {
   maxActiveTotal: 40,
@@ -387,7 +388,10 @@ export function initFloaters() {
           el.style.height = `${pos.h}px`;
           el.style.left = `${Math.round(pos.x)}px`;
           el.style.top = `${Math.round(pos.y)}px`;
-          el.style.setProperty('--fl-stagger', `${i * 75}ms`);
+          const enterStagger = REVEAL_TIMING.floater.delayMs + Math.min(i * REVEAL_TIMING.floater.staggerMs, REVEAL_TIMING.staggerMaxMs);
+          const outStagger = Math.min((chosenItems.length - 1 - i) * Math.round(REVEAL_TIMING.floater.staggerMs * REVEAL_TIMING.out.staggerFactor), Math.round(REVEAL_TIMING.staggerMaxMs * REVEAL_TIMING.out.staggerFactor));
+          el.style.setProperty('--fl-stagger', `${enterStagger}ms`);
+          el.style.setProperty('--fl-out-stagger', `${outStagger}ms`);
           el.style.setProperty('--fl-opacity', String(depth.opacity));
           el.innerHTML = `<div class="fx-floater__inner">${buildFloaterInnerHtml(itemDef)}</div>`;
 
@@ -452,20 +456,27 @@ export function initFloaters() {
       }
     }, { passive: true });
 
-    // IntersectionObserver per bagian: aktifkan animasi masuk bertahap & jalankan hanya saat di viewport
+    // IntersectionObserver per bagian: aktifkan animasi masuk/mundur & jalankan hanya saat di viewport
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
+        const vh = window.innerHeight || 800;
         for (const entry of entries) {
           const st = sectionStates.find((s) => s.sectionEl === entry.target);
           if (!st) continue;
           st.inView = entry.isIntersecting;
-          if (entry.isIntersecting && !st.enteredOnce) {
+          if (entry.isIntersecting) {
             st.enteredOnce = true;
             st.floaters.forEach((f) => f.el.classList.add('is-entered'));
+          } else {
+            // Keluar melalui bawah layar (top > vh * 0.85): kembalikan floater ke keadaan awal (mundur)
+            if (entry.boundingClientRect.top >= vh * 0.85) {
+              st.enteredOnce = false;
+              st.floaters.forEach((f) => f.el.classList.remove('is-entered'));
+            }
           }
         }
         ensureRafRunning();
-      }, { rootMargin: '120px 0px 120px 0px', threshold: 0.02 });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
 
       sectionStates.forEach((st) => io.observe(st.sectionEl));
     } else {

@@ -19,7 +19,7 @@
 - **Kearifan Lokal Jambi**: Representasi belanja dodol nanas, kue padamaran, beras payo, kopi AAA, dan tempoyak.
 - **Mode Kelas & Ruang Fasilitator**: Dashboard guru untuk pemantauan capaian belajar siswa secara real-time.
 - **20 Lencana Prestasi & 6 Gelar Kasir**: Sistem gamifikasi bertingkat untuk menjaga motivasi belajar.
-- **Buku Instruksi Lengkap**: Panduan terintegrasi format PDF yang dapat diunduh langsung atau dibaca daring.
+- **Buku Instruksi Lengkap**: Panduan terintegrasi yang dapat dibaca online secara interaktif melalui Heyzine flipbook maupun diunduh langsung dalam format PDF.
 
 ---
 

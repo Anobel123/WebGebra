@@ -40,4 +40,60 @@
   --header-h-small: 58px;
   --ease: cubic-bezier(.22, 1, .36, 1);
   --pop: cubic-bezier(.34, 1.56, .64, 1);
+
+  /* ==========================================================================
+     TOKEN WAKTU & TIMING ANIMASI REVEAL (Pusat Pengaturan Sentral)
+     Ubah angka di sini untuk menyetel kecepatan dan jeda seluruh efek reveal.
+     ========================================================================== */
+  --rv-delay-base: 150ms;        /* Jeda sebelum animasi mulai setelah elemen masuk layar (aman: 50ms - 350ms; naikkan untuk lebih lambat) */
+  --rv-duration-in: 900ms;       /* Durasi animasi masuk (aman: 500ms - 1400ms; jangan lebih dari 1400ms agar tidak terasa lambat) */
+  --rv-duration-out: 550ms;      /* Durasi animasi mundur saat scroll ke atas (~60% dari masuk; aman: 300ms - 700ms) */
+  --rv-stagger: 110ms;           /* Jeda antar elemen berturut-turut dalam satu kelompok (aman: 60ms - 180ms) */
+  --rv-stagger-max: 900ms;       /* Batas total stagger agar kelompok besar seperti level tidak terlalu lama (aman: 600ms - 1200ms) */
+  --rv-ease-in: cubic-bezier(.22, 1, .36, 1);     /* Easing masuk, mulus dan berbobot */
+  --rv-ease-pop: cubic-bezier(.34, 1.56, .64, 1); /* Easing kartu 'mendarat' di rak dengan pantulan */
+  --rv-trigger: 18%;             /* Ambang pemicu: elemen baru mulai beranimasi setelah 18% bagiannya masuk layar (aman: 10% - 25%) */
+
+  /* Penyetelan spesifik per gaya reveal */
+  --rv-mask-duration: 1000ms;    /* Durasi teks judul mask per kata (aman: 600ms - 1300ms) */
+  --rv-mask-stagger: 90ms;       /* Stagger antar kata judul (aman: 50ms - 130ms) */
+  --rv-mask-delay: 200ms;        /* Jeda dasar judul setelah masuk layar (aman: 100ms - 350ms) */
+
+  --rv-shelf-duration: 900ms;    /* Durasi kartu rak (features, materi, level, pengembang) (aman: 600ms - 1300ms) */
+  --rv-shelf-stagger: 120ms;     /* Stagger antar kartu rak (aman: 70ms - 180ms) */
+  --rv-shelf-delay: 150ms;       /* Jeda dasar kartu rak (aman: 80ms - 300ms) */
+  --rv-shelf-shadow-delay: 150ms;/* Bayangan menyusul 150ms setelah kartu mendarat (aman: 80ms - 250ms) */
+
+  --rv-canopy-duration: 1000ms;  /* Durasi membuka kanopi toko pembatas bagian (aman: 700ms - 1400ms) */
+  --rv-canopy-delay: 150ms;      /* Jeda kanopi mulai setelah bagian masuk (aman: 80ms - 300ms) */
+
+  --rv-floater-duration: 800ms;  /* Durasi barang melayang saat masuk (aman: 500ms - 1200ms) */
+  --rv-floater-stagger: 140ms;   /* Stagger antar barang melayang (aman: 80ms - 200ms) */
+  --rv-floater-delay: 250ms;     /* Jeda barang melayang setelah bagian terlihat (aman: 100ms - 400ms) */
+
+  --rv-draw-coin-delay: 120ms;   /* Koin nomor langkah/level menyala 120ms setelah garis mencapainya (aman: 60ms - 250ms) */
+}
+
+/* Penyesuaian di layar mobile (dikurangi ~25% agar tetap gesit & mulus) */
+@media (max-width: 640px) {
+  :root {
+    --rv-delay-base: 110ms;
+    --rv-duration-in: 675ms;
+    --rv-duration-out: 410ms;
+    --rv-stagger: 80ms;
+    --rv-stagger-max: 675ms;
+    --rv-mask-duration: 750ms;
+    --rv-mask-stagger: 68ms;
+    --rv-mask-delay: 150ms;
+    --rv-shelf-duration: 675ms;
+    --rv-shelf-stagger: 90ms;
+    --rv-shelf-delay: 110ms;
+    --rv-shelf-shadow-delay: 110ms;
+    --rv-canopy-duration: 750ms;
+    --rv-canopy-delay: 110ms;
+    --rv-floater-duration: 600ms;
+    --rv-floater-stagger: 105ms;
+    --rv-floater-delay: 190ms;
+    --rv-draw-coin-delay: 90ms;
+  }
 }

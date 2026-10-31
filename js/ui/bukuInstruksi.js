@@ -1,5 +1,5 @@
 // js/ui/bukuInstruksi.js — Kartu Unduh & Baca Online Buku Instruksi Algebra-Mart
-import { SITE_CONFIG } from '../config.js';
+import { SITE_CONFIG, isValidUrl } from '../config.js';
 import { renderIcon } from './icons.js';
 import { renderSlot, resolveSlots, shouldShowEmptySlots } from '../slots.js';
 import { esc } from '../utils/safe.js';
@@ -54,6 +54,8 @@ export async function initBukuInstruksi() {
   const downloadName = docConfig.namaUnduh || 'Buku-Instruksi-Algebra-Mart.pdf';
   const title = docConfig.judul || 'Buku Instruksi Algebra-Mart';
   const desc = docConfig.deskripsi || 'Panduan lengkap penggunaan Algebra-Mart mulai dari instalasi, navigasi antarmuka, hingga petunjuk bermain setiap mode.';
+  const bacaOnlineUrl = (docConfig.bacaOnlineUrl || '').trim();
+  const isBacaOnlineValid = isValidUrl(bacaOnlineUrl);
 
   // Status awal file: 'loading', 'available', 'not-found', 'offline'
   let fileStatus = 'offline';
@@ -120,21 +122,29 @@ export async function initBukuInstruksi() {
               <p>Berkas PDF sedang disiapkan dan akan segera tersedia untuk diunduh.</p>
             </div>
             <div class="buku-card__actions">
-              <button type="button" class="btn btn--disabled" disabled aria-disabled="true">
+              <button type="button" class="btn btn--disabled" disabled aria-disabled="true" style="min-height:44px">
                 ${renderIcon('download', { size: 18 })}
                 <span>Unduh Buku (Segera Hadir)</span>
               </button>
+              ${isBacaOnlineValid ? `
+                <a href="${esc(bacaOnlineUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn--secondary buku-btn-baca" data-fx="cta magnetic" data-burst aria-label="Baca Buku Instruksi online (membuka tab baru)" style="min-height:44px;min-width:44px">
+                  <svg class="am-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  <span>Baca Online</span>
+                </a>
+              ` : ''}
             </div>
           ` : `
             <div class="buku-card__actions">
-              <a href="${esc(fileUrl)}" download="${esc(downloadName)}" class="btn btn--gold buku-btn-unduh" type="application/pdf" rel="noopener" data-fx="cta magnetic" data-burst aria-label="${esc(ariaUnduh)}">
+              <a href="${esc(fileUrl)}" download="${esc(downloadName)}" class="btn btn--gold buku-btn-unduh" type="application/pdf" rel="noopener" data-fx="cta magnetic" data-burst aria-label="${esc(ariaUnduh)}" style="min-height:44px">
                 ${renderIcon('download', { size: 18 })}
                 <span>Unduh Buku (PDF)</span>
               </a>
-              <a href="${esc(fileUrl)}" target="_blank" rel="noopener" class="btn btn--secondary buku-btn-baca" data-fx="cta magnetic" data-burst aria-label="Baca Buku Instruksi Algebra-Mart secara online di tab baru">
-                <svg class="am-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                <span>Baca Online</span>
-              </a>
+              ${isBacaOnlineValid ? `
+                <a href="${esc(bacaOnlineUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn--secondary buku-btn-baca" data-fx="cta magnetic" data-burst aria-label="Baca Buku Instruksi online (membuka tab baru)" style="min-height:44px;min-width:44px">
+                  <svg class="am-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  <span>Baca Online</span>
+                </a>
+              ` : ''}
             </div>
           `}
         </div>
