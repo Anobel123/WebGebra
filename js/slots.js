@@ -13,7 +13,7 @@ export function slugify(str) {
     .replace(/(^-|-$)+/g, '');
 }
 
-export const EXTENSIONS = ['.webp', '.png', '.jpg', '.jpeg', '.svg', '.PNG', '.JPG', '.JPEG', '.png.png'];
+export const EXTENSIONS = ['.webp', '.png', '.jpg', '.jpeg', '.svg', '.PNG', '.JPG', '.JPEG', '.png.png', '.jpg.jpeg', '.jpeg.jpeg'];
 
 // Daftar statis slot sistem
 const BASE_SLOTS = [

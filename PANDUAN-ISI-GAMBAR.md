@@ -1,11 +1,11 @@
 # Panduan Pengisian Slot Gambar Algebra-Mart
 
-Dokumen ini dibuat otomatis oleh `tools/cek-slot.mjs` pada **31/10/2026, 14.55.22**.
+Dokumen ini dibuat otomatis oleh `tools/cek-slot.mjs` pada **31/10/2026, 16.42.06**.
 
 ### Ringkasan Status Saat Ini
 - **Total Slot Terdaftar**: 37
-- **Slot Sudah Terisi**: 13
-- **Slot Masih Kosong**: 24
+- **Slot Sudah Terisi**: 18
+- **Slot Masih Kosong**: 19
 
 > [!TIP]
 > Anda cukup menaruh file gambar ke dalam folder tujuan dengan nama dan ekstensi yang didukung (`.webp`, `.png`, `.jpg`, `.jpeg`, atau `.svg`). Website otomatis memuat gambar tanpa perlu mengubah kode HTML maupun JavaScript!
@@ -46,11 +46,11 @@ Dokumen ini dibuat otomatis oleh `tools/cek-slot.mjs` pada **31/10/2026, 14.55.2
 | `logo-lidm` | Identitas & Logo | `assets/logo/` | `logo-lidm` | 1:1 | 512×512 px | ✅ **TERISI** | `assets/logo/logo-lidm.png` |
 | `favicon` | Identitas & Logo | `assets/logo/` | `favicon` | 1:1 | 512×512 px | ⏳ *KOSONG* | `-` |
 | `og-image` | SEO & Medsos | `assets/img/og/` | `og-image` | 1.91:1 | 1200×630 px | ✅ **TERISI** | `assets/img/og/og-image.png` |
-| `tim-zakky-fahrul-gibran` | Tim Pengembang | `assets/tim/` | `zakky-fahrul-gibran` | 1:1 | 800×800 px | ⏳ *KOSONG* | `-` |
-| `tim-ansharudin-sahid` | Tim Pengembang | `assets/tim/` | `ansharudin-sahid` | 1:1 | 800×800 px | ⏳ *KOSONG* | `-` |
-| `tim-jean-daniela` | Tim Pengembang | `assets/tim/` | `jean-daniela` | 1:1 | 800×800 px | ⏳ *KOSONG* | `-` |
-| `tim-alfredo-nobel-tambunan` | Tim Pengembang | `assets/tim/` | `alfredo-nobel-tambunan` | 1:1 | 800×800 px | ⏳ *KOSONG* | `-` |
-| `validator-dr-tria-gustiningsi-m-pd` | Pembimbing & Validator | `assets/validator/` | `dr-tria-gustiningsi-m-pd` | 1:1 | 800×800 px | ⏳ *KOSONG* | `-` |
+| `tim-zakky-fahrul-gibran` | Tim Pengembang | `assets/tim/` | `zakky-fahrul-gibran` | 1:1 | 800×800 px | ✅ **TERISI** | `assets/tim/zakky-fahrul-gibran.webp` |
+| `tim-ansharudin-sahid` | Tim Pengembang | `assets/tim/` | `ansharudin-sahid` | 1:1 | 800×800 px | ✅ **TERISI** | `assets/tim/ansharudin-sahid.webp` |
+| `tim-jean-daniela` | Tim Pengembang | `assets/tim/` | `jean-daniela` | 1:1 | 800×800 px | ✅ **TERISI** | `assets/tim/jean-daniela.webp` |
+| `tim-alfredo-nobel-tambunan` | Tim Pengembang | `assets/tim/` | `alfredo-nobel-tambunan` | 1:1 | 800×800 px | ✅ **TERISI** | `assets/tim/alfredo-nobel-tambunan.webp` |
+| `validator-dr-tria-gustiningsi-m-pd` | Pembimbing & Validator | `assets/validator/` | `dr-tria-gustiningsi-m-pd` | 1:1 | 800×800 px | ✅ **TERISI** | `assets/validator/dr-tria-gustiningsi-m-pd.webp` |
 
 ## Catatan Penggunaan
 1. **Mode Kerangka Kosong**: Selama gambar belum ditaruh, website menampilkan kerangka panduan putus-putus amber dengan keterangan nama berkas dan resolusi.

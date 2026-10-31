@@ -297,16 +297,17 @@
 }
 
 /* ===== ID Card Pegawai ===== */
-.grid--team { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.35rem; }
-.id-card { transform: rotate(var(--tilt, -2.2deg)); text-align: center; padding-top: 2.6rem; transition: transform .4s var(--ease), box-shadow .3s; display: flex; flex-direction: column; align-items: center; height: 100%; }
+.grid--team { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+.id-card { transform: rotate(var(--tilt, -2.2deg)); text-align: center; padding: 2.5rem 1.25rem 1.5rem; transition: transform .4s var(--ease), box-shadow .3s; display: flex; flex-direction: column; align-items: center; height: 100%; }
 .id-card__badge { align-self: center; }
-.id-card__name { margin: .6rem 0 .35rem; }
+.id-card__name { margin: .65rem 0 .35rem; font-size: 1.22rem; }
 .id-card:nth-child(even) { --tilt: 2deg; }
 .id-card:nth-child(3n) { --tilt: -1.2deg; }
 .id-card:hover { transform: rotate(0) translateY(-6px); box-shadow: var(--shadow-warm-lg); }
 .id-card::before { content: ''; position: absolute; top: 14px; left: 50%; width: 72px; height: 13px; margin-left: -36px; border-radius: 8px; background: var(--am-green-800); border: 2px solid var(--am-amber-400); }
-.id-card__photo { width: 114px; height: 114px; border-radius: 50%; margin: 0 auto 1rem; overflow: hidden; border: 5px solid var(--am-amber-400); box-shadow: 0 0 0 3px var(--am-green-800); background: var(--am-cream-200); display: grid; place-items: center; }
-.id-card__photo img { width: 100%; height: 100%; object-fit: cover; }
+.id-card__photo { width: 148px; height: 148px; border-radius: 50%; margin: 0 auto 1.15rem; overflow: hidden; border: 5px solid var(--am-amber-400); box-shadow: 0 10px 22px -6px rgba(120, 53, 15, .32), 0 0 0 3.5px var(--am-green-800); background: radial-gradient(circle at 50% 35%, #fffdf5 0%, #fef3c7 65%, #fde68a 100%); display: grid; place-items: center; position: relative; }
+.id-card__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: drop-shadow(0 6px 12px rgba(69, 26, 3, .18)); transition: transform .32s var(--ease); }
+.id-card__photo .slot-container { width: 100%; height: 100%; display: grid; place-items: center; }
 .id-card__role { font-weight: 800; color: var(--am-green-800); margin-bottom: .4rem; }
 .id-card__meta { font-size: .92rem; color: var(--am-muted); }
 .id-card__links { display: flex; gap: .45rem; justify-content: center; flex-wrap: wrap; margin-top: auto; padding-top: .8rem; }

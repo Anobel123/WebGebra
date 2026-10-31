@@ -12,5 +12,10 @@ export const SLOT_MANIFEST = {
   "logo-tim": "assets/logo/logo-tim.png",
   "logo-kampus": "assets/logo/logo-kampus.png",
   "logo-lidm": "assets/logo/logo-lidm.png",
-  "og-image": "assets/img/og/og-image.png"
+  "og-image": "assets/img/og/og-image.png",
+  "tim-zakky-fahrul-gibran": "assets/tim/zakky-fahrul-gibran.webp",
+  "tim-ansharudin-sahid": "assets/tim/ansharudin-sahid.webp",
+  "tim-jean-daniela": "assets/tim/jean-daniela.webp",
+  "tim-alfredo-nobel-tambunan": "assets/tim/alfredo-nobel-tambunan.webp",
+  "validator-dr-tria-gustiningsi-m-pd": "assets/validator/dr-tria-gustiningsi-m-pd.webp"
 };
