@@ -77,10 +77,7 @@ export async function initBukuInstruksi() {
     fileStatus = 'offline';
   }
 
-  const showFrames = shouldShowEmptySlots();
-  const coverHtml = showFrames
-    ? renderSlot('buku-sampul', { className: 'buku-slot' })
-    : renderCssBookCover(title);
+  const coverHtml = renderSlot('buku-sampul', { className: 'buku-slot' });
 
   const isAvailable = fileStatus === 'available' || fileStatus === 'offline';
   const metaLabel = fileSizeMB ? `PDF · ${fileSizeMB}` : 'PDF';
@@ -145,8 +142,13 @@ export async function initBukuInstruksi() {
     </article>
   `;
 
-  // Resolusi slot sampul jika ada
-  resolveSlots(container);
+  // Resolusi slot sampul
+  await resolveSlots(container);
+  const figCover = container.querySelector('figure[data-slot="buku-sampul"]');
+  if (figCover && figCover.classList.contains('is-empty') && !shouldShowEmptySlots()) {
+    figCover.innerHTML = renderCssBookCover(title);
+    figCover.style.display = 'block';
+  }
 
   // Hook scroll halus untuk semua tautan ke #buku-instruksi
   document.querySelectorAll('a[href="#buku-instruksi"]').forEach(link => {

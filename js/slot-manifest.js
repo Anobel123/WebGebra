@@ -13,6 +13,7 @@ export const SLOT_MANIFEST = {
   "logo-kampus": "assets/logo/logo-kampus.png",
   "logo-lidm": "assets/logo/logo-lidm.png",
   "og-image": "assets/img/og/og-image.png",
+  "buku-sampul": "assets/img/buku/sampul.webp",
   "tim-zakky-fahrul-gibran": "assets/tim/zakky-fahrul-gibran.webp",
   "tim-ansharudin-sahid": "assets/tim/ansharudin-sahid.webp",
   "tim-jean-daniela": "assets/tim/jean-daniela.webp",
