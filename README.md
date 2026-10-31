@@ -4,7 +4,7 @@
 
 ---
 
-## 🔗 Tautan Akses
+##  Tautan Akses
 
 - **Google Play Store**: [Unduh di Play Store](https://play.google.com/store/apps/details?id=com.ansharudin.algebramart)
 - **Versi Web**: [Mainkan di Browser](https://algebramart.github.io/game/)
@@ -12,7 +12,7 @@
 
 ---
 
-## ✨ Fitur Unggulan
+##  Fitur Unggulan
 
 - **20 Level Berjenjang & 5 Fase Aljabar**: Dari konsep variabel tunggal hingga sifat distributif kontekstual.
 - **Simulasi Kasir Interaktif**: Keypad kalkulator aljabar, perhitungan struk kasir, uang pembayaran, dan kembalian.
@@ -23,7 +23,7 @@
 
 ---
 
-## 📁 Struktur Direktori
+##  Struktur Direktori
 
 ```
 WebGebra/
@@ -39,7 +39,7 @@ WebGebra/
 
 ---
 
-## 🚀 Menjalankan Secara Lokal
+##  Menjalankan Secara Lokal
 
 Cukup jalankan satu perintah berikut di terminal:
 
@@ -51,13 +51,13 @@ Lalu buka peramban web pada alamat `http://localhost:8000`.
 
 ---
 
-## 👥 Tim Pengembang
+##  Tim Pengembang
 
 Karya Inovasi Pembelajaran Digital (IPDP) – **LIDM 2026**  
 **Universitas Jambi**
 
-- **Alfredo Nobel Tambunan** (Ketua Tim / Pengembang Web)
+- **Alfredo Nobel Tambunan** (Anggota Tim / Pengembang Web)
 - **Ansharudin Sahid** (Anggota Tim / Pengembang Gim)
 - **Jean Daniela** (Anggota Tim / Kurikulum & Materi)
-- **Zakky Fahrul Gibran** (Anggota Tim / Desain & Ilustrasi)
+- **Zakky Fahrul Gibran** (ketua Tim / Desain & Ilustrasi)
 - **Dr. Tria Gustiningsi, M.Pd.** (Dosen Pembimbing)
