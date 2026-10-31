@@ -70,7 +70,7 @@
   color: #fff; display: grid; align-items: center; overflow: hidden; background: var(--am-green-800);
   padding-bottom: 6.5rem;
 }
-.hero__bg { position: absolute; inset: -40px 0; background: url('../assets/img/hero-bg.jpg') center / cover no-repeat, var(--am-green-800); will-change: transform; }
+.hero__bg { position: absolute; inset: -40px 0; background: url('../assets/img/hero-bg.webp') center / cover no-repeat, var(--am-green-800); will-change: transform; }
 .hero__overlay {
   position: absolute; inset: 0;
   background: linear-gradient(110deg, rgba(6, 73, 55, .94) 0%, rgba(6, 73, 55, .86) 46%, rgba(120, 53, 15, .72) 100%);

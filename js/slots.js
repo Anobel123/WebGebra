@@ -13,7 +13,7 @@ export function slugify(str) {
     .replace(/(^-|-$)+/g, '');
 }
 
-export const EXTENSIONS = ['.webp', '.png', '.jpg', '.jpeg', '.svg', '.PNG', '.JPG', '.JPEG', '.png.png', '.jpg.jpeg', '.jpeg.jpeg'];
+export const EXTENSIONS = ['.webp', '.png', '.jpg', '.jpeg', '.svg'];
 
 // Daftar statis slot sistem
 const BASE_SLOTS = [
@@ -59,7 +59,10 @@ const BASE_SLOTS = [
   { id: 'favicon', bagian: 'Identitas & Logo', folder: 'assets/logo', namaBerkas: 'favicon', rasio: '1:1', lebar: 512, tinggi: 512, ukuranDisarankan: '512×512 px', alt: 'Favicon Browser Algebra-Mart', wajib: false },
 
   // 6. Media Sosial (Open Graph)
-  { id: 'og-image', bagian: 'SEO & Medsos', folder: 'assets/img/og', namaBerkas: 'og-image', rasio: '1.91:1', lebar: 1200, tinggi: 630, ukuranDisarankan: '1200×630 px', alt: 'Thumbnail Pratinjau Sosial Algebra-Mart', wajib: true }
+  { id: 'og-image', bagian: 'SEO & Medsos', folder: 'assets/img/og', namaBerkas: 'og-image', rasio: '1.91:1', lebar: 1200, tinggi: 630, ukuranDisarankan: '1200×630 px', alt: 'Thumbnail Pratinjau Sosial Algebra-Mart', wajib: true },
+
+  // 7. Dokumen & Buku Instruksi (3:4, 900x1200)
+  { id: 'buku-sampul', bagian: 'Dokumen', folder: 'assets/img/buku', namaBerkas: 'sampul', rasio: '3:4', lebar: 900, tinggi: 1200, ukuranDisarankan: '900×1200 px', alt: 'Sampul Buku Instruksi Algebra-Mart', wajib: false }
 ];
 
 /**

@@ -22,6 +22,16 @@ export const SITE_CONFIG = {
   // Mode tampil kerangka slot gambar kosong: true = tampilkan kotak putus-putus panduan; false = sembunyikan otomatis.
   // Dapat dioverride lewat parameter URL ?slots=1 atau ?slots=0.
   showEmptySlots: true,
+  // Dokumen unduhan (Buku Instruksi)
+  dokumen: {
+    bukuInstruksi: {
+      berkas: "assets/dokumen/buku-instruksi-algebra-mart.pdf",
+      judul: "Buku Instruksi Algebra-Mart",
+      deskripsi: "Panduan lengkap penggunaan Algebra-Mart mulai dari instalasi, navigasi antarmuka, hingga petunjuk bermain setiap mode.",
+      namaUnduh: "Buku-Instruksi-Algebra-Mart.pdf",
+      versi: ""
+    }
+  },
   // URL publik situs ini (dipakai tombol Bagikan). Kosong => fallback ke location.origin + location.pathname.
   siteUrl: "https://anobel123.github.io/WebGebra/"
 };

@@ -4,10 +4,10 @@ export { LEVELS, QUIZ_SAMPLES, BADGES } from './content-data.js';
 export const MARQUEE = ['Aljabar', 'Literasi Keuangan', 'Kurikulum Merdeka', 'Pembelajaran Mendalam', 'Android & Web', 'LIDM 2026'];
 
 export const SCREENSHOTS = [
-  { src: 'assets/img/hero/hero-1.png', slotId: 'hero-1', title: 'Profil Saya', alt: 'Layar Profil Saya: pemain mengisi nama, memilih avatar, dan melihat gelar' },
-  { src: 'assets/img/hero/hero-2.png', slotId: 'hero-2', title: 'Pilih Tantangan', alt: 'Layar Pilih Tantangan: lencana level bernomor dengan bintang' },
-  { src: 'assets/img/hero/hero-3.png', slotId: 'hero-3', title: 'Layar Kasir', alt: 'Layar Kasir dengan petunjuk tutorial cara bermain' },
-  { src: 'assets/img/hero/hero-4.png', slotId: 'hero-4', title: 'Pesanan Pelanggan', alt: 'Pesanan pelanggan yang harus diterjemahkan menjadi bentuk aljabar' }
+  { src: 'assets/img/hero/hero-1.webp', slotId: 'hero-1', title: 'Profil Saya', alt: 'Layar Profil Saya: pemain mengisi nama, memilih avatar, dan melihat gelar' },
+  { src: 'assets/img/hero/hero-2.webp', slotId: 'hero-2', title: 'Pilih Tantangan', alt: 'Layar Pilih Tantangan: lencana level bernomor dengan bintang' },
+  { src: 'assets/img/hero/hero-3.webp', slotId: 'hero-3', title: 'Layar Kasir', alt: 'Layar Kasir dengan petunjuk tutorial cara bermain' },
+  { src: 'assets/img/hero/hero-4.webp', slotId: 'hero-4', title: 'Pesanan Pelanggan', alt: 'Pesanan pelanggan yang harus diterjemahkan menjadi bentuk aljabar' }
 ];
 
 export const PHASES = [
@@ -388,15 +388,20 @@ export const FAQ = [
     q: 'Apakah progres permainan dan koleksi lencana saya akan hilang jika browser ditutup?',
     a: 'Tidak. Data akun kasir, skor, bintang per level, serta 20 koleksi lencana tersimpan aman di penyimpanan peramban (localStorage) perangkat Anda.'
   },
-  // Pertanyaan 9 & 10 jika kosong/tampil:false otomatis disembunyikan oleh sistem FAQ
   {
     id: 9,
+    q: 'Di mana saya bisa mendapat panduan lengkap?',
+    a: 'Anda dapat mengunduh Buku Instruksi Algebra-Mart dalam format PDF pada kartu <a href="#buku-instruksi">Buku Instruksi</a> di bagian Akses Game untuk panduan menyeluruh mulai dari instalasi hingga strategi menyelesaikan level.'
+  },
+  // Pertanyaan 10 & 11 jika kosong/tampil:false otomatis disembunyikan oleh sistem FAQ
+  {
+    id: 10,
     q: 'Bagaimana cara mereset data akun kasir jika ingin mengulang dari awal?',
     a: '', // sengaja dikosongkan untuk pengujian penyembunyian otomatis
     tampil: false
   },
   {
-    id: 10,
+    id: 11,
     q: 'Bagaimana cara melaporkan saran atau kendala teknis?',
     a: '', // sengaja dikosongkan untuk pengujian penyembunyian otomatis
     tampil: false

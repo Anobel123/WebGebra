@@ -320,7 +320,7 @@
 .id-card:hover { transform: rotate(0) translateY(-6px); box-shadow: var(--shadow-warm-lg); }
 .id-card::before { content: ''; position: absolute; top: 14px; left: 50%; width: 72px; height: 13px; margin-left: -36px; border-radius: 8px; background: var(--am-green-800); border: 2px solid var(--am-amber-400); }
 .id-card__photo { width: 148px; height: 148px; border-radius: 50%; margin: 0 auto 1.15rem; overflow: hidden; border: 5px solid var(--am-amber-400); box-shadow: 0 10px 22px -6px rgba(120, 53, 15, .32), 0 0 0 3.5px var(--am-green-800); background: radial-gradient(circle at 50% 35%, #fffdf5 0%, #fef3c7 65%, #fde68a 100%); display: grid; place-items: center; position: relative; }
-.id-card__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: drop-shadow(0 6px 12px rgba(69, 26, 3, .18)); transition: transform .32s var(--ease); }
+.id-card__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; filter: drop-shadow(0 6px 12px rgba(69, 26, 3, .18)); transition: transform .32s var(--ease); }
 .id-card__photo .slot-container { width: 100%; height: 100%; display: grid; place-items: center; }
 .id-card__role { font-weight: 800; color: var(--am-green-800); margin-bottom: .4rem; }
 .id-card__meta { font-size: .92rem; color: var(--am-muted); }
@@ -956,7 +956,7 @@ body.is-opening-locked {
   position: absolute; inset: -24px;
   background:
     radial-gradient(circle at 50% 42%, rgba(255, 251, 235, .86), rgba(253, 230, 138, .88) 58%, rgba(217, 119, 6, .85)),
-    url('../assets/img/hero-bg.jpg') center / cover no-repeat;
+    url('../assets/img/hero-bg.webp') center / cover no-repeat;
   filter: blur(12px);
   opacity: .55;
   pointer-events: none;
@@ -2161,6 +2161,202 @@ button:active, .btn:active, .icon-btn:active, .store-badge:active {
 /* Input iOS Auto-zoom Prevention */
 input, select, textarea {
   font-size: 16px !important;
+}
+
+/* ===== Kartu & Sampul Buku Instruksi ===== */
+.buku-card {
+  max-width: 920px;
+  margin: 3.5rem auto 0;
+  padding: 2.2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #fffdf8 60%, #fef3c7 100%);
+  border: 2px solid rgba(217, 119, 6, 0.28);
+  border-radius: var(--radius-card);
+  box-shadow: 0 14px 34px -8px rgba(120, 53, 15, 0.16);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-bounce), box-shadow var(--transition-bounce), border-color 0.3s ease;
+}
+.buku-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--am-amber-400), var(--am-green-800), var(--am-amber-500));
+}
+.buku-card--highlight {
+  animation: pulseHighlight 1.6s ease-out;
+  border-color: var(--am-amber-500) !important;
+}
+@keyframes pulseHighlight {
+  0% { transform: scale(0.99); box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.6); }
+  40% { transform: scale(1.02); box-shadow: 0 0 0 14px rgba(217, 119, 6, 0); }
+  100% { transform: scale(1); box-shadow: 0 14px 34px -8px rgba(120, 53, 15, 0.16); }
+}
+.buku-card__grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+.buku-card__cover {
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.28), 0 0 0 1px rgba(0,0,0,0.06);
+  position: relative;
+}
+.buku-slot {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.buku-cover-css {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(145deg, #064937 0%, #04382a 100%);
+  color: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: inset 4px 0 10px rgba(0,0,0,0.35);
+  position: relative;
+  overflow: hidden;
+}
+.buku-cover-css::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 14px; height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0.3) 100%);
+}
+.buku-cover-css__inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 8px;
+}
+.buku-cover-css__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.buku-cover-css__logo {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.buku-cover-css__tag {
+  font: 900 0.72rem var(--font-display);
+  letter-spacing: 0.08em;
+  color: var(--am-amber-400);
+}
+.buku-cover-css__title-group {
+  margin: 1.2rem 0;
+}
+.buku-cover-css__title {
+  margin: 0;
+  font: 900 1.35rem var(--font-display);
+  color: #fff;
+  line-height: 1.15;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+.buku-cover-css__subtitle {
+  margin: 0.4rem 0 0;
+  font: 600 0.82rem var(--font-body);
+  color: var(--am-amber-300);
+}
+.buku-cover-css__foot {
+  font: 700 0.7rem var(--font-body);
+  color: rgba(255,255,255,0.7);
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 0.5rem;
+}
+.buku-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+}
+.buku-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-pill);
+  background: rgba(217, 119, 6, 0.12);
+  color: var(--am-amber-800);
+  font: 800 0.78rem var(--font-body);
+  border: 1px solid rgba(217, 119, 6, 0.28);
+}
+.buku-card__title {
+  margin: 0.2rem 0 0.6rem;
+  font: 900 1.75rem var(--font-display);
+  color: var(--am-green-800);
+  line-height: 1.2;
+}
+.buku-card__desc {
+  margin: 0 0 1.4rem;
+  font-size: 1.02rem;
+  color: #4b5563;
+  line-height: 1.55;
+  max-width: 580px;
+}
+.buku-card__actions {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.buku-card__notice {
+  margin-bottom: 1.2rem;
+  padding: 0.75rem 1rem;
+  background: #fef2f2;
+  border-left: 4px solid #ef4444;
+  border-radius: 6px;
+  color: #991b1b;
+  font-size: 0.92rem;
+}
+.cara-buku-notice {
+  padding: 1.2rem;
+  border-radius: var(--radius-card);
+  background: linear-gradient(135deg, rgba(254, 243, 199, 0.6) 0%, rgba(255, 255, 255, 0.9) 100%);
+  border: 1.5px dashed var(--am-amber-400);
+  max-width: 680px;
+  margin: 2.5rem auto 0;
+}
+
+@media (max-width: 768px) {
+  .buku-card {
+    padding: 1.6rem;
+    margin-top: 2.5rem;
+  }
+  .buku-card__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .buku-card__cover {
+    margin: 0 auto;
+    max-width: 180px;
+  }
+  .buku-card__header {
+    justify-content: center;
+  }
+  .buku-card__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .buku-card__actions .btn {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+  }
 }
 
 /* Mobile Landscape Mode (844x390, 667x375) */

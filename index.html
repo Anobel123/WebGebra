@@ -15,14 +15,14 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Algebra-Mart | Gim Edukasi Literasi Matematika &amp; Keuangan">
   <meta property="og:description" content="Petualangan Belajar Aljabar di Toko Kelontong Modern untuk Siswa SMP Kelas VII. Karya Inovasi Pembelajaran Digital (IPDP) LIDM 2026.">
-  <meta property="og:image" content="assets/img/og-image.png">
+  <meta property="og:image" content="assets/img/og/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="id_ID">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Algebra-Mart | Gim Edukasi Literasi Matematika &amp; Keuangan">
   <meta name="twitter:description" content="Petualangan Belajar Aljabar di Toko Kelontong Modern untuk Siswa SMP Kelas VII.">
-  <meta name="twitter:image" content="assets/img/og-image.png">
+  <meta name="twitter:image" content="assets/img/og/og-image.png">
   <script type="application/ld+json" id="app-jsonld">
   {
     "@context": "https://schema.org",
@@ -45,7 +45,7 @@
   </script>
   <link rel="preload" href="assets/fonts/fredoka-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/nunito-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/img/hero-bg.jpg" as="image">
+  <link rel="preload" href="assets/img/hero-bg.webp" as="image">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
@@ -106,10 +106,10 @@
   <header class="header">
     <div class="container header__inner">
       <a class="logo" href="#beranda" aria-label="ALGEBRA-MART, ke Beranda">
-        <img class="logo__img" src="assets/logo/logo-algebra-mart.png" alt="Logo Algebra-Mart" width="40" height="40" onerror="if(!this.dataset.retry){this.dataset.retry='1';this.src='assets/img/logo-algebramart.png'}else{this.hidden=true;this.nextElementSibling.removeAttribute('hidden')}">
+        <img class="logo__img" src="assets/logo/logo-algebra-mart.png" alt="Logo Algebra-Mart" width="40" height="40" onerror="this.hidden=true;this.nextElementSibling.removeAttribute('hidden')">
         <svg class="logo__svg" viewBox="0 0 100 100" aria-hidden="true" hidden><circle cx="50" cy="55" r="40" fill="#b45309"/><circle cx="50" cy="48" r="40" fill="#fbbf24"/><circle cx="50" cy="48" r="30" fill="none" stroke="#064937" stroke-width="5"/><text x="50" y="60" text-anchor="middle" font-size="36" font-weight="900" fill="#064937" font-family="Fredoka,Nunito,sans-serif">x</text></svg>
         <span>ALGEBRA-MART</span>
-        <img class="logo__team" src="assets/logo/logo-tim.png" alt="Logo Tim" width="32" height="32" onerror="if(!this.dataset.retry){this.dataset.retry='1';this.src='assets/img/logo-tim.PNG'}else{this.hidden=true}">
+        <img class="logo__team" src="assets/logo/logo-tim.png" alt="Logo Tim" width="32" height="32" onerror="this.hidden=true">
       </a>
       <nav class="nav" id="nav" aria-label="Navigasi utama">
         <a href="#beranda">Beranda</a>
@@ -324,10 +324,13 @@
         <!-- Sub-bagian 1: Cara Bermain Langkah demi Langkah -->
         <div id="cara-bermain-container" style="margin-top:3.5rem"></div>
 
-        <!-- Sub-bagian 2: Panduan Perangkat (Device Guide) -->
+        <!-- Sub-bagian 2: Buku Instruksi (Dokumen PDF) -->
+        <div id="buku-instruksi-container" style="margin-top:3.5rem"></div>
+
+        <!-- Sub-bagian 3: Panduan Perangkat (Device Guide) -->
         <div id="device-guide-container" style="margin-top:3.5rem"></div>
 
-        <!-- Sub-bagian 3: FAQ (Tanya Jawab) -->
+        <!-- Sub-bagian 4: FAQ (Tanya Jawab) -->
         <div id="faq-container" style="margin-top:3.5rem"></div>
       </div>
     </section>
@@ -366,8 +369,8 @@
       <div class="footer__grid">
         <div>
           <div class="footer__brand">
-            <img class="footer__logo" src="assets/logo/logo-algebra-mart.png" alt="Logo Algebra-Mart" width="44" height="44" onerror="if(!this.dataset.retry){this.dataset.retry='1';this.src='assets/img/logo-algebramart.png'}else{this.hidden=true}">
-            <img class="footer__logo" src="assets/logo/logo-tim.png" alt="Logo Tim Pengembang" width="44" height="44" onerror="if(!this.dataset.retry){this.dataset.retry='1';this.src='assets/img/logo-tim.PNG'}else{this.hidden=true}">
+            <img class="footer__logo" src="assets/logo/logo-algebra-mart.png" alt="Logo Algebra-Mart" width="44" height="44" onerror="this.hidden=true">
+            <img class="footer__logo" src="assets/logo/logo-tim.png" alt="Logo Tim Pengembang" width="44" height="44" onerror="this.hidden=true">
             <h3 style="margin:0">ALGEBRA-MART</h3>
           </div>
           <p>Gim edukasi literasi matematika dan keuangan untuk siswa SMP. Jadi kasir, tulis bentuk aljabar, layani pembayaran.</p>
@@ -387,6 +390,7 @@
             <li><a href="#materi">Materi &amp; Kuis</a></li>
             <li><a href="#akses">Akses Game &amp; QR</a></li>
             <li><a href="#cara-bermain-container">Cara Bermain</a></li>
+            <li><a href="assets/dokumen/buku-instruksi-algebra-mart.pdf" download="Buku-Instruksi-Algebra-Mart.pdf" class="footer__link-buku" type="application/pdf">Buku Instruksi (PDF)</a></li>
             <li><a href="#device-guide-container">Panduan Perangkat</a></li>
             <li><a href="#faq-container">FAQ (Tanya Jawab)</a></li>
             <li><a href="#profil">Pengembang &amp; Pembimbing</a></li>

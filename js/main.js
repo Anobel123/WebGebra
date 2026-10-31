@@ -20,6 +20,7 @@ const MODULES = [
   ['features', './ui/features.js', (m) => m.initFeatures()],
   ['access', './ui/access.js', (m) => m.initAccess()],
   ['caraBermain', './ui/caraBermain.js', (m) => m.initCaraBermain()],
+  ['bukuInstruksi', './ui/bukuInstruksi.js', (m) => m.initBukuInstruksi()],
   ['deviceGuide', './ui/deviceGuide.js', (m) => m.initDeviceGuide()],
   ['faq', './ui/faq.js', (m) => m.initFaq()],
   ['share', './ui/share.js', (m) => m.initShare()],
@@ -53,7 +54,7 @@ const MODULES = [
 
 (async () => {
   // reveal harus dipasang setelah konten dinamis; urutan: konten dulu, lalu reveal
-  const order = ['config', 'content', 'sparkFx', 'opening', 'audio', 'nav', 'scrollProgress', 'effects', 'carousel', 'demo', 'kelas', 'features', 'materi', 'access', 'caraBermain', 'deviceGuide', 'faq', 'share', 'team', 'feedback', 'lightbox', 'hoverFx', 'year', 'reveal'];
+  const order = ['config', 'content', 'sparkFx', 'opening', 'audio', 'nav', 'scrollProgress', 'effects', 'carousel', 'demo', 'kelas', 'features', 'materi', 'access', 'caraBermain', 'bukuInstruksi', 'deviceGuide', 'faq', 'share', 'team', 'feedback', 'lightbox', 'hoverFx', 'year', 'reveal'];
   for (const name of order) {
     const [, path, run] = MODULES.find((m) => m[0] === name);
     await new Promise((res) => {

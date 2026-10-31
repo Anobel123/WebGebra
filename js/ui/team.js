@@ -86,13 +86,7 @@ export function initTeam() {
       if (!img) return;
 
       const initialSrc = img.getAttribute('src');
-      const candidates = [
-        initialSrc,
-        initialSrc.replace('assets/logo/', 'assets/img/'),
-        initialSrc.replace('assets/img/', 'assets/logo/'),
-        initialSrc.replace('logo-algebra-mart', 'logo-algebramart'),
-        initialSrc.replace('logo-algebramart', 'logo-algebra-mart')
-      ].filter((v, i, a) => a.indexOf(v) === i);
+      const candidates = [initialSrc];
 
       let idx = 0;
       function tryLoad() {

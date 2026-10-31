@@ -13,8 +13,8 @@ export const OPENING_CONFIG = {
   reducedMotionFadeMs: 180,          // Durasi fade singkat bila prefers-reduced-motion aktif
   sessionKey: 'algebraMart_openingSeen',
   preloadImages: [
-    'assets/img/hero-bg.jpg',
-    'assets/img/hero/hero-1.png'
+    'assets/img/hero-bg.webp',
+    'assets/img/hero/hero-1.webp'
   ]
 };
 
