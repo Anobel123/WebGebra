@@ -1,41 +1,56 @@
-/* Token desain Algebra-Mart: Emas/Amber + Hijau Khas #064937 */
+/* Token desain Algebra-Mart: Toko Kelontong Jambi (Krem 60% · Cokelat Kayu 30% · Emas/Amber 10%) */
 @font-face { font-family: 'Fredoka'; font-weight: 400 700; font-display: swap; src: url('../assets/fonts/fredoka-var.woff2') format('woff2'); }
 @font-face { font-family: 'Nunito'; font-weight: 400 900; font-display: swap; src: url('../assets/fonts/nunito-var.woff2') format('woff2'); }
-@font-face { font-family: 'Roboto'; font-weight: 400; font-display: swap; src: local('Roboto'), url('../assets/fonts/Roboto-Regular.woff2') format('woff2'); }
-@font-face { font-family: 'Roboto'; font-weight: 700; font-display: swap; src: local('Roboto Bold'), url('../assets/fonts/Roboto-Bold.woff2') format('woff2'); }
-@font-face { font-family: 'Roboto'; font-weight: 900; font-display: swap; src: local('Roboto Black'), url('../assets/fonts/Roboto-Black.woff2') format('woff2'); }
 
 :root {
+  /* Skala 60/30/10 Warung Kelontong Jambi */
+  --am-cream-100: #fff1d0;  /* 60%: Latar utama kertas/krem hangat warung */
+  --am-cream-50:  #fef3c7;  /* Krem terang selang-seling */
+  --am-cream-200: #fde68a;  /* Krem aksen garis struk */
+  --am-card:      #fffaf0;  /* Latar kartu hangat (bukan #fff polos) */
+
+  --am-brown-900: #451a03;  /* 30%: Teks gelap penegas, batas kayu jati */
+  --am-brown-800: #78350f;  /* Teks judul & aksen cokelat hangat */
+  --am-brown-700: #92400e;  /* Garis tepi & tombol kayu sekunder */
+  --am-wood:      #3f2a22;  /* Papan kayu rak kelontong */
+  --am-ink:       #2b1204;  /* Teks bacaan hitam-cokelat pekat */
+  --am-muted:     #6b4e3d;  /* Teks sekunder bernuansa kopi hangat */
+
+  --am-amber-400: #fbbf24;  /* 10%: Aksen emas koin rupiah & lencana */
+  --am-amber-500: #f59e0b;  /* Tombol utama kasir */
+  --am-amber-600: #d97706;  /* Garis bawah penegas tombol */
+  --am-amber-700: #b45309;  /* Bayangan koin */
+
+  /* Aksen fungsional kecil (<= 5% permukaan: status berhasil / tanda operasi) */
   --am-green-900: #032b20;
   --am-green-800: #064937;
   --am-green-700: #0a684f;
   --am-green-600: #0e8768;
   --am-green-100: #d1fae5;
-  --am-green-50: #ecfdf5;
+  --am-green-50:  #ecfdf5;
+  --am-mint:      #10b981;
+  --am-blue:      #3b82f6;
 
-  --am-amber-400: #fbbf24;
-  --am-amber-500: #f59e0b;
-  --am-amber-600: #d97706;
-  --am-amber-700: #b45309;
-  --am-brown-900: #451a03;
-  --am-brown-800: #78350f;
-  --am-brown-700: #92400e;
-  --am-cream-50: #fef3c7;
-  --am-cream-100: #fff1d0;
-  --am-cream-200: #fde68a;
-  --am-card: #fffaf0;
-  --am-ink: #172536;
-  --am-muted: #475569;
-  --am-mint: #10b981;
-  --am-blue: #3b82f6;
-  --am-wood: #3f2a22;
+  /* 2 Keluarga Font Lokal Murni (Bebas Font AI-Slop Generik) */
+  --font: 'Nunito', sans-serif;
+  --font-display: 'Fredoka', cursive, sans-serif;
 
-  --font: 'Nunito', 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Fredoka', 'Nunito', 'Roboto', system-ui, sans-serif;
-  --radius-card: 26px;
+  /* Skala Tipografi Terkontrol (Tepat 5 Ukuran Berbasis clamp()) */
+  --text-xs:   clamp(0.80rem, 0.76rem + 0.20vw, 0.88rem); /* Catatan kaki, lencana harga, nomor koin kecil */
+  --text-base: clamp(0.98rem, 0.94rem + 0.20vw, 1.08rem); /* Teks isi bacaan utama */
+  --text-lg:   clamp(1.22rem, 1.15rem + 0.35vw, 1.42rem); /* Subjudul, judul kartu & blok menu */
+  --text-xl:   clamp(1.65rem, 1.45rem + 0.90vw, 2.25rem); /* Judul bagian / section head */
+  --text-hero: clamp(2.30rem, 1.80rem + 2.20vw, 3.50rem); /* Judul hero utama */
+
+  /* 2 Bobot Font Terkontrol */
+  --weight-body: 500;
+  --weight-heading: 700;
+
+  --radius-card: 22px;
   --radius-pill: 999px;
-  --shadow-warm: 0 6px 0 rgba(120, 53, 15, .20), 0 12px 26px -8px rgba(69, 26, 3, .26);
-  --shadow-warm-lg: 0 8px 0 rgba(120, 53, 15, .28), 0 22px 44px -10px rgba(69, 26, 3, .34);
+  --shadow-warm: 0 5px 0 rgba(120, 53, 15, .20), 0 10px 22px -6px rgba(69, 26, 3, .24);
+  --shadow-warm-lg: 0 7px 0 rgba(120, 53, 15, .26), 0 18px 36px -8px rgba(69, 26, 3, .30);
+  --shadow-timber: 0 6px 0 #2b1204, 0 14px 28px -6px rgba(43, 18, 4, .35);
   --header-h: 74px;
   --header-h-small: 58px;
   --ease: cubic-bezier(.22, 1, .36, 1);

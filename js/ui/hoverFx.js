@@ -21,37 +21,39 @@ export const HOVER_CONFIG = {
   switches: {
     tilt: true,
     magnetic: true,
-    cursor: true,
+    cursor: false, /* Hapus kursor cincin: bebas tumpang tindih dengan trail partikel */
     hoverSymbols: true,
     cornerCoins: true,
     touchFallback: true
   },
   tilt: {
-    maxDeg: 7,
+    maxDeg: 6,
     perspective: 900,
-    selector: '.card--tilt, .level-card, .feature, .id-card, [data-fx~="tilt"]'
+    /* Tilt 3D bermakna: HANYA untuk kartu level & ID Card pengembang */
+    selector: '.level-card, .id-card, [data-tilt-allowed]'
   },
   magnetic: {
-    radius: 80,
-    maxShift: 6.5,
-    selector: '[data-fx~="magnetic"]'
+    radius: 70,
+    maxShift: 5,
+    /* Tarikan magnetik: HANYA untuk tombol aksi utama (CTA) */
+    selector: '.hero__cta .btn, .btn--cta-primary, [data-magnetic-primary]'
   },
   cursor: {
     lerp: 0.24,
     defaultSize: 22,
     hoverSizeMin: 40,
     hoverSizeMax: 58,
-    interactiveSelector: 'a, button, .btn, .store-badge, .card--tilt, .level-card, .id-card, .qr-box, .tab, .quiz-choice, .smp-char, .rating-star'
+    interactiveSelector: 'a, button, .btn, .store-badge, .level-card, .id-card, .qr-box'
   },
   symbols: {
     glyphs: ['+', '=', 'x', 'd'],
-    maxPerElement: 3,
-    countMin: 2,
-    countMax: 3,
-    durMs: 960,
+    maxPerElement: 2,
+    countMin: 1,
+    countMax: 2,
+    durMs: 800,
     fontMin: 11,
-    fontMax: 14,
-    selector: '[data-fx~="cta"], .level-card'
+    fontMax: 13,
+    selector: '.level-card'
   },
   cornerCoins: {
     countMin: 2,
@@ -434,6 +436,12 @@ function updatePointerFrame(now) {
  * 5. Kursor Khusus Bercincin Emas (hanya pointer: fine) dengan Lerp Halus
  */
 function ensureCursorRing() {
+  if (!HOVER_CONFIG.switches.cursor) {
+    const existing = document.getElementById('hover-cursor-ring');
+    if (existing) existing.remove();
+    state.cursorEl = null;
+    return null;
+  }
   if (state.cursorEl && document.body.contains(state.cursorEl)) return state.cursorEl;
   let el = document.getElementById('hover-cursor-ring');
   if (!el) {
@@ -527,7 +535,7 @@ export function initHoverFx() {
       mo.observe(materiPanel, { childList: true });
     }
 
-    if (state.isFinePointer) {
+    if (state.isFinePointer && HOVER_CONFIG.switches.cursor) {
       ensureCursorRing();
     }
     initTouchFallbacks();

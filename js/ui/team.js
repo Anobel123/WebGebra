@@ -19,21 +19,47 @@ function card(p, kind) {
   if (links.github) l.push(`<a href="${esc(links.github)}" target="_blank" rel="noopener noreferrer">GitHub</a>`);
   if (links.instagram) l.push(`<a href="${esc(links.instagram)}" target="_blank" rel="noopener noreferrer">Instagram</a>`);
   if (links.email) l.push(`<a href="mailto:${esc(links.email)}">Email</a>`);
-  // Program studi / bidang: tidak dirender bila masih TODO atau kosong
   const prodi = p.prodi && !isTodo(p.prodi) ? esc(p.prodi) : '';
-  const chipClass = kind === 'val' || p.isLead ? 'chip chip--green' : 'chip';
   const slug = slugify(p.name);
   const slotFolder = kind === 'val' ? 'assets/validator' : 'assets/tim';
   const slotId = kind === 'val' ? `validator-${slug}` : `tim-${slug}`;
 
-  // Urutan: foto/inisial -> lencana peran -> nama -> program studi -> tautan
-  return `<article class="card id-card reveal" data-reveal="shelf">
+  // Tata letak khusus Dosen Pembimbing: Plakat Sertifikat Akademis (bukan ID card lanyard)
+  if (kind === 'val') {
+    return `<article class="advisor-card card reveal" data-reveal="shelf" style="--shelf-rot:1.5deg">
+      <div class="advisor-card__inner">
+        <div class="advisor-card__seal" aria-hidden="true">★</div>
+        <div class="advisor-card__photo">
+          <figure class="slot-container slot-container--round" data-slot="${slotId}" data-folder="${slotFolder}" data-file="${slug}" data-ratio="1:1" data-width="800" data-height="800" data-alt="Foto ${esc(p.name)}" data-fallback="initials">
+            <div class="img-fallback img-fallback--round" role="img" aria-label="Inisial ${esc(p.name)}">${initials(p.name)}</div>
+          </figure>
+        </div>
+        <div class="advisor-card__info">
+          <span class="advisor-card__tag">Dosen Pembimbing Akademik</span>
+          <h3 class="advisor-card__name">${esc(p.name)}</h3>
+          ${prodi ? `<div class="advisor-card__meta">${prodi} · Universitas Jambi</div>` : ''}
+          <p class="advisor-card__note">Supervisi pedagogis materi aljabar &amp; keterpaduan Kurikulum Merdeka Fase D.</p>
+          ${l.length ? `<div class="advisor-card__links">${l.join('')}</div>` : ''}
+        </div>
+      </div>
+    </article>`;
+  }
+
+  // ID Card Pegawai Kasir Tim Pengembang: Ketua tim ditonjolkan & posisi sedikit miring asimetris
+  const isLead = Boolean(p.isLead);
+  const tiltDeg = isLead ? '-2.8deg' : (slug.includes('ansharudin') ? '2.2deg' : (slug.includes('jean') ? '-1.8deg' : '2.4deg'));
+  const leadClass = isLead ? 'id-card--lead' : '';
+  const badgeLabel = isLead ? 'Ketua Tim / Project Lead' : 'Anggota Tim Pengembang';
+  const badgeClass = isLead ? 'chip chip--gold id-card__badge--lead' : 'chip id-card__badge';
+
+  return `<article class="card id-card ${leadClass} reveal" data-reveal="shelf" style="--tilt:${tiltDeg};" data-tilt-allowed>
+    <div class="id-card__lanyard" aria-hidden="true"></div>
     <div class="id-card__photo">
       <figure class="slot-container slot-container--round" data-slot="${slotId}" data-folder="${slotFolder}" data-file="${slug}" data-ratio="1:1" data-width="800" data-height="800" data-alt="Foto ${esc(p.name)}" data-fallback="initials">
         <div class="img-fallback img-fallback--round" role="img" aria-label="Inisial ${esc(p.name)}">${initials(p.name)}</div>
       </figure>
     </div>
-    <span class="${chipClass} id-card__badge">${esc(roleLabel(p, kind))}</span>
+    <span class="${badgeClass}">${esc(badgeLabel)}</span>
     <h3 class="id-card__name">${esc(p.name)}</h3>
     ${prodi ? `<div class="id-card__meta">${prodi}</div>` : ''}
     ${l.length ? `<div class="id-card__links">${l.join('')}</div>` : ''}

@@ -24,18 +24,18 @@ export const SPARK_CONFIG = {
     maxActive: 40
   },
   trail: {
-    minDistMin: 14,
-    minDistMax: 18,
-    driftMin: 10,
-    driftMax: 30,
-    durMin: 1200,
-    durMax: 1800,
-    fontMin: 12,
-    fontMax: 20,
-    rotMax: 20,
-    tokenDelayMs: 55,
-    maxActive: 60,
-    minSpawnIntervalMs: 16
+    minDistMin: 28,  /* Dinaikkan agar frekuensi partikel berkurang */
+    minDistMax: 36,
+    driftMin: 6,
+    driftMax: 16,
+    durMin: 550,     /* Dipersingkat agar lenyap anggun tanpa garis panjang membentang */
+    durMax: 850,
+    fontMin: 11,
+    fontMax: 15,
+    rotMax: 15,
+    tokenDelayMs: 65,
+    maxActive: 22,   /* Pangkas ~63% dari 60 menjadi 22 partikel aktif maksimum */
+    minSpawnIntervalMs: 32
   },
   device: {
     mobileMaxWidth: 480,
@@ -532,6 +532,11 @@ export function initCursorTrail() {
     document.addEventListener('pointermove', (e) => {
       try {
         if (!SPARK_CONFIG.enabled || !state.userEnabled || state.trailDegraded) return;
+        // Matikan jejak partikel di area teks bacaan panjang agar nyaman dibaca
+        const t = e.target;
+        if (t && t.closest && t.closest('p, article, .text-block, .about-intro-body, .about-menu-board, .lead, blockquote, .card__info, .tips-memo-board, .steps, .faq-answer, .note')) {
+          return;
+        }
         state.pendingMove = { x: e.clientX, y: e.clientY };
         scheduleFrame();
       } catch (err) {
@@ -543,9 +548,13 @@ export function initCursorTrail() {
     document.addEventListener('touchmove', (e) => {
       try {
         if (!SPARK_CONFIG.enabled || !state.userEnabled || state.trailDegraded) return;
-        const t = e.touches?.[0];
-        if (!t) return;
-        state.pendingMove = { x: t.clientX, y: t.clientY };
+        const touch = e.touches?.[0];
+        if (!touch) return;
+        const t = touch.target;
+        if (t && t.closest && t.closest('p, article, .text-block, .about-intro-body, .about-menu-board, .lead, blockquote, .card__info, .tips-memo-board, .steps, .faq-answer, .note')) {
+          return;
+        }
+        state.pendingMove = { x: touch.clientX, y: touch.clientY };
         scheduleFrame();
       } catch (err) {
         console.error('[modul:cursorTrail]', err);

@@ -112,18 +112,23 @@ export function initCaraBermain() {
         </div>
       ` : ''}
 
-      <!-- 3 Kartu Tips Cepat (Diverifikasi Sesuai Kode Gim) -->
-      <div class="tips-cepat-section">
-        <h4 class="tips-heading">${renderIcon('lightbulb', { size: 22 })} Tips Cepat Sukses Melayani Pelanggan</h4>
-        <div class="grid grid--3 tips-grid">
-          ${TIPS_BERMAIN.map(tip => `
-            <div class="tip-card card reveal">
-              <div class="tip-icon">${renderIcon(tip.icon, { size: 24 })}</div>
-              <h5 class="tip-title">${esc(tip.title)}</h5>
-              <p class="tip-desc">${esc(tip.desc)}</p>
-            </div>
-          `).join('')}
+      <!-- Memo Catatan Kasir: Teks Bernomor Lega (Bebas Kotak Ikon AI-Slop) -->
+      <div class="tips-memo-board card reveal" data-reveal="shelf" style="--shelf-rot:-1.2deg">
+        <div class="tips-memo-board__head">
+          <span class="tips-memo-board__stamp">MEMO MEJA KASIR</span>
+          <h4 class="tips-memo-board__title">Tiga Pedoman Penting Saat Melayani Pelanggan</h4>
         </div>
+        <ol class="tips-memo-list">
+          ${TIPS_BERMAIN.map((tip, idx) => `
+            <li class="tips-memo-item">
+              <span class="tips-memo-num" aria-hidden="true">0${idx + 1}</span>
+              <div class="tips-memo-body">
+                <h5 class="tips-memo-item-title">${esc(tip.title)}</h5>
+                <p class="tips-memo-item-desc">${esc(tip.desc)}</p>
+              </div>
+            </li>
+          `).join('')}
+        </ol>
       </div>
 
       <!-- Kartu Panduan Guru & Fasilitator (Carousel Sesuai Alur Kode Gim) -->

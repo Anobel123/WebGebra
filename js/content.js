@@ -20,11 +20,31 @@ export const PHASES = [
 ];
 
 export const PILLARS = [
-  { t: 'Kontekstual', d: 'Variabel adalah harga barang sehari-hari, termasuk kuliner lokal Jambi: padamaran, dodol nanas, gandus, dan tempoyak.' },
-  { t: 'Pembelajaran mendalam', d: 'Pendekatan mindful, meaningful, joyful learning. Siswa bernalar, bukan menghafal.' },
-  { t: 'Bertahap', d: '20 level dari C1 sampai C6 (taksonomi Bloom), dengan scaffolding dari variabel tunggal hingga sifat distributif.' },
-  { t: 'Lintas mata pelajaran', d: 'Aljabar bertemu literasi keuangan, kewargaan, bahasa, informatika, dan muatan lokal.' },
-  { t: 'Inklusif untuk daerah 3T', d: 'Berbasis web ringan dan APK Android. Aset gim dibundel lokal sehingga tetap berjalan dengan koneksi terbatas.' }
+  {
+    num: '01',
+    t: 'Variabel Adalah Harga Dagangan Nyata',
+    d: 'Bukan sekadar huruf x dan y tanpa makna. Simbol mewakili komoditas belanja lokal Jambi: dodol nanas Muaro Jambi (d), kue padamaran (p), gandus, dan tempoyak (t).'
+  },
+  {
+    num: '02',
+    t: 'Bernalar Suku Sejenis di Meja Kasir',
+    d: 'Siswa memahami secara intuitif mengapa 3 dodol nanas + 4 dodol nanas (3d + 4d = 7d) dapat dijumlahkan, sementara dodol dan tempoyak (3d + 2t) tidak dapat dilebur.'
+  },
+  {
+    num: '03',
+    t: '20 Level Terstruktur dari C1 hingga C6',
+    d: 'Scaffolding bertahap: pengenalan koefisien tunggal di Level 1-3, dua variabel di Level 4-7, sifat operasi di Level 8-10, substitusi harga riil di Level 11-15, hingga sifat distributif paket hajatan di Level 16-20.'
+  },
+  {
+    num: '04',
+    t: 'Literasi Keuangan & Perhitungan Kembalian',
+    d: 'Belajar aljabar langsung terhubung dengan transaksi kasir: menghitung laba toko di Buku Kas, menghitung uang kembalian pecahan Rp500 hingga Rp100.000, serta menyisihkan sumbangan sosial.'
+  },
+  {
+    num: '05',
+    t: 'Akses Ringan untuk Sekolah dan Daerah 3T',
+    d: 'Dapat dijalankan langsung di peramban web maupun aplikasi Android luring. Seluruh aset gim dibundel lokal sehingga tidak membebani kuota data siswa.'
+  }
 ];
 
 export const MAPEL = [
@@ -33,21 +53,52 @@ export const MAPEL = [
 ];
 
 export const FEATURES = [
-  { t: 'Mode Kasir interaktif', d: 'Terjemahkan pesanan menjadi bentuk aljabar, lalu layani pembayaran.', i: 'M4 7h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7zm4 0a4 4 0 0 1 8 0' },
-  { t: 'Kuis evaluasi tiap level', d: 'Soal pilihan ganda untuk mengecek pemahaman.', i: 'M9 9a3 3 0 1 1 4.5 2.6c-1 .6-1.5 1.1-1.5 2.4M12 18h.01M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z' },
-  { t: 'Bintang 1-3 per level', d: 'Penilaian bintang setiap level selesai.', i: 'M12 2l3 6.5 7 .9-5.1 4.8 1.3 7L12 17.8 5.8 21.2l1.3-7L2 9.4l7-.9z' },
-  { t: 'Buku Kas', d: 'Catatan laba toko dari transaksi yang dilayani.', i: 'M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4V4zm4 5h8M8 13h8' },
-  { t: 'Prestasi', d: '20 lencana dalam 5 tier.', i: 'M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3' },
-  { t: 'Gelar', d: 'Kasir Magang, Kasir Junior, Pedagang Ahli, Juragan Pasar, Sultan Aljabar, dan Pedagang Dermawan bagi yang aktif menyumbang.', i: 'M3 8l4 4 5-7 5 7 4-4v11H3V8z' },
-  { t: 'Mode Kelas untuk guru', d: 'Kode ruang, pantau siswa, rapor belajar, laporan asesmen cetak, dan peringatan dini siswa yang kesulitan.', i: 'M3 5h18v11H3zM8 21h8M12 16v5' },
-  { t: 'Efek suara', d: 'Umpan balik suara yang menyenangkan saat bermain.', i: 'M4 9v6h4l5 4V5L8 9H4zm12 0a4 4 0 0 1 0 6' }
+  {
+    id: 'buku-kas',
+    size: 'featured',
+    t: 'Buku Kas & Kalkulator Kembalian Kasir',
+    d: 'Mencatat seluruh laba kotor, modal belanja, dan pendapatan dari setiap pelanggan yang dilayani. Melatih ketepatan menghitung uang kembalian pecahan rupiah secara akurat.',
+    badge: 'Struk Toko',
+    receipt: {
+      shop: 'ALGEBRA-MART JAMBI',
+      no: 'NOTA-0428',
+      items: [
+        { name: 'Dodol Nanas (3d)', price: 'Rp9.000' },
+        { name: 'Kue Padamaran (2p)', price: 'Rp5.000' },
+        { name: 'Tempoyak Dus (1t)', price: 'Rp18.000' }
+      ],
+      total: 'Total Belanja: Rp32.000',
+      pay: 'Tunai: Rp50.000 · Kembali: Rp18.000'
+    }
+  },
+  {
+    id: 'mode-kelas',
+    size: 'compact',
+    t: 'Mode Kelas & Kode Ruang Fasilitator',
+    d: 'Guru dapat membuat kode ruang belajar 4 angka (PIN 1234), memantau ketuntasan level siswa secara langsung, dan mengunduh rekap rapor asesmen formatif.',
+    badge: 'Fasilitator'
+  },
+  {
+    id: 'kuis-c1c6',
+    size: 'compact',
+    t: 'Kuis Evaluasi Konsep di Akhir Level',
+    d: 'Setiap level diakhiri kuis evaluasi pemahaman konsep bentuk aljabar dan literasi keuangan untuk memastikan siswa tidak sekadar menebak jawaban.',
+    badge: 'Evaluasi'
+  },
+  {
+    id: 'audio-kelontong',
+    size: 'compact',
+    t: 'Umpan Balik Suara Khas Toko Kelontong',
+    d: 'Denting koin klinting saat kembalian tepat, pemindai barcode kasir saat pesanan dimasukkan, dan lonceng pintu warung yang berbunyi ketika pembeli baru datang.',
+    badge: 'Suara Toko'
+  }
 ];
 
 export const LEARN_STEPS = [
-  'Isi profil dan pilih avatar.',
-  'Ikuti Pengantar (Level 0).',
-  'Layani pelanggan dan tulis rumus aljabarnya.',
-  'Jawab kuis, kumpulkan bintang dan lencana.'
+  'Pilih avatar kasir dan isi nama kasir di papan nama toko.',
+  'Pahami harga barang dan aturan aljabar di Level 0 (Pengantar).',
+  'Layani pesanan pembeli: tuliskan rumus aljabar dan hitung kembalian uang rupiah.',
+  'Jawab kuis evaluasi pemahaman dan raih kenaikan gelar kasir.'
 ];
 
 // Demo "Coba Jadi Kasir": soal diambil dari contoh level 2, 4, dan 11 (levels.js).
@@ -96,7 +147,7 @@ export const STUDENT_VOICES = [
   { no: 17, code: 'Siswa 17', initials: 'AH', name: 'Ulfa Azmi Ashoka', gender: 'F', item: 'terong.png', topic: 'Evaluasi Kuis Tiap Level', text: 'Gamenya bagus! Saya bisa belajar sesuai kuis evaluasi di akhir level, dan saya jadi paham letak kesalahan saya sehingga lebih teliti menulis rumus aljabar.' },
   { no: 18, code: 'Siswa 18', initials: 'AA', name: 'Dara Alhaditsul Husna', gender: 'F', item: 'dodolnanas.png', topic: 'Pesanan Rombongan & Gabungan', text: 'Gamenya bagus! Saya bisa belajar sesuai tantangan yang makin seru, dan saya jadi paham cara menggabungkan pesanan dari beberapa pelanggan sekaligus ke bentuk aljabar.' },
   { no: 19, code: 'Siswa 19', initials: 'UAA', name: 'Novil Azis Permana', gender: 'M', item: 'beras.png', topic: 'Kurung Ganda & Operasi Bertingkat', text: 'Gamenya bagus! Saya bisa belajar sesuai tahapan dari mudah ke sulit, dan saya jadi paham cara menyelesaikan operasi aljabar bertingkat dengan kurung ganda.' },
-  { no: 20, code: 'Siswa 20', initials: 'DAH', name: 'Muhammad Naufal Maulana', gender: 'M', item: 'kopiaaa.png', topic: 'Kepercayaan Diri Belajar Aljabar', text: 'Gamenya bagus! Saya bisa belajar sesuai cara bermain yang menyenangkan, dan saya jadi paham bahwa aljabar itu ternyata dekat dengan kehidupan sehari-hari dan tidak menakutkan.' }
+  { no: 20, code: 'Siswa 20', initials: 'DAH', name: 'Muhammad Naufal Maulana', gender: 'M', item: 'kopiaaa.png', topic: 'Kepercayaan Diri Belajar Aljabar', text: 'Simulasi meja kasir membantu saya melihat bahwa bentuk aljabar itu dekat dengan belanja sehari-hari dan tidak rumit dipahami.' }
 ];
 
 // Data tim pengembang. Foto otomatis fallback ke inisial emas bila file belum ditaruh di assets/img/.
@@ -304,7 +355,7 @@ export const TIPS_BERMAIN = [
   {
     icon: 'book-open',
     title: 'Pelajari Konsep di Level 0',
-    desc: 'Level 0 memuat materi pengantar interaktif konsep aljabar (koefisien pesanan, variabel harga barang, dan konstanta biaya tambahan) tanpa batasan antrean, sangat dianjurkan dicoba sebelum melayani pelanggan.'
+    desc: 'Level 0 memuat pengantar interaktif konsep aljabar (koefisien pesanan, variabel harga barang, dan konstanta biaya kemasan) dengan tempo santai tanpa terburu-buru antrean, dianjurkan dicoba sebelum melayani pelanggan.'
   }
 ];
 
