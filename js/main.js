@@ -44,7 +44,7 @@ const MODULES = [
           const parsed = JSON.parse(jsonLdScript.textContent);
           const cleanUrl = siteUrl.replace(/\/$/, '');
           parsed.image = `${cleanUrl}/assets/logo/logo-algebra-mart.png`;
-          parsed.logo = `${cleanUrl}/assets/icons/icon-512.png`;
+          parsed.logo = `${cleanUrl}/assets/logo/logo-algebra-mart.png`;
           jsonLdScript.textContent = JSON.stringify(parsed, null, 2);
         } catch (_) {}
       }
