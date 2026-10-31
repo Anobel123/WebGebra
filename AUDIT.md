@@ -30,3 +30,4 @@ Dihasilkan secara otomatis oleh `tools/buat-ikon.mjs`:
 ## 4. Daftar Inventaris
 - Sebelum: `scratch/inventaris-sebelum.txt` (atau `/tmp/inventaris-sebelum.txt`)
 - Sesudah: `scratch/inventaris-sesudah.txt` (atau `/tmp/inventaris-sesudah.txt`)
+
