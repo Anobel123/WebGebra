@@ -25,6 +25,7 @@ const MODULES = [
   ['share', './ui/share.js', (m) => m.initShare()],
   ['team', './ui/team.js', (m) => m.initTeam()],
   ['feedback', './ui/feedback.js', (m) => m.initFeedback()],
+  ['lightbox', './ui/lightbox.js', (m) => m.initLightbox()],
   ['hoverFx', './ui/hoverFx.js', (m) => m.initHoverFx()],
   ['year', './config.js', (m) => {
     const comp = m.SITE_CONFIG.competition || {};
@@ -34,12 +35,25 @@ const MODULES = [
     document.querySelectorAll('[data-email]').forEach((el) => {
       if (mail) { el.innerHTML = ''; const a = document.createElement('a'); a.href = 'mailto:' + mail; a.textContent = mail; el.appendChild(a); }
     });
+    const siteUrl = (m.SITE_CONFIG.siteUrl || '').trim();
+    if (m.isValidUrl && m.isValidUrl(siteUrl) && !/^\s*TODO/i.test(siteUrl)) {
+      const jsonLdScript = document.getElementById('app-jsonld');
+      if (jsonLdScript) {
+        try {
+          const parsed = JSON.parse(jsonLdScript.textContent);
+          const cleanUrl = siteUrl.replace(/\/$/, '');
+          parsed.image = `${cleanUrl}/assets/logo/logo-algebra-mart.png`;
+          parsed.logo = `${cleanUrl}/assets/icons/icon-512.png`;
+          jsonLdScript.textContent = JSON.stringify(parsed, null, 2);
+        } catch (_) {}
+      }
+    }
   }]
 ];
 
 (async () => {
   // reveal harus dipasang setelah konten dinamis; urutan: konten dulu, lalu reveal
-  const order = ['config', 'content', 'sparkFx', 'opening', 'audio', 'nav', 'scrollProgress', 'effects', 'carousel', 'demo', 'kelas', 'features', 'materi', 'access', 'caraBermain', 'deviceGuide', 'faq', 'share', 'team', 'feedback', 'hoverFx', 'year', 'reveal'];
+  const order = ['config', 'content', 'sparkFx', 'opening', 'audio', 'nav', 'scrollProgress', 'effects', 'carousel', 'demo', 'kelas', 'features', 'materi', 'access', 'caraBermain', 'deviceGuide', 'faq', 'share', 'team', 'feedback', 'lightbox', 'hoverFx', 'year', 'reveal'];
   for (const name of order) {
     const [, path, run] = MODULES.find((m) => m[0] === name);
     await new Promise((res) => {

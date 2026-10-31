@@ -33,12 +33,40 @@ export function initNav() {
     sections.forEach((s) => io.observe(s));
   }
 
-  const closeMenu = () => { nav?.classList.remove('is-open'); burger?.setAttribute('aria-expanded', 'false'); };
+  const closeMenu = () => {
+    if (!nav?.classList.contains('is-open')) return;
+    nav.classList.remove('is-open');
+    burger?.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('nav-open');
+  };
+
+  const openMenu = () => {
+    nav?.classList.add('is-open');
+    burger?.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('nav-open');
+    // Kelola fokus ke tautan navigasi pertama
+    const firstLink = nav?.querySelector('a');
+    if (firstLink) setTimeout(() => firstLink.focus(), 50);
+  };
+
   burger?.addEventListener('click', () => {
-    const open = nav.classList.toggle('is-open');
-    burger.setAttribute('aria-expanded', String(open));
+    const isOpen = nav?.classList.contains('is-open');
+    if (isOpen) closeMenu(); else openMenu();
   });
-  addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+
+  addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav?.classList.contains('is-open')) {
+      closeMenu();
+      burger?.focus();
+    }
+  });
+
+  // Tutup menu jika klik terjadi di luar panel navigasi & tombol hamburger
+  document.addEventListener('click', (e) => {
+    if (!nav?.classList.contains('is-open')) return;
+    if (nav.contains(e.target) || burger?.contains(e.target)) return;
+    closeMenu();
+  });
 
   // Klik anchor: scroll mulus dengan offset header, hash bersih
   document.addEventListener('click', (e) => {

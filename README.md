@@ -68,11 +68,31 @@ Seluruh gambar di Web Algebra-Mart menggunakan sistem slot terpusat (`js/slots.j
 | `assets/img/guru/` | 5 screenshot Panduan Guru & Mode Kelas (`guru-01.png` s.d. `guru-05.png`) |
 | `assets/img/kelas/` | Banner / infografis fitur Mode Kelas (`kelas-preview.png`) |
 | `assets/img/og/` | Banner pratinjau sosial media OpenGraph / Twitter (`og-image.png`) |
-| **Screenshot Gim 4** | `assets/img/ss-kasir.png` | 1280×720 px (16:9) | Carousel Hero Slide 4 (Pesanan Pelanggan) |
-| **Foto Ketua Tim** | `assets/img/tim-zakky.png` | 400×400 px (1:1) | Kartu ID Zakky Fahrul Gibran (Ketua Tim - Pendidikan Matematika) |
-| **Foto Anggota 1** | `assets/img/tim-ansharudin.png` | 400×400 px (1:1) | Kartu ID Ansharudin Sahid (Anggota - Pendidikan Matematika) |
-| **Foto Anggota 2** | `assets/img/tim-jean.png` | 400×400 px (1:1) | Kartu ID Jean Daniela (Anggota - Pendidikan Matematika) |
-| **Foto Anggota 3** | `assets/img/tim-alfredo.png` | 400×400 px (1:1) | Kartu ID Alfredo Nobel Tambunan (Anggota - Informatika) |
+
+## Pembuat Ikon Otomatis (Favicon & PWA)
+
+Cukup letakkan logo game persegi (disarankan 1024×1024 px PNG) di `assets/logo/logo-algebra-mart.png`, lalu jalankan **SATU** perintah berikut:
+
+```bash
+node tools/buat-ikon.mjs
+```
+
+Perintah di atas akan membaca logo dan otomatis menghasilkan seluruh set ikon di folder `assets/icons/`:
+- `favicon.ico` (multi-resolusi: 16×16, 32×32, 48×48 px)
+- `favicon-16.png` & `favicon-32.png` (tab browser)
+- `apple-touch-icon.png` (180×180 px dengan latar solid krem `#fff1d0`)
+- `icon-192.png` & `icon-512.png` (ikon web PWA standar)
+- `icon-maskable-512.png` (ikon PWA aman potong pada latar amber `#f59e0b`)
+
+### Cara Menaikkan Versi Cache Ikon
+Untuk memperbarui cache browser pengunjung seketika setelah memperbarui logo/ikon, cukup naikkan parameter query versi `?v=...` pada tag `<link>` di dalam `<head>` berkas `index.html`:
+```html
+<link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico?v=2">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png?v=2">
+```
+Cukup ubah `v=1` menjadi `v=2`, `v=3`, dst. saat merilis pembaruan logo.
 | **Foto Dosen Pembimbing** | `assets/img/pembimbing-tria.png` | 400×400 px (1:1) | Kartu ID Dr. Tria Gustiningsi, M.Pd. |
 | **Thumbnail Share (OG)** | `assets/img/og-image.png` | 1200×630 px | Pratinjau saat link web dibagikan di WhatsApp/medsos |
 

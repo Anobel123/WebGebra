@@ -32,6 +32,8 @@ export function revealNew(root) {
 
 export function initParallax() {
   if (prefersReducedMotion()) return;
+  // Nonaktifkan parallax di layar ponsel / sentuh demi performa scroll 60fps yang ringan dan bebas loncatan
+  if (window.innerWidth <= 768 || window.matchMedia?.('(hover: none) and (pointer: coarse)').matches) return;
   const hero = document.getElementById('beranda');
   const items = [...document.querySelectorAll('[data-speed]')];
   if (!hero || !items.length) return;

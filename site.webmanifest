@@ -1,0 +1,30 @@
+{
+  "name": "Algebra-Mart",
+  "short_name": "Algebra-Mart",
+  "description": "Gim edukasi literasi matematika dan keuangan aljabar untuk siswa SMP",
+  "start_url": "./",
+  "scope": "./",
+  "display": "browser",
+  "background_color": "#fff1d0",
+  "theme_color": "#f59e0b",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

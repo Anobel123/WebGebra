@@ -2,11 +2,15 @@
 <html lang="id">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Algebra-Mart | Gim Edukasi Literasi Matematika &amp; Keuangan</title>
   <meta name="description" content="Algebra-Mart: gim edukasi literasi matematika dan keuangan untuk siswa SMP. Jadi kasir minimarket, tulis bentuk aljabar, dan layani pembayaran. Karya LIDM 2026.">
-  <meta name="theme-color" content="#064937">
-  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f59e0b">
+  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png?v=1">
+  <link rel="manifest" href="site.webmanifest">
   <meta property="og:site_name" content="Algebra-Mart">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Algebra-Mart | Gim Edukasi Literasi Matematika &amp; Keuangan">
@@ -19,7 +23,7 @@
   <meta name="twitter:title" content="Algebra-Mart | Gim Edukasi Literasi Matematika &amp; Keuangan">
   <meta name="twitter:description" content="Petualangan Belajar Aljabar di Toko Kelontong Modern untuk Siswa SMP Kelas VII.">
   <meta name="twitter:image" content="assets/img/og-image.png">
-  <script type="application/ld+json">
+  <script type="application/ld+json" id="app-jsonld">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -68,7 +72,8 @@
       <div class="opening__backdrop"></div>
       <div class="opening__center">
         <div class="opening__coin-wrap">
-          <svg class="opening__coin" viewBox="0 0 120 120" width="96" height="96" aria-hidden="true">
+          <img class="opening__logo" src="assets/logo/logo-algebra-mart.png" alt="Logo Algebra-Mart" width="96" height="96" decoding="async" onerror="this.hidden=true;this.nextElementSibling.removeAttribute('hidden')">
+          <svg class="opening__coin" viewBox="0 0 120 120" width="96" height="96" aria-hidden="true" hidden>
             <defs>
               <radialGradient id="am-open-coin" cx="32%" cy="28%" r="70%">
                 <stop offset="0%" stop-color="#fef3c7"/>
@@ -204,9 +209,14 @@
           <p class="lead">Pemain berperan sebagai kasir minimarket. Sasaran: SMP (Fase D, Kurikulum Merdeka), topik bentuk aljabar.</p>
         </div>
         <div class="about-split">
-          <div class="card reveal">
-            <p>Pelanggan menyebut harga barang sebagai <b>variabel</b>. Pemain menuliskan <b>bentuk aljabar</b>, lalu melayani pembayaran dan kembalian dengan uang rupiah, sehingga konsep abstrak terasa nyata.</p>
-            <p style="margin-bottom:0">Contoh: “Harga satu batang dodol nanas adalah <b><i>d</i></b> rupiah. Saya beli 3 batang, lalu tambah 4 batang.”</p>
+          <div class="card reveal about-intro-card">
+            <div class="about-intro-wrap">
+              <img class="about-intro-logo" src="assets/logo/logo-algebra-mart.png" alt="Logo Algebra-Mart" width="68" height="68" decoding="async" onerror="this.hidden=true">
+              <div class="about-intro-body">
+                <p>Pelanggan menyebut harga barang sebagai <b>variabel</b>. Pemain menuliskan <b>bentuk aljabar</b>, lalu melayani pembayaran dan kembalian dengan uang rupiah, sehingga konsep abstrak terasa nyata.</p>
+                <p style="margin-bottom:0">Contoh: “Harga satu batang dodol nanas adalah <b><i>d</i></b> rupiah. Saya beli 3 batang, lalu tambah 4 batang.”</p>
+              </div>
+            </div>
           </div>
           <div class="example-box reveal" aria-label="Contoh bentuk aljabar">
             Bentuk aljabar yang ditulis pemain:
@@ -290,7 +300,10 @@
 
       <div class="container">
         <div class="section-head reveal">
-          <span class="eyebrow">Akses Game</span>
+          <span class="eyebrow">
+            <img class="eyebrow__logo" src="assets/logo/logo-algebra-mart.png" alt="Logo Algebra-Mart" width="22" height="22" decoding="async" onerror="this.hidden=true">
+            Akses Game
+          </span>
           <h2 id="h-akses">Coba Algebra-Mart Sekarang</h2>
           <p class="lead">Scan QR Code atau tekan tombol di bawah untuk langsung bermain di Browser maupun Android.</p>
         </div>

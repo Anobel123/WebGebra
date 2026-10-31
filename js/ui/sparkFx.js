@@ -40,7 +40,7 @@ export const SPARK_CONFIG = {
   device: {
     mobileMaxWidth: 480,
     mobileScaleFactor: 0.5,
-    minHardwareConcurrency: 2,
+    minHardwareConcurrency: 4,
     minFps: 30,
     lowFpsStreakLimit: 18
   }
@@ -75,6 +75,8 @@ const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const isMobileViewport = () => typeof window !== 'undefined' && window.innerWidth <= SPARK_CONFIG.device.mobileMaxWidth;
 const isLowEndHardware = () => {
   try {
+    const isSaveData = navigator?.connection?.saveData === true;
+    if (isSaveData) return true;
     const hc = navigator?.hardwareConcurrency;
     return typeof hc === 'number' && hc > 0 && hc <= SPARK_CONFIG.device.minHardwareConcurrency;
   } catch {

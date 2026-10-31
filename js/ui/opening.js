@@ -14,7 +14,7 @@ export const OPENING_CONFIG = {
   sessionKey: 'algebraMart_openingSeen',
   preloadImages: [
     'assets/img/hero-bg.jpg',
-    'assets/img/ss-profil.png'
+    'assets/img/hero/hero-1.png'
   ]
 };
 

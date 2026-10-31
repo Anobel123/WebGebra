@@ -2,6 +2,7 @@
 // Generator Open Graph image statis (1200x630) untuk Algebra-Mart
 import puppeteer from '../scratch/node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js';
 import path from 'node:path';
+import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -9,6 +10,13 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 const chromePath = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const outputPath = path.join(rootDir, 'assets', 'img', 'og-image.png');
+const outputPathOg = path.join(rootDir, 'assets', 'img', 'og', 'og-image.png');
+
+let logoDataUrl = '';
+const logoFile = path.join(rootDir, 'assets', 'logo', 'logo-algebra-mart.png');
+if (fs.existsSync(logoFile)) {
+  logoDataUrl = 'data:image/png;base64,' + fs.readFileSync(logoFile).toString('base64');
+}
 
 const htmlContent = `<!DOCTYPE html>
 <html lang="id">
@@ -65,6 +73,16 @@ const htmlContent = `<!DOCTYPE html>
     align-items: center;
     gap: 20px;
     margin-bottom: 12px;
+  }
+  .brand-logo-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 20px;
+    background: #fff8e1;
+    padding: 4px;
+    border: 3.5px solid #d97706;
+    box-shadow: 0 8px 16px rgba(120, 53, 15, 0.25);
   }
   .coin-logo {
     width: 72px;
@@ -143,7 +161,7 @@ const htmlContent = `<!DOCTYPE html>
 
     <div class="main-content">
       <div class="brand-row">
-        <div class="coin-logo">x</div>
+        ${logoDataUrl ? `<img src="${logoDataUrl}" class="brand-logo-img" alt="Logo">` : '<div class="coin-logo">x</div>'}
         <h1 class="title">Algebra-Mart</h1>
       </div>
       <p class="subtitle">Petualangan Belajar Aljabar di Toko Kelontong Modern untuk Siswa SMP Kelas VII · Kurikulum Merdeka</p>
@@ -173,9 +191,11 @@ async function main() {
   const page = await browser.newPage();
   await page.setViewport({ width: 1200, height: 630 });
   await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
-  await page.screenshot({ path: outputPath, type: 'png' });
+  const buf = await page.screenshot({ type: 'png' });
+  fs.writeFileSync(outputPath, buf);
+  fs.writeFileSync(outputPathOg, buf);
   await browser.close();
-  console.log('[og-image] Sukses dibuat di:', outputPath);
+  console.log('[og-image] Sukses dibuat di:', outputPath, 'dan', outputPathOg);
 }
 
 main().catch(err => {

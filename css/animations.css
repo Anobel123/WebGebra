@@ -87,7 +87,7 @@
   .marquee__inner, .hero__float span, .hero__float img, .smp-char__sprite, .deco-sticker,
   .progress__bar, .progress__coin.is-scrolling .progress__coin-inner, .progress__coin-inner.is-pop,
   .kelas-card.is-active .kelas-chibi, .kelas-chibi__wave,
-  .opening__coin, .opening__dots span, .opening__bar { animation: none !important; }
+  .opening__coin, .opening__logo, .opening__dots span, .opening__bar { animation: none !important; }
   .opening { display: none !important; pointer-events: none !important; }
   .js-reveal .reveal { transform: none !important; transition: opacity .3s !important; transition-delay: 0s !important; }
   .card--tilt:hover, .id-card:hover, .smp-char:hover, .card--tilt.is-tilting, .level-card.is-tilting, .id-card.is-tilting { transform: none !important; }

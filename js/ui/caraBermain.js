@@ -27,7 +27,10 @@ export function initCaraBermain() {
   container.innerHTML = `
     <div class="stepper-section reveal" data-fx="tilt">
       <div class="section-head text-center">
-        <span class="badge-pill">Panduan Alur Permainan</span>
+        <span class="badge-pill">
+          <img class="badge-pill__logo" src="assets/logo/logo-algebra-mart.png" alt="Logo Algebra-Mart" width="20" height="20" decoding="async" onerror="this.hidden=true">
+          Panduan Alur Permainan
+        </span>
         <h3 class="stepper-title">Cara Bermain, Langkah demi Langkah</h3>
         <p class="stepper-subtitle">Ikuti urutan ini untuk mencoba Algebra-Mart dari nol sampai level pertama selesai.</p>
       </div>

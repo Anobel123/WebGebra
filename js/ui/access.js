@@ -47,17 +47,33 @@ export function initAccess() {
     const primary = c.store
       ? `<a class="store-badge" data-burst data-fx="cta magnetic store-apk" aria-label="${esc(c.cta)}" ${ok ? `href="${esc(url)}" target="_blank" rel="noopener"` : 'aria-disabled="true" tabindex="-1"'}><svg class="btn__swing-icon" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path fill="#34d399" d="M3 2l11 10L3 22z"/><path fill="#fbbf24" d="M14 12l4-3.600 3 1.700c1 .6 1 1.800 0 2.400l-3 1.700z"/><path fill="#60a5fa" d="M3 2l15 8.400-4 1.600z"/><path fill="#f87171" d="M3 22l15-8.400-4-1.600z"/></svg><span><small>Tersedia di</small>Google Play</span></a>`
       : `<a class="btn ${c.featured ? 'btn--green' : ''}" data-burst data-fx="cta magnetic${c.apk ? ' store-apk' : ''}" data-hover="${esc(c.hoverText || c.cta)}" aria-label="${esc(c.cta)}" ${ok ? `href="${esc(url)}" target="_blank" rel="noopener"${c.apk ? ' download' : ''}` : 'aria-disabled="true" tabindex="-1"'}>${apkIcon}${c.cta}</a>`;
+    const qrSection = c.qr ? `
+      <details class="qr-disclosure">
+        <summary class="qr-disclosure__trigger">
+          <svg class="qr-disclosure__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>Tampilkan QR (untuk dipindai perangkat lain)</span>
+          <svg class="qr-disclosure__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="qr-disclosure__content">
+          <div class="qr-wrap"><div class="qr-box" id="qr-${i}">${ok ? '' : COIN_SVG}</div><span class="qr-scan-hint" aria-hidden="true">Scan untuk bermain</span></div>
+          ${ok ? `<code class="access-url">${esc(shortUrl)}</code>` : ''}
+          ${ok ? `<div class="card-actions" style="margin-top:.6rem">
+            <button class="btn btn--small btn--secondary" type="button" data-dl="${c.key}" data-i="${i}">Unduh QR (PNG)</button>
+          </div>` : ''}
+        </div>
+      </details>
+    ` : '';
+
     return `
     <article class="card card--tilt access-card ${c.featured ? 'access-card--featured' : ''} reveal" data-fx="tilt" data-key="${c.key}">
       ${c.featured && ok ? '<span class="chip chip--green">Akses Instan Juri (QR + Browser)</span>' : ''}
       <h3>${c.title}</h3><p>${c.desc}</p>
-      ${c.qr ? `<div class="qr-wrap"><div class="qr-box" id="qr-${i}">${ok ? '' : COIN_SVG}</div><span class="qr-scan-hint" aria-hidden="true">Scan untuk bermain</span></div>` : ''}
-      ${ok && c.qr ? `<code class="access-url">${esc(shortUrl)}</code>` : ''}
       ${ok ? '' : '<span class="soon">Segera Hadir</span>'}
-      ${primary}${meta}
+      <div class="access-primary-action">${primary}${meta}</div>
+      ${qrSection}
       ${ok ? `<div class="card-actions">
-        ${c.qr ? `<button class="btn btn--small btn--secondary" type="button" data-dl="${c.key}" data-i="${i}">Unduh QR (PNG)</button>` : ''}
-        <button class="btn btn--small btn--secondary" type="button" data-copy="${esc(url)}">Salin tautan</button></div>` : ''}
+        <button class="btn btn--small btn--secondary" type="button" data-copy="${esc(url)}">Salin tautan</button>
+      </div>` : ''}
     </article>`;
   }).join('');
   wrap.innerHTML = html;

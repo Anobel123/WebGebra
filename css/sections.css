@@ -120,7 +120,7 @@
 
 .footer {
   background: var(--am-green-800); color: var(--am-cream-100);
-  border-top: 6px solid var(--am-amber-400); padding: 3.2rem 0 2.2rem; position: relative;
+  border-top: 6px solid var(--am-amber-400); padding: 3.2rem 0 calc(2.2rem + env(safe-area-inset-bottom, 0px)); position: relative;
 }
 .footer a { color: var(--am-amber-400); }
 .footer__grid { display: grid; gap: 2rem; grid-template-columns: 2fr 1fr 1fr; }

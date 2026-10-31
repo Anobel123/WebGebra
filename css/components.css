@@ -148,13 +148,27 @@
 .header__tools { display: flex; align-items: center; gap: .5rem; }
 @media (max-width: 860px) {
   .hamburger { display: grid; }
+  body.nav-open { overflow: hidden; touch-action: none; }
   .nav {
-    position: fixed; inset: calc(var(--header-h) + var(--progress-h) + 8px) 1rem auto 1rem; flex-direction: column; align-items: stretch; padding: 1rem;
-    background: #fff8e1; border-radius: var(--radius-card); box-shadow: var(--shadow-warm-lg); border: 3px solid #451a03;
-    transform: translateY(-14px) scale(.97); opacity: 0; visibility: hidden; transition: transform .3s var(--ease), opacity .25s, visibility .3s;
+    position: fixed; inset: 0; width: 100vw; height: 100dvh; height: 100svh;
+    flex-direction: column; align-items: center; justify-content: center; gap: 1.15rem;
+    padding: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 1rem) 2rem calc(2rem + env(safe-area-inset-bottom, 0px));
+    background: rgba(255, 248, 225, .98);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    box-shadow: none; border: none; border-radius: 0;
+    transform: translateY(-100%); opacity: 0; visibility: hidden;
+    transition: transform .32s var(--ease), opacity .25s, visibility .32s;
+    z-index: 100;
   }
-  .nav.is-open { transform: none; opacity: 1; visibility: visible; }
-  .nav a { justify-content: center; }
+  .nav.is-open { transform: translateY(0); opacity: 1; visibility: visible; }
+  .nav a {
+    font-size: 1.35rem; padding: .65rem 1.8rem; width: min(320px, 88%);
+    text-align: center; justify-content: center;
+    border-radius: var(--radius-pill); border: 2.5px solid transparent;
+  }
+  .nav a.is-active {
+    border-color: #451a03;
+  }
 }
 
 /* ===== Kartu Bold & Ramai ===== */
@@ -800,13 +814,26 @@
 }
 
 /* ===== Tempat Khusus Logo Tim, Logo Algebra-Mart, Kampus & LIDM ===== */
-.logo__img, .logo__team {
-  width: 38px; height: 38px; object-fit: contain; border-radius: 10px;
-  background: rgba(255, 255, 255, .12); padding: 2px;
-  filter: drop-shadow(0 3px 0 rgba(0,0,0,.3));
+.logo__img {
+  width: 38px; height: 38px; object-fit: contain; border-radius: 22%;
+  background: #fff8e1; padding: 2px;
+  border: 1.5px solid var(--am-amber-400);
+  box-shadow: 0 4px 8px -2px rgba(120, 53, 15, .32), 0 1px 0 rgba(255, 255, 255, .9) inset;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.logo:hover .logo__img {
+  transform: rotate(-4deg) scale(1.06);
+  box-shadow: 0 6px 12px -2px rgba(120, 53, 15, .4);
 }
 .logo__team {
-  width: 32px; height: 32px; border: 1.5px solid var(--am-amber-400);
+  width: 32px; height: 32px; object-fit: contain; border-radius: 8px;
+  border: 1.5px solid var(--am-amber-400);
+  background: #fff8e1; padding: 2px;
+  box-shadow: 0 3px 6px -2px rgba(120, 53, 15, .25);
+  transition: transform .25s var(--ease);
+}
+.logo:hover .logo__team {
+  transform: scale(1.05);
 }
 .footer__brand {
   display: flex; align-items: center; gap: .65rem; flex-wrap: wrap; margin-bottom: .6rem;
@@ -814,6 +841,19 @@
 .footer__logo {
   width: 44px; height: 44px; object-fit: contain; border-radius: 12px;
   background: #fff8e1; padding: 4px; border: 2px solid var(--am-amber-400);
+}
+.about-intro-wrap {
+  display: flex; align-items: flex-start; gap: 1.25rem;
+}
+.about-intro-logo {
+  width: 68px; height: 68px; object-fit: contain; flex-shrink: 0;
+  border-radius: 20%; background: #fff8e1; padding: 4px;
+  border: 2px solid var(--am-amber-400);
+  box-shadow: 0 4px 10px rgba(120, 53, 15, .15);
+}
+.eyebrow__logo, .badge-pill__logo {
+  width: 20px; height: 20px; object-fit: contain; border-radius: 5px;
+  vertical-align: middle; display: inline-block; margin-right: .4rem;
 }
 .logo-showcase {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.3rem;
@@ -933,8 +973,8 @@ body.is-opening-locked {
 .opening__coin-wrap {
   perspective: 700px;
 }
-.opening__coin {
-  width: 96px; height: 96px;
+.opening__coin, .opening__logo {
+  width: 96px; height: 96px; object-fit: contain; border-radius: 22%;
   filter: drop-shadow(0 8px 14px rgba(69, 26, 3, .32));
   animation: openingCoinSpin 2.2s ease-in-out infinite;
   transform-style: preserve-3d;
@@ -2012,5 +2052,134 @@ body.is-store-open .hero__grid > *:last-child {
     display: inline;
     font-weight: 800;
     color: #78350f;
+  }
+}
+
+.carousel__slide img, .cara-carousel__media img, .guru-carousel__media img, .slot-container[data-ratio="16:9"] img {
+  cursor: zoom-in;
+}
+
+/* ===== 8. LIGHTBOX MODAL (Pratinjau Layar Penuh Tangkapan Layar Gim) ===== */
+.lightbox {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  padding: calc(var(--safe-top, 0px) + 1rem) calc(var(--safe-right, 0px) + 1rem) calc(var(--safe-bottom, 0px) + 1rem) calc(var(--safe-left, 0px) + 1rem);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .25s var(--ease), visibility .25s;
+}
+.lightbox.is-open {
+  opacity: 1; visibility: visible; pointer-events: auto;
+}
+body.lightbox-open {
+  overflow: hidden !important; touch-action: none;
+}
+.lightbox__backdrop {
+  position: absolute; inset: 0;
+  background: rgba(6, 73, 55, .88);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.lightbox__dialog {
+  position: relative; z-index: 2;
+  max-width: min(1080px, 96vw); max-height: 92vh;
+  display: flex; flex-direction: column; align-items: center; gap: .75rem;
+  touch-action: pinch-zoom;
+}
+.lightbox__close {
+  align-self: flex-end;
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .5rem 1rem; border-radius: var(--radius-pill);
+  background: var(--am-amber-400); color: #451a03;
+  border: 2px solid #451a03; font: 800 .92rem var(--font-display);
+  cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,.3);
+  transition: transform .15s, background .2s;
+}
+.lightbox__close:hover { background: #fde68a; transform: scale(1.04); }
+.lightbox__img-wrap {
+  border: 4px solid var(--am-amber-400); border-radius: 18px;
+  background: #000; overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,.55);
+}
+.lightbox__img {
+  max-width: 95vw; max-height: 80vh; width: auto; height: auto;
+  object-fit: contain; display: block;
+}
+
+/* ===== 9. COLLAPSIBLE QR ACCORDION & MOBILE ACCESS CTA ===== */
+/* Desktop (default): QR selalu terbuka secara utuh seperti semula */
+details.qr-disclosure {
+  display: block; width: 100%;
+}
+details.qr-disclosure > summary {
+  display: none;
+}
+details.qr-disclosure > .qr-disclosure__content {
+  display: block !important;
+}
+
+/* Mobile: QR diringkas dalam akordeon lipat */
+@media (max-width: 768px) {
+  details.qr-disclosure > summary {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    width: 100%; padding: .65rem 1rem; border-radius: 14px;
+    background: #fef3c7; border: 2px solid #d97706;
+    color: #78350f; font: 700 .9rem var(--font); cursor: pointer;
+    list-style: none; margin: .85rem 0 .5rem;
+    transition: background .2s, border-color .2s;
+  }
+  details.qr-disclosure > summary::-webkit-details-marker { display: none; }
+  details.qr-disclosure[open] > summary {
+    background: #fde68a; border-color: #b45309;
+  }
+  .qr-disclosure__arrow {
+    transition: transform .25s var(--ease);
+    margin-left: auto;
+  }
+  details.qr-disclosure[open] .qr-disclosure__arrow {
+    transform: rotate(180deg);
+  }
+  .access-primary-action .btn,
+  .access-primary-action .store-badge {
+    width: 100%; min-height: 52px; font-size: 1.1rem; justify-content: center;
+  }
+}
+
+/* Banner Lanskap kontekstual: hanya tampil di layar sempit / portrait */
+@media (min-width: 861px) {
+  .landscape-banner { display: none !important; }
+}
+
+/* Optimasi Sentuh: Feedback Instan & tap highlight */
+button, .btn, .icon-btn, .store-badge, a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+button:active, .btn:active, .icon-btn:active, .store-badge:active {
+  transform: translateY(2px) scale(.98) !important;
+  transition: transform .05s ease !important;
+}
+
+/* Input iOS Auto-zoom Prevention */
+input, select, textarea {
+  font-size: 16px !important;
+}
+
+/* Mobile Landscape Mode (844x390, 667x375) */
+@media (max-height: 480px) and (orientation: landscape) {
+  :root {
+    --header-h: 52px;
+  }
+  .header { height: 52px; }
+  .header__inner { height: 52px; }
+  .panel {
+    min-height: auto;
+    padding: calc(var(--header-h) + 1.2rem) 0 3rem;
+  }
+  .hero {
+    min-height: auto;
+    padding: calc(var(--header-h) + 1.2rem) 0 3.5rem;
+  }
+  .hero__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
   }
 }
