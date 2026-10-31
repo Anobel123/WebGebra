@@ -23,7 +23,7 @@ export const SITE_CONFIG = {
   // Dapat dioverride lewat parameter URL ?slots=1 atau ?slots=0.
   showEmptySlots: true,
   // URL publik situs ini (dipakai tombol Bagikan). Kosong => fallback ke location.origin + location.pathname.
-  siteUrl: "" // TODO: isi URL GitHub Pages publik saat deployment (mis. "https://ansharudinsahid.github.io/algebra-mart/")
+  siteUrl: "https://anobel123.github.io/WebGebra/"
 };
 
 /** URL valid = string, berskema https://, dan bisa di-parse. */
