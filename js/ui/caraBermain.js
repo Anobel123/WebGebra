@@ -4,7 +4,6 @@ import { SITE_CONFIG, isValidUrl } from '../config.js';
 import { esc } from '../utils/safe.js';
 import { renderIcon } from './icons.js';
 import { renderSlot, resolveSlots } from '../slots.js';
-import { playSfx } from './audio.js';
 
 export const CARA_BERMAIN_CONFIG = {
   autoplayIntervalMs: 6500,
@@ -79,19 +78,25 @@ export function initCaraBermain() {
           </div>
         </div>
 
-        <!-- Kolom Kanan: Daftar 15 Langkah Berurutan -->
+        <!-- Kolom Kanan: Daftar 15 Langkah Berurutan dengan Garis Emas Progres Scroll -->
         <div class="cara-carousel__sidebar">
-          <ol class="stepper-list" id="stepper-list" role="list">
-            ${CARA_BERMAIN.map((item, idx) => `
-              <li class="stepper-item ${idx === 0 ? 'is-active' : ''}" data-step="${item.step}" tabindex="0" role="button" aria-current="${idx === 0 ? 'step' : 'false'}">
-                <div class="stepper-coin" aria-hidden="true">${item.step}</div>
-                <div class="stepper-summary">
-                  <span class="stepper-step-badge">${esc(item.badge)}</span>
-                  <h4 class="stepper-step-title">${esc(item.title)}</h4>
-                </div>
-              </li>
-            `).join('')}
-          </ol>
+          <div class="stepper-draw-wrap" data-reveal="draw">
+            <svg class="stepper-draw-svg" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
+              <line class="draw-line-bg" x1="4" y1="0" x2="4" y2="600" stroke="#fde68a" stroke-width="4" stroke-dasharray="8 8"/>
+              <line class="draw-line-fill" x1="4" y1="0" x2="4" y2="600" pathLength="100" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/>
+            </svg>
+            <ol class="stepper-list" id="stepper-list" role="list">
+              ${CARA_BERMAIN.map((item, idx) => `
+                <li class="stepper-item ${idx === 0 ? 'is-active' : ''}" data-step="${item.step}" tabindex="0" role="button" aria-current="${idx === 0 ? 'step' : 'false'}">
+                  <div class="stepper-coin ${idx === 0 ? 'is-lit' : ''}" aria-hidden="true">${item.step}</div>
+                  <div class="stepper-summary">
+                    <span class="stepper-step-badge">${esc(item.badge)}</span>
+                    <h4 class="stepper-step-title">${esc(item.title)}</h4>
+                  </div>
+                </li>
+              `).join('')}
+            </ol>
+          </div>
         </div>
       </div>
 
@@ -220,12 +225,14 @@ export function initCaraBermain() {
     // Resolusi slot gambar
     resolveSlots(stageView);
 
-    // Update list sorotan
+    // Update list sorotan & nyalakan koin langkah yang sudah dilewati
     const listItems = stepperList.querySelectorAll('.stepper-item');
     listItems.forEach((li, idx) => {
       const active = idx === currentStep;
       li.classList.toggle('is-active', active);
       li.setAttribute('aria-current', active ? 'step' : 'false');
+      const coin = li.querySelector('.stepper-coin');
+      if (coin) coin.classList.toggle('is-lit', idx <= currentStep);
       if (active) {
         li.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
       }
@@ -274,17 +281,14 @@ export function initCaraBermain() {
     stepStartTime = Date.now();
   }
 
-  // Event Listeners
+  // Event Listeners (Navigasi langkah 100% hening tanpa SFX)
   btnPrev.addEventListener('click', () => {
-    playSfx('wood');
     goToStep(currentStep - 1, true);
   });
   btnNext.addEventListener('click', () => {
-    playSfx('wood');
     goToStep(currentStep + 1, true);
   });
   btnPlay.addEventListener('click', () => {
-    playSfx('wood');
     togglePlay();
   });
 
@@ -292,14 +296,12 @@ export function initCaraBermain() {
     const item = e.target.closest('.stepper-item');
     if (!item) return;
     const s = parseInt(item.getAttribute('data-step'), 10);
-    playSfx('wood');
     goToStep(s, true);
   });
 
   phaseBtns.forEach(pb => {
     pb.addEventListener('click', () => {
       const start = parseInt(pb.getAttribute('data-start'), 10);
-      playSfx('wood');
       goToStep(start, true);
     });
   });
@@ -314,11 +316,9 @@ export function initCaraBermain() {
   caraCarousel.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      playSfx('wood');
       goToStep(currentStep - 1, true);
     } else if (e.key === 'ArrowRight') {
       e.preventDefault();
-      playSfx('wood');
       goToStep(currentStep + 1, true);
     }
   });
@@ -332,10 +332,8 @@ export function initCaraBermain() {
     const diff = e.changedTouches[0].screenX - touchStartX;
     if (Math.abs(diff) > 45) {
       if (diff > 0) {
-        playSfx('wood');
         goToStep(currentStep - 1, true);
       } else {
-        playSfx('wood');
         goToStep(currentStep + 1, true);
       }
     }
@@ -418,15 +416,12 @@ export function initCaraBermain() {
   }
 
   guruBtnPrev.addEventListener('click', () => {
-    playSfx('wood');
     goToGuruStep(guruStep - 1, true);
   });
   guruBtnNext.addEventListener('click', () => {
-    playSfx('wood');
     goToGuruStep(guruStep + 1, true);
   });
   guruBtnPlay.addEventListener('click', () => {
-    playSfx('wood');
     guruPlaying = !guruPlaying;
     guruBtnPlay.setAttribute('aria-pressed', guruPlaying ? 'true' : 'false');
     guruPlayIcon.innerHTML = renderIcon(guruPlaying ? 'pause' : 'play', { size: 14 });
@@ -442,11 +437,9 @@ export function initCaraBermain() {
   guruCarousel.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      playSfx('wood');
       goToGuruStep(guruStep - 1, true);
     } else if (e.key === 'ArrowRight') {
       e.preventDefault();
-      playSfx('wood');
       goToGuruStep(guruStep + 1, true);
     }
   });
@@ -459,10 +452,8 @@ export function initCaraBermain() {
     const diff = e.changedTouches[0].screenX - guruTouchX;
     if (Math.abs(diff) > 45) {
       if (diff > 0) {
-        playSfx('wood');
         goToGuruStep(guruStep - 1, true);
       } else {
-        playSfx('wood');
         goToGuruStep(guruStep + 1, true);
       }
     }

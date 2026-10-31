@@ -13,22 +13,30 @@ export function initMateri() {
   let current = 'f1';
 
   const starsHtml = `<span class="level-stars" aria-hidden="true"><span class="level-star" style="--star-i:0">★</span><span class="level-star" style="--star-i:1">★</span><span class="level-star" style="--star-i:2">★</span></span>`;
-  const levelCard = (l) => `
-    <article class="card card--tilt level-card reveal reveal--shelf" data-fx="tilt level" tabindex="0">
+  const levelCard = (l, idx = 0) => `
+    <article class="card card--tilt level-card reveal reveal--shelf" data-reveal="shelf" style="--shelf-rot:${idx % 2 === 0 ? '-3deg' : '3deg'}" data-fx="tilt level" tabindex="0">
       <div class="level-card__head"><span class="coin-num" aria-hidden="true">${l.no}</span>
         <div><div class="level-card__title">Level ${l.no}: ${esc(l.title)}</div><div class="level-card__badges"><span class="chip chip--green">Jenjang ${esc(l.bloom)}</span>${starsHtml}</div></div></div>
       <div class="bubble level-card__peek"><b>Tujuan:</b> ${esc(l.title)}.<br><b>Contoh transaksi:</b> “${esc(l.example)}”</div>
     </article>`;
 
+  const drawPathSvg = `
+    <div class="materi-draw-path" data-reveal="draw" aria-hidden="true">
+      <svg class="materi-draw-path__svg" viewBox="0 0 600 18" preserveAspectRatio="none">
+        <line class="draw-line-bg" x1="8" y1="9" x2="592" y2="9" stroke="#fde68a" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 8"/>
+        <line class="draw-line-fill" x1="8" y1="9" x2="592" y2="9" pathLength="100" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    </div>`;
+
   const render = () => {
     const ph = PHASES.find((p) => p.id === current);
     tabsEl.querySelectorAll('.tab').forEach((t) => t.setAttribute('aria-selected', String(t.dataset.id === current)));
     if (ph.levels[0] === 0) {
-      panelEl.innerHTML = `<article class="card card--tilt level-card" data-fx="tilt level" tabindex="0"><div class="level-card__head"><span class="coin-num" aria-hidden="true">0</span>
+      panelEl.innerHTML = `${drawPathSvg}<article class="card card--tilt level-card reveal reveal--shelf" data-reveal="shelf" data-fx="tilt level" tabindex="0"><div class="level-card__head"><span class="coin-num is-lit" aria-hidden="true">0</span>
         <div><div class="level-card__title">Level 0: Pengantar</div><div class="level-card__badges"><span class="chip chip--green">Tutorial</span>${starsHtml}</div></div></div>
         <div class="bubble level-card__peek">${esc(ph.note)} Pemain belajar cara membaca pesanan, menulis bentuk aljabar, dan melayani pembayaran sebelum masuk Level 1.</div></article>`;
     } else {
-      panelEl.innerHTML = `<p class="lead">${esc(ph.mode)}</p><div class="grid grid--pillars">${LEVELS.filter((l) => ph.levels.includes(l.no)).map(levelCard).join('')}</div>`;
+      panelEl.innerHTML = `<p class="lead">${esc(ph.mode)}</p>${drawPathSvg}<div class="grid grid--pillars">${LEVELS.filter((l) => ph.levels.includes(l.no)).map((l, idx) => levelCard(l, idx)).join('')}</div>`;
     }
     revealNew(panelEl);
   };
@@ -55,8 +63,8 @@ function initBadges() {
   const render = () => {
     filters.querySelectorAll('.tab').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.t === tier)));
     const list = BADGES.filter((b) => !tier || b.tier === tier);
-    grid.innerHTML = list.map((b) => `
-      <article class="card card--tilt badge-card reveal">
+    grid.innerHTML = list.map((b, idx) => `
+      <article class="card card--tilt badge-card reveal" data-reveal="shelf" style="--shelf-rot:${idx % 2 === 0 ? '-3deg' : '3deg'}">
         <img src="${TIER_IMG(b.tier)}" alt="Ikon lencana tier ${b.tier}" width="56" height="56" loading="lazy">
         <div><h4>${esc(b.name)}</h4><span class="chip">Tier ${b.tier}</span><p>${esc(b.desc)}</p></div>
       </article>`).join('');

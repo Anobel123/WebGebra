@@ -485,11 +485,18 @@ function syncToggleButton() {
   btn.querySelector('.fx-off-slash')?.toggleAttribute('hidden', active);
 }
 
+export function isSparkFxEnabled() {
+  return Boolean(SPARK_CONFIG.enabled && state.userEnabled);
+}
+
 export function setSparkFxEnabled(on) {
   state.userEnabled = Boolean(on);
   savePreference(state.userEnabled);
   if (!state.userEnabled) clearAllSparks();
   syncToggleButton();
+  try {
+    window.dispatchEvent(new CustomEvent('algebramart:fx-toggle', { detail: { enabled: isSparkFxEnabled() } }));
+  } catch { /* abaikan */ }
 }
 
 export function setSparkGate(open) {

@@ -207,7 +207,7 @@ export async function resolveSlots(root = document) {
 
     const basePath = `${folder}/${file}`;
     let foundUrl = (typeof SLOT_MANIFEST !== 'undefined' && SLOT_MANIFEST[slotId]) ? SLOT_MANIFEST[slotId] : null;
-    if (!foundUrl) {
+    if (!foundUrl && typeof SLOT_MANIFEST === 'undefined') {
       foundUrl = await probeImage(basePath);
     }
 

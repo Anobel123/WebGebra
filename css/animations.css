@@ -1,4 +1,4 @@
-/* Hanya transform, opacity, & filter ringan */
+/* Hanya transform, opacity, clip-path, & filter ringan */
 @keyframes ripple { to { transform: scale(4); opacity: 0; } }
 @keyframes marquee { to { transform: translateX(-50%); } }
 @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-16px) rotate(5deg); } }
@@ -24,12 +24,283 @@
 @keyframes openingDotPulse { 0%, 80%, 100% { opacity: .25; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
 @keyframes openingFailSafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
 @keyframes heroEnterAfterShutter { from { opacity: 0; transform: translateY(22px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes floaterPopIn {
+  0% { transform: scale(0) rotate(-14deg); opacity: 0; }
+  70% { transform: scale(1.12) rotate(4deg); opacity: var(--fl-opacity, .9); }
+  100% { transform: scale(1) rotate(0deg); opacity: var(--fl-opacity, .9); }
+}
+@keyframes shelfEnterView {
+  from { opacity: 0; transform: translateY(38px) rotate(var(--shelf-rot, -3deg)) scale(.95); }
+  to { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+}
+@keyframes zoomEnterView {
+  from { opacity: 0; transform: scale(.92) translateY(18px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
 
-/* Scroll reveal (progressive enhancement: hanya aktif bila JS menambah .js-reveal) */
-.js-reveal .reveal { opacity: 0; transform: translateY(32px) scale(.97); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: calc(var(--i, 0) * 75ms); }
-.js-reveal .reveal.is-in { opacity: 1; transform: none; }
-.js-reveal .reveal--shelf { transform: translateY(-40px) rotate(-3deg) scale(.95); }
-.js-reveal .reveal--shelf.is-in { transform: none; }
+/* ============================================================================
+   1. SISTEM "BARANG MELAYANG" DI SEMUA BAGIAN (.fx-floaters & .fx-floater)
+   ============================================================================ */
+.fx-floaters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: clip;
+  z-index: 1;
+  user-select: none;
+}
+body.is-floaters-off .fx-floaters {
+  display: none !important;
+}
+.fx-floater {
+  position: absolute;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: pointer;
+  will-change: transform, opacity;
+  display: grid;
+  place-items: center;
+}
+.fx-floater__inner {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform .48s cubic-bezier(.34, 1.56, .64, 1), opacity .38s var(--ease);
+  transition-delay: var(--fl-stagger, 0ms);
+}
+.fx-floater.is-entered .fx-floater__inner {
+  transform: scale(1);
+  opacity: var(--fl-opacity, .9);
+}
+.fx-floater.is-shattered {
+  pointer-events: none;
+}
+.fx-floater.is-shattered .fx-floater__inner {
+  transform: scale(0) rotate(24deg) !important;
+  opacity: 0 !important;
+  transition: transform .22s ease-in, opacity .18s ease-in !important;
+  transition-delay: 0ms !important;
+}
+.fx-floater.is-respawning .fx-floater__inner {
+  animation: floaterPopIn .46s cubic-bezier(.34, 1.56, .64, 1) forwards;
+}
+
+/* Tiga lapisan kedalaman: jauh (kecil, buram tipis), sedang, dekat (besar, tajam) */
+.fx-floater--far .fx-floater__inner {
+  filter: blur(.6px) drop-shadow(0 3px 6px rgba(69, 26, 3, .16));
+}
+.fx-floater--mid .fx-floater__inner {
+  filter: drop-shadow(0 6px 12px rgba(69, 26, 3, .24));
+}
+.fx-floater--near .fx-floater__inner {
+  filter: drop-shadow(0 9px 16px rgba(69, 26, 3, .32));
+}
+
+/* Visual elemen di dalam barang melayang */
+.fx-floater__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+.fx-floater__img--bill {
+  border-radius: 6px;
+  border: 1.5px solid rgba(69, 26, 3, .28);
+}
+.fx-floater__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+.fx-floater__token {
+  display: inline-grid;
+  place-items: center;
+  padding: .15em .42em;
+  border-radius: 14px;
+  font: 900 1.45rem var(--font-display);
+  color: #451a03;
+  background: linear-gradient(180deg, #fffdf5 0%, #fde68a 100%);
+  border: 2.5px solid #78350f;
+  border-bottom: 4.5px solid #451a03;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
+#beranda .fx-floater__token,
+.footer .fx-floater__token {
+  background: linear-gradient(180deg, #fef3c7 0%, #fbbf24 100%);
+  border-color: #451a03;
+}
+.fx-floater__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .28em .75em;
+  border-radius: var(--radius-pill);
+  font: 800 .98rem var(--font-display);
+  background: linear-gradient(135deg, #78350f, #451a03);
+  color: #fbbf24;
+  border: 2px solid #fbbf24;
+  box-shadow: 0 3px 0 #2b1a14;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.fx-floater__calc {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  font: 900 1.25rem var(--font-display);
+  background: linear-gradient(180deg, #fffdf5, #fef3c7);
+  color: #451a03;
+  border: 2.5px solid #78350f;
+  border-bottom: 5px solid #451a03;
+  pointer-events: none;
+}
+.fx-floater__calc--accent {
+  background: linear-gradient(180deg, #fde68a, #f59e0b);
+  color: #451a03;
+}
+
+/* ============================================================================
+   2. ANIMASI SCROLL KE BAWAH YANG BERKARAKTER (data-reveal)
+   Progressive enhancement: hanya aktif bila JS menambah .js-reveal pada <html>
+   ============================================================================ */
+
+/* Default reveal fallback */
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(.97);
+  transition: opacity .65s var(--ease), transform .65s var(--ease);
+  transition-delay: calc(var(--i, 0) * 65ms);
+}
+.js-reveal .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* (a) Judul Bagian (data-reveal="mask" / .heading-mask): kata naik dari balik garis pembatas */
+.reveal-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: .08em;
+  margin-bottom: -.08em;
+}
+.reveal-word {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+.js-reveal .heading-mask:not(.is-in) .reveal-word,
+.js-reveal [data-reveal="mask"]:not(.is-in) .reveal-word {
+  transform: translateY(108%);
+  opacity: 0;
+}
+.js-reveal .reveal.is-in .heading-mask .reveal-word,
+.js-reveal .heading-mask.is-in .reveal-word,
+.js-reveal [data-reveal="mask"].is-in .reveal-word {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform .58s cubic-bezier(.22, 1, .36, 1), opacity .42s var(--ease);
+  transition-delay: calc(var(--w-i, 0) * 68ms);
+}
+
+/* (b) Kartu Rak Toko (data-reveal="shelf"): rotasi ±3° -> 0° dengan pantulan cubic-bezier(0.34, 1.56, 0.64, 1) */
+.js-reveal [data-reveal="shelf"],
+.js-reveal .reveal--shelf {
+  opacity: 0;
+  transform: translateY(38px) rotate(var(--shelf-rot, -3deg)) scale(.95);
+  transition:
+    opacity .62s var(--ease),
+    transform .68s cubic-bezier(.34, 1.56, .64, 1),
+    box-shadow .32s var(--ease);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+.js-reveal [data-reveal="shelf"].is-in,
+.js-reveal .reveal--shelf.is-in {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg) scale(1);
+}
+.js-reveal .id-card[data-reveal="shelf"].is-in {
+  transform: rotate(var(--tilt, -2.2deg));
+}
+@media (max-width: 640px) {
+  .js-reveal [data-reveal="shelf"],
+  .js-reveal .reveal--shelf {
+    transform: translateY(28px) rotate(0deg) scale(.97);
+  }
+}
+
+/* (d) Mockup Hero, Screenshot, Buku Instruksi, & Demo Kasir (data-reveal="zoom"): skala 0.92 -> 1 */
+.js-reveal [data-reveal="zoom"] {
+  opacity: 0;
+  transform: scale(.92) translateY(18px);
+  transition:
+    opacity .68s var(--ease),
+    transform .72s cubic-bezier(.22, 1, .36, 1),
+    box-shadow .45s var(--ease);
+}
+.js-reveal [data-reveal="zoom"].is-in {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Progressive enhancement dengan CSS animation-timeline: view() bila browser mendukung */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .js-reveal [data-reveal="zoom"].is-in {
+      animation: zoomEnterView linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 28%;
+    }
+  }
+}
+
+/* (e) Garis Penghubung Cara Bermain & Jalur Level Materi (data-reveal="draw") */
+.materi-draw-path {
+  width: min(680px, 92%);
+  height: 18px;
+  margin: 0 auto 1.2rem;
+  display: block;
+}
+.materi-draw-path__svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.stepper-draw-wrap {
+  position: relative;
+}
+.stepper-draw-svg {
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 21px;
+  width: 8px;
+  height: calc(100% - 48px);
+  z-index: 1;
+  pointer-events: none;
+}
+.stepper-draw-wrap .stepper-list::before {
+  display: none;
+}
+.draw-line-fill {
+  stroke-dasharray: 100;
+  stroke-dashoffset: calc(100 - (var(--draw-progress, 0.35) * 100));
+  transition: stroke-dashoffset .25s ease-out;
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, .65));
+}
+.stepper-coin.is-lit,
+.level-card .coin-num.is-lit {
+  background: radial-gradient(circle at 30% 25%, #fffbeb, #fbbf24 50%, #d97706);
+  box-shadow: 0 3px 0 #451a03, 0 0 12px rgba(251, 191, 36, .75);
+}
 
 .particle { position: fixed; z-index: 400; pointer-events: none; font: 700 1rem var(--font-display); color: var(--am-amber-600); animation: particle .85s var(--ease) forwards; will-change: transform, opacity; }
 .particle--coin { width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 30% 25%, #fef3c7, var(--am-amber-400)); border: 2px solid var(--am-brown-900); }
@@ -49,7 +320,7 @@
 }
 .fx-token--click {
   font-weight: 800;
-  text-shadow: 0 0 12px rgba(251, 191, 36, .9), 0 2px 4px rgba(6, 73, 55, .55);
+  text-shadow: 0 0 12px rgba(251, 191, 36, .9), 0 2px 4px rgba(69, 26, 3, .55);
 }
 .fx-token--trail {
   opacity: .9;
@@ -87,9 +358,24 @@
   .marquee__inner, .hero__float span, .hero__float img, .smp-char__sprite, .deco-sticker,
   .progress__bar, .progress__coin.is-scrolling .progress__coin-inner, .progress__coin-inner.is-pop,
   .kelas-card.is-active .kelas-chibi, .kelas-chibi__wave,
-  .opening__coin, .opening__logo, .opening__dots span, .opening__bar { animation: none !important; }
+  .opening__coin, .opening__logo, .opening__dots span, .opening__bar,
+  .fx-floater, .fx-floater__inner { animation: none !important; }
   .opening { display: none !important; pointer-events: none !important; }
-  .js-reveal .reveal { transform: none !important; transition: opacity .3s !important; transition-delay: 0s !important; }
+  .fx-floater__inner { transform: scale(1) !important; opacity: var(--fl-opacity, .85) !important; }
+  .js-reveal .reveal,
+  .js-reveal [data-reveal="shelf"],
+  .js-reveal [data-reveal="zoom"],
+  .js-reveal .heading-mask .reveal-word,
+  .js-reveal [data-reveal="mask"] .reveal-word {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+    transition-delay: 0s !important;
+  }
+  .js-reveal .panel + .panel::before,
+  .js-reveal .panel + .panel::after {
+    clip-path: none !important;
+  }
   .card--tilt:hover, .id-card:hover, .smp-char:hover, .card--tilt.is-tilting, .level-card.is-tilting, .id-card.is-tilting { transform: none !important; }
   .btn, .store-badge { transform: none !important; }
   .btn[data-fx~="cta"]:hover .btn__label-main, .btn[data-fx~="cta"]:focus-visible .btn__label-main { transform: none !important; opacity: 1 !important; }

@@ -33,15 +33,6 @@ function burst(x, y) {
   }
 }
 
-function click(){
-  if (!soundOn) return;
-  try {
-    audio = audio || new Audio(SOUND_FILE);
-    audio.volume = 0.35; audio.currentTime = 0;
-    audio.play().catch(() => {});
-  } catch { /* abaikan */ }
-}
-
 export function initEffects() {
   const reduced = prefersReducedMotion();
   document.addEventListener('pointerdown', (e) => {

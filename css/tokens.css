@@ -34,8 +34,8 @@
   --font-display: 'Fredoka', 'Nunito', 'Roboto', system-ui, sans-serif;
   --radius-card: 26px;
   --radius-pill: 999px;
-  --shadow-warm: 0 6px 0 rgba(6, 73, 55, .18), 0 12px 26px -8px rgba(6, 73, 55, .24);
-  --shadow-warm-lg: 0 8px 0 rgba(6, 73, 55, .26), 0 22px 44px -10px rgba(6, 73, 55, .34);
+  --shadow-warm: 0 6px 0 rgba(120, 53, 15, .20), 0 12px 26px -8px rgba(69, 26, 3, .26);
+  --shadow-warm-lg: 0 8px 0 rgba(120, 53, 15, .28), 0 22px 44px -10px rgba(69, 26, 3, .34);
   --header-h: 74px;
   --header-h-small: 58px;
   --ease: cubic-bezier(.22, 1, .36, 1);

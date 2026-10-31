@@ -86,7 +86,7 @@ export async function initBukuInstruksi() {
     : 'Unduh Buku Instruksi Algebra-Mart (format PDF)';
 
   container.innerHTML = `
-    <article class="buku-card card card--tilt reveal" id="buku-instruksi" data-fx="tilt" aria-labelledby="buku-title">
+    <article class="buku-card card card--tilt reveal" id="buku-instruksi" data-reveal="zoom" data-fx="tilt" aria-labelledby="buku-title">
       <div class="buku-card__grid">
         <!-- Kolom Kiri: Sampul Buku (Slot / CSS) -->
         <div class="buku-card__cover">

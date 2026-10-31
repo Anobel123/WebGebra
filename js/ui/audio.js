@@ -19,8 +19,7 @@ export const AUDIO_CONFIG = {
   files: {
     bgm: 'assets/audio/bgm.mp3',
     sfx: {
-      coin: 'assets/audio/confirmation_003.ogg',    // Klik tombol CTA = bunyi koin
-      section: 'assets/audio/confirmation_002.ogg', // Berganti bagian aktif = "ting" lembut
+      coin: 'assets/audio/confirmation_003.ogg',    // Klik tombol CTA keluar/aksi = bunyi koin
       right: 'assets/audio/select_001.ogg',         // Jawaban benar di demo kasir = "ting" kasir
       wrong: 'assets/audio/confirmation_001.ogg',   // Jawaban salah = "tok" lembut
       wood: 'assets/audio/select_006.ogg'           // Buka/tutup akordeon = klik kayu
@@ -160,7 +159,7 @@ function playWebAudioSynth(kind) {
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
       osc.start(now);
       osc.stop(now + 0.19);
-    } else if (kind === 'wood') {
+    } else {
       osc.type = 'triangle';
       osc.frequency.setValueAtTime(340, now);
       osc.frequency.exponentialRampToValueAtTime(140, now + 0.06);
@@ -168,14 +167,6 @@ function playWebAudioSynth(kind) {
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
       osc.start(now);
       osc.stop(now + 0.08);
-    } else {
-      // 'section' ting lembut
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(1046.5, now);
-      gain.gain.setValueAtTime(gainVal * 0.45, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
-      osc.start(now);
-      osc.stop(now + 0.17);
     }
   } catch { /* abaikan */ }
 }
@@ -568,15 +559,22 @@ export function initAudio() {
       }
     });
 
-    // Pemetaan SFX global: klik tombol CTA = bunyi koin; buka/tutup akordeon = klik kayu
+    // Pemetaan SFX global: klik tombol CTA keluar/aksi = bunyi koin; buka/tutup akordeon = klik kayu.
+    // Navigasi antarbagian (menu navbar, tautan #anchor, tombol loncat bagian, carousel, barang melayang) 100% HENING.
     document.addEventListener('click', (e) => {
       if (!state.sfxOn || state.unavailable) return;
-      const acc = e.target.closest?.('.accordion__btn');
+      const t = e.target;
+      if (!t || typeof t.closest !== 'function') return;
+      // Jangan pernah memicu SFX untuk navigasi bagian, tautan #anchor internal, menu, carousel, atau barang melayang
+      if (t.closest('a[href^="#"], .nav, .header__nav, .footer ul, .cara-carousel, .guru-carousel, .stepper-phases, .fx-floaters, .fx-floater')) {
+        return;
+      }
+      const acc = t.closest('.accordion__btn');
       if (acc) {
         playSfx('wood');
         return;
       }
-      const cta = e.target.closest?.('.btn[data-fx~="cta"], .store-badge, [data-burst]');
+      const cta = t.closest('.btn[data-fx~="cta"], .store-badge, [data-burst]');
       if (cta && !cta.matches('[disabled], [aria-disabled="true"]')) {
         playSfx('coin');
       }

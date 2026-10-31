@@ -28,6 +28,7 @@ const MODULES = [
   ['feedback', './ui/feedback.js', (m) => m.initFeedback()],
   ['lightbox', './ui/lightbox.js', (m) => m.initLightbox()],
   ['hoverFx', './ui/hoverFx.js', (m) => m.initHoverFx()],
+  ['floaters', './ui/floaters.js', (m) => m.initFloaters()],
   ['year', './config.js', (m) => {
     const comp = m.SITE_CONFIG.competition || {};
     const cat = comp.category && !/^\s*TODO/i.test(comp.category) ? ` · Kategori ${comp.category}` : '';
@@ -54,7 +55,7 @@ const MODULES = [
 
 (async () => {
   // reveal harus dipasang setelah konten dinamis; urutan: konten dulu, lalu reveal
-  const order = ['config', 'content', 'sparkFx', 'opening', 'audio', 'nav', 'scrollProgress', 'effects', 'carousel', 'demo', 'kelas', 'features', 'materi', 'access', 'caraBermain', 'bukuInstruksi', 'deviceGuide', 'faq', 'share', 'team', 'feedback', 'lightbox', 'hoverFx', 'year', 'reveal'];
+  const order = ['config', 'content', 'sparkFx', 'opening', 'audio', 'nav', 'scrollProgress', 'effects', 'carousel', 'demo', 'kelas', 'features', 'materi', 'access', 'caraBermain', 'bukuInstruksi', 'deviceGuide', 'faq', 'share', 'team', 'feedback', 'lightbox', 'hoverFx', 'year', 'reveal', 'floaters'];
   for (const name of order) {
     const [, path, run] = MODULES.find((m) => m[0] === name);
     await new Promise((res) => {

@@ -27,7 +27,7 @@ function card(p, kind) {
   const slotId = kind === 'val' ? `validator-${slug}` : `tim-${slug}`;
 
   // Urutan: foto/inisial -> lencana peran -> nama -> program studi -> tautan
-  return `<article class="card id-card reveal">
+  return `<article class="card id-card reveal" data-reveal="shelf">
     <div class="id-card__photo">
       <figure class="slot-container slot-container--round" data-slot="${slotId}" data-folder="${slotFolder}" data-file="${slug}" data-ratio="1:1" data-width="800" data-height="800" data-alt="Foto ${esc(p.name)}" data-fallback="initials">
         <div class="img-fallback img-fallback--round" role="img" aria-label="Inisial ${esc(p.name)}">${initials(p.name)}</div>

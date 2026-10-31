@@ -7,19 +7,19 @@ body {
 img, svg, canvas { max-width: 100%; display: block; }
 img { height: auto; }
 h1, h2, h3, h4 {
-  font-family: var(--font-display); color: var(--am-green-800); line-height: 1.15; margin: 0 0 .5em;
+  font-family: var(--font-display); color: var(--am-brown-900); line-height: 1.15; margin: 0 0 .5em;
   font-weight: 700; letter-spacing: .01em;
 }
 h1 { font-size: clamp(2.3rem, 5.8vw, 4.1rem); }
 h2 { font-size: clamp(1.85rem, 4.2vw, 2.75rem); }
 h3 { font-size: 1.32rem; }
 p { margin: 0 0 1em; }
-b, strong { font-weight: 800; color: var(--am-green-800); }
-a { color: var(--am-green-800); font-weight: 700; }
+b, strong { font-weight: 800; color: var(--am-brown-800); }
+a { color: var(--am-brown-800); font-weight: 700; }
 ul, ol { padding-left: 1.25em; }
 :focus-visible { outline: 3px solid var(--am-amber-500); outline-offset: 3px; border-radius: 8px; box-shadow: 0 0 0 6px rgba(251, 191, 36, .45); }
 .skip-link {
-  position: fixed; left: 12px; top: -80px; z-index: 1000; background: var(--am-green-800); color: #fff;
+  position: fixed; left: 12px; top: -80px; z-index: 1000; background: var(--am-brown-900); color: #fff;
   padding: 12px 18px; border-radius: 12px; font-weight: 800; transition: top .2s; border: 2px solid var(--am-amber-400);
 }
 .skip-link:focus { top: 12px; }

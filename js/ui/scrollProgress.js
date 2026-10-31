@@ -4,7 +4,6 @@
 
 import { prefersReducedMotion } from '../utils/safe.js';
 import { spawnClickBurst } from './sparkFx.js';
-import { playSfx } from './audio.js';
 
 export const SCROLL_PROGRESS_CONFIG = {
   // Pengaturan simbol koin per bagian halaman (scrollspy)
@@ -152,9 +151,6 @@ export function initScrollProgress() {
         shadowTextEl.setAttribute('font-size', fontSize);
       }
 
-      if (triggerEffects) {
-        playSfx('section');
-      }
       if (triggerEffects && !prefersReducedMotion()) {
         if (coinInnerEl) {
           coinInnerEl.classList.remove('is-pop');
