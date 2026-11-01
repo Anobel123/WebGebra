@@ -193,16 +193,110 @@
     <!-- Pemisah Kanopi Bergaris Antara Beranda & Tentang -->
     <div class="divider--canopy" aria-hidden="true"></div>
 
-    <!-- B. TENTANG: SCROLLYTELLING SPLIT COUNTER -->
+    <!-- B. TENTANG: PENGENALAN TOKO & SCROLLYTELLING -->
     <section id="tentang" class="panel panel--light" aria-labelledby="h-tentang">
       <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Konsep Toko Kelontong</span>
-          <h2 id="h-tentang" class="heading-mask">Pelanggan Menyebut Harga Sebagai Huruf. Kamu yang Menghitungnya.</h2>
-          <p class="lead">Gim matematika kontekstual Fase D Kurikulum Merdeka: menerjemahkan pesanan barang dagangan khas Jambi ke bentuk aljabar nyata di meja kasir.</p>
+        <!-- Blok Pembuka "Apa itu Algebra-Mart?": Komposisi 2 Kolom (~55/45) -->
+        <div class="about-hero-grid">
+          <!-- Kolom Kiri: Penjelasan Detail 3 Paragraf -->
+          <div class="about-hero__desc">
+            <h2 id="h-tentang" class="heading-mask" data-reveal="mask">Apa itu Algebra-Mart?</h2>
+            <p class="lead about-hero__tagline">Pelanggan menyebut harga sebagai huruf. Kamu yang menghitungnya.</p>
+            
+            <p class="about-hero__text">
+              <strong>Algebra-Mart</strong> adalah inovasi gim edukasi matematika kontekstual yang mentransformasikan suasana warung kelontong khas Jambi menjadi panggung belajar bentuk aljabar interaktif bagi siswa Fase D (kelas VII SMP).
+            </p>
+            <p class="about-hero__text">
+              Di balik meja kasir toko, siswa memecahkan enam tantangan transaksi nyata: <em>(1)</em> membaca pesanan pembeli berwujud variabel, <em>(2)</em> menyusun bentuk aljabar dari kombinasi suku sejenis maupun tak sejenis, <em>(3)</em> mensubstitusi harga riil dagangan, <em>(4)</em> memeriksa keaslian pecahan uang tunai pembeli dan menghitung kembalian pas, <em>(5)</em> mencatat pembukuan laba bersih di Buku Kas toko, serta <em>(6)</em> menyisihkan keuntungan toko untuk infaq dana sosial kemanusiaan.
+            </p>
+            <p class="about-hero__text">
+              Gim dapat dimainkan langsung di peramban web (Chromium desktop maupun ponsel) serta aplikasi Android luring, dirancang ringan untuk mendukung sekolah maupun wilayah dengan koneksi minim. <a href="#akses" class="about-hero__link-akses">Lihat cara mencoba &rarr;</a>
+            </p>
+          </div>
+
+          <!-- Kolom Kanan: Struk Belanja CSS Satu Transaksi di Algebra-Mart -->
+          <div class="about-hero__receipt-wrap reveal" data-reveal="shelf" style="--shelf-rot: 1.2deg">
+            <div class="receipt-slip about-opening-receipt" aria-label="Struk Satu Transaksi di Algebra-Mart">
+              <!-- Gigi Gergaji Atas (Serrated Tear Top) -->
+              <div class="receipt-tear receipt-tear--top" aria-hidden="true">
+                <svg viewBox="0 0 400 10" preserveAspectRatio="none" class="receipt-tear-svg">
+                  <path d="M0 10 L10 0 L20 10 L30 0 L40 10 L50 0 L60 10 L70 0 L80 10 L90 0 L100 10 L110 0 L120 10 L130 0 L140 10 L150 0 L160 10 L170 0 L180 10 L190 0 L200 10 L210 0 L220 10 L230 0 L240 10 L250 0 L260 10 L270 0 L280 10 L290 0 L300 10 L310 0 L320 10 L330 0 L340 10 L350 0 L360 10 L370 0 L380 10 L390 0 L400 10 Z" fill="var(--am-card)" stroke="rgba(120,53,15,0.25)" stroke-width="1" />
+                </svg>
+              </div>
+
+              <div class="receipt-inner">
+                <div class="receipt-header">
+                  <div class="receipt-store-title">ALGEBRA-MART 2.0</div>
+                  <div class="receipt-store-sub">Toko Kelontong Edukasi Jambi</div>
+                  <div class="receipt-divider-dash" aria-hidden="true">--------------------------------</div>
+                  <h3 class="receipt-slip-heading">Satu transaksi di Algebra-Mart</h3>
+                  <div class="receipt-meta">Level 2 · Pelanggan 1 (Dodol Nanas khas Jambi)</div>
+                  <div class="receipt-divider-dash" aria-hidden="true">--------------------------------</div>
+                </div>
+
+                <ol class="receipt-flow-list">
+                  <li class="receipt-flow-item">
+                    <span class="receipt-step-num">1.</span>
+                    <div class="receipt-step-body">
+                      <span class="receipt-step-label">Pesanan:</span>
+                      <span class="receipt-step-value">3 batang dodol nanas (d) + 4 batang dodol nanas (d)</span>
+                    </div>
+                  </li>
+                  <li class="receipt-flow-item">
+                    <span class="receipt-step-num">2.</span>
+                    <div class="receipt-step-body">
+                      <span class="receipt-step-label">Rumus aljabar:</span>
+                      <strong class="receipt-step-value highlight-math">3d + 4d = 7d</strong>
+                    </div>
+                  </li>
+                  <li class="receipt-flow-item">
+                    <span class="receipt-step-num">3.</span>
+                    <div class="receipt-step-body">
+                      <span class="receipt-step-label">Total harga:</span>
+                      <span class="receipt-step-value">7 &times; Rp 3.000 = <strong>Rp 21.000</strong></span>
+                    </div>
+                  </li>
+                  <li class="receipt-flow-item">
+                    <span class="receipt-step-num">4.</span>
+                    <div class="receipt-step-body">
+                      <span class="receipt-step-label">Pembayaran tunai &amp; kembalian:</span>
+                      <span class="receipt-step-value">Uang Rp 50.000 &rarr; kembalian Rp 29.000 (disiapkan pas dari pecahan kasir).</span>
+                    </div>
+                  </li>
+                  <li class="receipt-flow-item">
+                    <span class="receipt-step-num">5.</span>
+                    <div class="receipt-step-body">
+                      <span class="receipt-step-label">Buku kas toko:</span>
+                      <span class="receipt-step-value">Laba bersih = Pendapatan &minus; Modal pokok (Rp 21.000 &minus; Rp 10.500 = Rp 10.500).</span>
+                    </div>
+                  </li>
+                  <li class="receipt-flow-item">
+                    <span class="receipt-step-num">6.</span>
+                    <div class="receipt-step-body">
+                      <span class="receipt-step-label">Dana sosial:</span>
+                      <span class="receipt-step-value">Sumbangan sosial kemanusiaan disisihkan langsung dari laba kasir.</span>
+                    </div>
+                  </li>
+                </ol>
+
+                <div class="receipt-footer">
+                  <div class="receipt-divider-dash" aria-hidden="true">--------------------------------</div>
+                  <div class="receipt-thanks">*** TERIMA KASIH TELAH BERBELANJA ***</div>
+                  <div class="receipt-signature">Status: Kasir Magang &rarr; Sultan Aljabar</div>
+                </div>
+              </div>
+
+              <!-- Gigi Gergaji Bawah (Serrated Tear Bottom) -->
+              <div class="receipt-tear receipt-tear--bottom" aria-hidden="true">
+                <svg viewBox="0 0 400 10" preserveAspectRatio="none" class="receipt-tear-svg">
+                  <path d="M0 0 L10 10 L20 0 L30 10 L40 0 L50 10 L60 0 L70 10 L80 0 L90 10 L100 0 L110 10 L120 0 L130 10 L140 0 L150 10 L160 0 L170 10 L180 0 L190 10 L200 0 L210 10 L220 0 L230 10 L240 0 L250 10 L260 0 L270 10 L280 0 L290 10 L300 0 L310 10 L320 0 L330 10 L340 0 L350 10 L360 0 L370 10 L380 0 L390 10 L400 0 Z" fill="var(--am-card)" stroke="rgba(120,53,15,0.25)" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
         
-        <!-- Dua Kolom Scrollytelling: Kiri Menempel (Sticky), Kanan Baris Pilar -->
+        <!-- Tiga Pilar Utama Sesuai Dokumen Panduan: Kiri Menempel (Sticky), Kanan Baris Pilar -->
         <div class="scrollytelling-split">
           <!-- Kolom Kiri: Panel Kasir Menempel (Sticky) yang Reaktif terhadap Scroll -->
           <div class="scrolly-counter-sticky">
@@ -210,11 +304,11 @@
               <div class="cashier-register__slot" aria-hidden="true"></div>
               <div class="cashier-register__head">
                 <span class="cashier-register__tag">MEJA KASIR 01</span>
-                <span class="cashier-register__step-badge" id="scrolly-step-badge">Pilar 01 / 05</span>
+                <span class="cashier-register__step-badge" id="scrolly-step-badge">Pilar 01 / 03</span>
               </div>
               <div class="cashier-lcd-display" id="scrolly-lcd">
-                <span class="cashier-lcd__speaker" id="scrolly-speaker">Pesanan Dodol Nanas Muaro Jambi:</span>
-                <p class="cashier-lcd__dialog" id="scrolly-dialog">“Tolong 3 ikat dodol nanas ya kasir, eh tambah 4 ikat lagi!”</p>
+                <span class="cashier-lcd__speaker" id="scrolly-speaker">Pesanan Dodol Nanas khas Jambi:</span>
+                <p class="cashier-lcd__dialog" id="scrolly-dialog">“Tolong siapkan 3 batang dodol nanas seharga d rupiah. Eh, tambahkan 4 batang dodol nanas lagi untuk oleh-oleh.”</p>
                 <div class="cashier-lcd__equation-box">
                   <span class="cashier-lcd__equation-label">Bentuk Aljabar Kasir:</span>
                   <span class="cashier-lcd__equation-value" id="scrolly-equation">3d + 4d = 7d</span>
@@ -227,53 +321,37 @@
             </div>
           </div>
 
-          <!-- Kolom Kanan: 5 Baris Pilar Narasi Panjang Bernomor Tipografi Besar -->
+          <!-- Kolom Kanan: Tepat Tiga Baris Pilar Narasi Panjang Bernomor Tipografi Besar -->
           <div class="scrolly-pillars-col">
             <article class="menu-pillar-row scrolly-pillar-item reveal is-active-pillar" data-reveal="shelf" data-scrolly-pilar="1">
               <span class="menu-pillar-num">01</span>
               <div class="menu-pillar-content">
-                <h4>Variabel Adalah Harga Dagangan Nyata</h4>
-                <p>Bukan sekadar huruf x dan y tanpa makna. Simbol mewakili komoditas belanja lokal Jambi: dodol nanas Muaro Jambi (<em>d</em>), kue padamaran (<em>p</em>), gandus, dan tempoyak (<em>t</em>).</p>
+                <h4>Aljabar Kontekstual</h4>
+                <p>Variabel, koefisien, dan konstanta berasal langsung dari barang dagangan khas Jambi: dodol nanas (<em>d</em>), kue padamaran (<em>j</em>), gandus (<em>e</em>), dan tempoyak (<em>o</em>). Siswa bernalar secara intuitif di meja kasir mengapa pesanan suku sejenis seperti <strong>3d + 4d = 7d</strong> dapat dijumlahkan, sedangkan komoditas berbeda seperti dodol nanas dan tempoyak (<strong>3d + 2o &ne; 5do</strong>) tidak dapat dilebur.</p>
               </div>
             </article>
 
             <article class="menu-pillar-row scrolly-pillar-item reveal" data-reveal="shelf" data-scrolly-pilar="2">
               <span class="menu-pillar-num">02</span>
               <div class="menu-pillar-content">
-                <h4>Bernalar Suku Sejenis di Meja Kasir</h4>
-                <p>Siswa memahami secara intuitif mengapa 3 dodol nanas + 4 dodol nanas (3d + 4d = 7d) dapat dijumlahkan, sementara dodol dan tempoyak (3d + 2t) tidak dapat dilebur.</p>
+                <h4>Simulasi Kasir &amp; Finansial</h4>
+                <p>Pembelajaran aljabar terhubung utuh dengan literasi finansial nyata. Siswa menghitung total belanja pesanan, memeriksa nominal pecahan uang tunai di laci kasir, menghitung uang kembalian pas, menyusun pencatatan laba bersih (pendapatan dikurangi modal pokok) di Buku Kas, serta menyisihkan keuntungan toko untuk infaq dana sosial kemanusiaan.</p>
               </div>
             </article>
 
             <article class="menu-pillar-row scrolly-pillar-item reveal" data-reveal="shelf" data-scrolly-pilar="3">
               <span class="menu-pillar-num">03</span>
               <div class="menu-pillar-content">
-                <h4>20 Level Terstruktur dari C1 hingga C6</h4>
-                <p>Scaffolding bertahap: pengenalan koefisien tunggal di Level 1-3, dua variabel di Level 4-7, sifat operasi di Level 8-10, substitusi harga riil di Level 11-15, hingga sifat distributif paket hajatan di Level 16-20.</p>
+                <h4>Gamifikasi Prestasi</h4>
+                <p>Membangkitkan motivasi belajar mandiri melalui sistem capaian komprehensif: 20 lencana prestasi bertingkat (dari Si Teliti hingga Sultan Aljabar), kenaikan jenjang karier kasir dari Kasir Magang sampai Sultan Aljabar (serta gelar istimewa Pedagang Dermawan), dan Papan Kehormatan (<em>Hall of Fame</em>) bagi kasir terbaik.</p>
               </div>
             </article>
 
-            <article class="menu-pillar-row scrolly-pillar-item reveal" data-reveal="shelf" data-scrolly-pilar="4">
-              <span class="menu-pillar-num">04</span>
-              <div class="menu-pillar-content">
-                <h4>Literasi Keuangan &amp; Perhitungan Kembalian</h4>
-                <p>Belajar aljabar langsung terhubung dengan transaksi kasir: menghitung laba toko di Buku Kas, menghitung uang kembalian pecahan Rp500 hingga Rp100.000, serta menyisihkan sumbangan sosial.</p>
-              </div>
-            </article>
-
-            <article class="menu-pillar-row scrolly-pillar-item reveal" data-reveal="shelf" data-scrolly-pilar="5">
-              <span class="menu-pillar-num">05</span>
-              <div class="menu-pillar-content">
-                <h4>Akses Ringan untuk Sekolah dan Daerah 3T</h4>
-                <p>Dapat dijalankan langsung di peramban web maupun aplikasi Android luring. Seluruh aset gim dibundel lokal sehingga tidak membebani kuota data siswa.</p>
-              </div>
-            </article>
-
-            <!-- Papan Tulis Kapur: Dasar Pengembangan & Catatan Toko -->
+            <!-- Papan Tulis Kapur: Dasar Pengembangan & Pedagogi Toko -->
             <div class="chalkboard-column reveal" data-reveal="shelf" style="--shelf-rot:1.5deg">
-              <h4 style="margin:0 0 .6rem;color:var(--am-amber-400)">Dasar Pengembangan &amp; Peralatan Toko</h4>
+              <h4 style="margin:0 0 .6rem;color:var(--am-amber-400)">Dasar Pengembangan &amp; Pedagogi Toko</h4>
               <p style="font-size:.92rem;line-height:1.55;margin:0 0 1rem;color:#d1fae5">
-                Didesain berdasarkan Capaian Pembelajaran Matematika SMP Fase D (Elemen Aljabar), memadukan simulasi transaksi kasir dengan gamifikasi kenaikan pangkat kasir.
+                Didesain berdasarkan Capaian Pembelajaran Matematika SMP Fase D (Elemen Aljabar) dengan <i>scaffolding</i> berjenjang dari level C1 hingga C6 (pengenalan variabel tunggal, suku sejenis, sifat operasi komutatif, substitusi rupiah riil, hingga sifat distributif paket hajatan) yang dipadukan dengan simulasi kasir dan pembukuan finansial nyata.
               </p>
               <div class="features-asymmetric" id="features"></div>
             </div>

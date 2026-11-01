@@ -3,39 +3,25 @@ import { esc } from '../utils/safe.js';
 
 const PILLAR_SCENARIOS = {
   1: {
-    speaker: 'Pesanan Dodol Nanas Muaro Jambi:',
-    dialog: '“Tolong 3 ikat dodol nanas ya kasir, eh tambah 4 ikat lagi!”',
+    speaker: 'Pesanan Dodol Nanas khas Jambi:',
+    dialog: '“Tolong siapkan 3 batang dodol nanas seharga d rupiah. Eh, tambahkan 4 batang dodol nanas lagi untuk oleh-oleh.”',
     equation: '3d + 4d = 7d',
     status: 'Suku Sejenis Dodol (d)',
-    badge: 'Pilar 01 / 05'
+    badge: 'Pilar 01 / 03'
   },
   2: {
-    speaker: 'Pesanan Dodol & Tempoyak:',
-    dialog: '“Saya beli 3 dodol nanas dan 2 tempoyak, bisa jadi 5 dodol-tempoyak?”',
-    equation: '3d + 2t ≠ 5dt',
-    status: 'Beda Barang, Jangan Dilebur!',
-    badge: 'Pilar 02 / 05'
+    speaker: 'Buku Kas & Transaksi Finansial:',
+    dialog: '“Pendapatan Rp 21.000, modal Rp 10.500. Hitung laba bersih dan sisihkan infaq kemanusiaan.”',
+    equation: 'Laba = Rp 10.500 · Infaq = Rp 1.050',
+    status: 'Laba Kasir & Infaq Sosial',
+    badge: 'Pilar 02 / 03'
   },
   3: {
-    speaker: 'Jenjang Karier Kasir Toko:',
-    dialog: '“Dari kasir pemula Level 1 sampai mahir memimpin toko di Level 20!”',
-    equation: 'Level 1 (C1) → Level 20 (C6)',
-    status: 'Scaffolding 5 Fase Belanja',
-    badge: 'Pilar 03 / 05'
-  },
-  4: {
-    speaker: 'Laci Kasir & Kembalian Tunai:',
-    dialog: '“Belanja Rp16.000, dibayar pakai uang Rp20.000. Kembaliannya berapa?”',
-    equation: 'Kembalian = Rp4.000',
-    status: 'Buku Kas & Uang Tunai Riil',
-    badge: 'Pilar 04 / 05'
-  },
-  5: {
-    speaker: 'Mode Belanja Sekolah & 3T:',
-    dialog: '“Sinyal internet tidak stabil? Gim tetap bisa dimainkan tanpa hambatan!”',
-    equation: '100% Luring · 0 KB Kuota',
-    status: 'Mode Mandiri Sekolah',
-    badge: 'Pilar 05 / 05'
+    speaker: 'Etalase Prestasi & Karier Kasir:',
+    dialog: '“Kumpulkan 20 lencana prestasi, raih gelar Sultan Aljabar, dan masuki Papan Kehormatan!”',
+    equation: '20 Lencana · 6 Gelar Karier',
+    status: 'Gamifikasi & Papan Kehormatan',
+    badge: 'Pilar 03 / 03'
   }
 };
 

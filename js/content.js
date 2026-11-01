@@ -22,28 +22,18 @@ export const PHASES = [
 export const PILLARS = [
   {
     num: '01',
-    t: 'Variabel Adalah Harga Dagangan Nyata',
-    d: 'Bukan sekadar huruf x dan y tanpa makna. Simbol mewakili komoditas belanja lokal Jambi: dodol nanas Muaro Jambi (d), kue padamaran (p), gandus, dan tempoyak (t).'
+    t: 'Aljabar Kontekstual',
+    d: 'Variabel, koefisien, dan konstanta berasal langsung dari barang dagangan khas Jambi: dodol nanas (d), kue padamaran (j), gandus (e), dan tempoyak (o). Siswa bernalar secara intuitif mengapa pesanan suku sejenis seperti 3d + 4d = 7d dapat dijumlahkan, sedangkan komoditas berbeda seperti dodol nanas dan tempoyak (3d + 2o ≠ 5do) tidak dapat dilebur.'
   },
   {
     num: '02',
-    t: 'Bernalar Suku Sejenis di Meja Kasir',
-    d: 'Siswa memahami secara intuitif mengapa 3 dodol nanas + 4 dodol nanas (3d + 4d = 7d) dapat dijumlahkan, sementara dodol dan tempoyak (3d + 2t) tidak dapat dilebur.'
+    t: 'Simulasi Kasir & Finansial',
+    d: 'Pembelajaran aljabar terhubung utuh dengan literasi finansial nyata: menghitung total belanja pesanan, memeriksa nominal pecahan uang tunai di laci kasir, menghitung uang kembalian pas, menyusun pencatatan laba bersih di Buku Kas, serta menyisihkan keuntungan toko untuk infaq dana sosial kemanusiaan.'
   },
   {
     num: '03',
-    t: '20 Level Terstruktur dari C1 hingga C6',
-    d: 'Scaffolding bertahap: pengenalan koefisien tunggal di Level 1-3, dua variabel di Level 4-7, sifat operasi di Level 8-10, substitusi harga riil di Level 11-15, hingga sifat distributif paket hajatan di Level 16-20.'
-  },
-  {
-    num: '04',
-    t: 'Literasi Keuangan & Perhitungan Kembalian',
-    d: 'Belajar aljabar langsung terhubung dengan transaksi kasir: menghitung laba toko di Buku Kas, menghitung uang kembalian pecahan Rp500 hingga Rp100.000, serta menyisihkan sumbangan sosial.'
-  },
-  {
-    num: '05',
-    t: 'Akses Ringan untuk Sekolah dan Daerah 3T',
-    d: 'Dapat dijalankan langsung di peramban web maupun aplikasi Android luring. Seluruh aset gim dibundel lokal sehingga tidak membebani kuota data siswa.'
+    t: 'Gamifikasi Prestasi',
+    d: 'Membangun motivasi belajar mandiri melalui sistem capaian komprehensif: 20 lencana prestasi bertingkat (dari Si Teliti hingga Sultan Aljabar), kenaikan jenjang karier kasir dari Kasir Magang sampai Sultan Aljabar (serta gelar istimewa Pedagang Dermawan), dan Papan Kehormatan (Hall of Fame) bagi kasir terbaik.'
   }
 ];
 
@@ -64,11 +54,11 @@ export const FEATURES = [
       no: 'NOTA-0428',
       items: [
         { name: 'Dodol Nanas (3d)', price: 'Rp9.000' },
-        { name: 'Kue Padamaran (2p)', price: 'Rp5.000' },
-        { name: 'Tempoyak Dus (1t)', price: 'Rp18.000' }
+        { name: 'Kue Padamaran (2j)', price: 'Rp4.000' },
+        { name: 'Tempoyak Dus (1o)', price: 'Rp15.000' }
       ],
-      total: 'Total Belanja: Rp32.000',
-      pay: 'Tunai: Rp50.000 · Kembali: Rp18.000'
+      total: 'Total Belanja: Rp28.000',
+      pay: 'Tunai: Rp50.000 · Kembali: Rp22.000'
     }
   },
   {
