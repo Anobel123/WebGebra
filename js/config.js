@@ -22,7 +22,7 @@ export const SITE_CONFIG = {
   // Mode tampil kerangka slot gambar kosong: true = tampilkan kotak putus-putus panduan; false = sembunyikan otomatis.
   // Dapat dioverride lewat parameter URL ?slots=1 atau ?slots=0.
   showEmptySlots: true,
-  // Dokumen unduhan (Buku Instruksi)
+  // Dokumen unduhan (Buku Instruksi & Modul Ajar)
   dokumen: {
     bukuInstruksi: {
       berkas: "assets/dokumen/buku-instruksi-algebra-mart.pdf",
@@ -30,6 +30,14 @@ export const SITE_CONFIG = {
       judul: "Buku Instruksi Algebra-Mart",
       deskripsi: "Panduan lengkap penggunaan Algebra-Mart mulai dari instalasi, navigasi antarmuka, hingga petunjuk bermain setiap mode.",
       namaUnduh: "Buku-Instruksi-Algebra-Mart.pdf",
+      versi: ""
+    },
+    modulAjar: {
+      berkas: "assets/dokumen/modul-ajar-algebra-mart.pdf",
+      bacaOnlineUrl: "https://heyzine.com/flip-book/d04c34bbc6.html",
+      judul: "Modul Ajar Gim Algebra-Mart",
+      deskripsi: "Perangkat ajar Matematika SMP Fase D Kelas VIII (Bentuk & Operasi Aljabar) memuat RPP Deep Learning (PBL), Materi Ajar, Asesmen, dan Lembar Soal Evaluasi.",
+      namaUnduh: "Modul-Ajar-Algebra-Mart.pdf",
       versi: ""
     }
   },

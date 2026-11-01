@@ -140,37 +140,37 @@ export function initCaraBermain() {
         </ol>
       </div>
 
-      <!-- Kartu Panduan Guru & Fasilitator (Carousel Sesuai Alur Kode Gim) -->
+      <!-- Kartu Panduan Guru & Fasilitator (Status: Segera Hadir / Soon Added) -->
       <div class="guru-guide-box card reveal" id="guru-guide-box">
         <div class="guru-guide-head">
           <div class="guru-guide-icon">${renderIcon('chalkboard-user', { size: 30 })}</div>
-          <div>
-            <span class="guru-guide-badge">${esc(GURU_GUIDE.badge)}</span>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+              <span class="guru-guide-badge">${esc(GURU_GUIDE.badge)}</span>
+              <span class="chip chip--gold" style="font-weight:800;font-size:.76rem;background:#fef3c7;color:#78350f;border:1.5px solid #d97706;padding:.2rem .65rem;border-radius:999px">
+                ${renderIcon('sparkles', { size: 13 })} Segera Hadir · Soon Added
+              </span>
+            </div>
             <h4 class="guru-guide-title">${esc(GURU_GUIDE.title)}</h4>
             ${showPin ? `<div class="guru-guide-pin">${renderIcon('key', { size: 16 })} PIN Fasilitator (Mode Kelas): <strong>${esc(pinValue)}</strong></div>` : ''}
           </div>
         </div>
 
-        <!-- Carousel Tahap Guru -->
-        <div class="guru-carousel" id="guru-carousel" tabindex="0" role="region" aria-label="Panduan Guru Langkah demi Langkah">
-          <div class="guru-carousel__stage" id="guru-stage-view">
-            <!-- Diisi dinamis -->
+        <!-- Wadah Segera Hadir Guru (Soon Added) -->
+        <div class="guru-soon-box" style="background:rgba(0,0,0,0.22);border:2px dashed rgba(251,191,36,0.45);border-radius:20px;padding:2.2rem 1.8rem;text-align:center;color:#fffdf5">
+          <div style="width:60px;height:60px;margin:0 auto 1rem;border-radius:50%;background:rgba(251,191,36,0.18);display:grid;place-items:center;border:2px solid #fbbf24;color:#fbbf24">
+            ${renderIcon('sparkles', { size: 28 })}
           </div>
-          <div class="guru-carousel__progress-wrap" aria-hidden="true">
-            <div class="guru-carousel__progress-bar" id="guru-progress-bar"></div>
-          </div>
-          <div class="guru-carousel__controls">
-            <button type="button" class="carousel-ctrl-btn" id="guru-btn-prev" aria-label="Langkah guru sebelumnya">
-              ${renderIcon('arrow-left', { size: 16 })} <span>Sebelumnya</span>
-            </button>
-            <button type="button" class="carousel-ctrl-btn carousel-ctrl-btn--play" id="guru-btn-play" aria-label="Putar/Jeda panduan guru">
-              <span id="guru-play-icon">${renderIcon(prefersReduced ? 'play' : 'pause', { size: 14 })}</span>
-              <span id="guru-play-text">${prefersReduced ? 'Putar' : 'Jeda'}</span>
-            </button>
-            <span class="cara-carousel__counter" id="guru-counter">1 / ${GURU_GUIDE.steps.length}</span>
-            <button type="button" class="carousel-ctrl-btn" id="guru-btn-next" aria-label="Langkah guru berikutnya">
-              <span>Berikutnya</span> ${renderIcon('arrow-right', { size: 16 })}
-            </button>
+          <span class="badge-pill" style="background:#fbbf24;color:#451a03;font-weight:900;font-size:.78rem;margin-bottom:.6rem;display:inline-block">PANDUAN INTERAKTIF GURU</span>
+          <h5 style="font:800 1.35rem var(--font-display);color:#fef3c7;margin:.3rem 0 .6rem">Tangkapan Layar &amp; Panduan Fasilitator Segera Hadir</h5>
+          <p style="max-width:620px;margin:0 auto 1.4rem;color:#fde68a;font-size:.95rem;line-height:1.6">
+            Panduan interaktif langkah demi langkah untuk Ruang Fasilitator (pembuatan sesi kelas online, PIN pengawas, dan pemantauan statistik EWS) sedang dipersiapkan. Untuk saat ini, Bapak/Ibu Guru dan juri dapat mengunduh serta membaca <strong>Modul Ajar Matematika (RPP &amp; Soal)</strong> dan <strong>Buku Instruksi</strong> resmi pada bagian di bawah ini.
+          </p>
+          <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap">
+            <a href="#buku-instruksi" class="btn btn--gold" style="min-height:44px;color:#451a03">
+              ${renderIcon('book-open', { size: 18 })}
+              <span>Lihat Buku Instruksi &amp; Modul Ajar &darr;</span>
+            </a>
           </div>
         </div>
       </div>
@@ -178,7 +178,7 @@ export function initCaraBermain() {
       <!-- Tautan Akses Buku Instruksi -->
       <div class="cara-buku-notice reveal text-center">
         <p style="margin:0;font-weight:700;color:var(--am-green-800);font-size:1.02rem">
-          Butuh panduan lengkap? <a href="#buku-instruksi" class="link-smooth-instruksi" style="color:var(--am-amber-700);text-decoration:underline;text-underline-offset:4px">Buku Instruksi (Baca Online &amp; Unduh PDF) &darr;</a>
+          Butuh panduan lengkap? <a href="#buku-instruksi" class="link-smooth-instruksi" style="color:var(--am-amber-700);text-decoration:underline;text-underline-offset:4px">Buku Instruksi &amp; Modul Ajar (Baca Online &amp; Unduh PDF) &darr;</a>
         </p>
       </div>
     </div>
@@ -386,116 +386,7 @@ export function initCaraBermain() {
   });
 
   // =========================================================================
-  // LOGIKA CAROUSEL 2: PANDUAN GURU & FASILITATOR (5 LANGKAH)
-  // =========================================================================
-  let guruStep = 0;
-  let guruPlaying = !prefersReduced;
-  let guruHovered = false;
-  let guruFocused = false;
-  let guruVisible = true;
-  let guruStartTime = Date.now();
-  let guruRafId = null;
-
-  const guruStageView = document.getElementById('guru-stage-view');
-  const guruProgressBar = document.getElementById('guru-progress-bar');
-  const guruBtnPrev = document.getElementById('guru-btn-prev');
-  const guruBtnNext = document.getElementById('guru-btn-next');
-  const guruBtnPlay = document.getElementById('guru-btn-play');
-  const guruPlayIcon = document.getElementById('guru-play-icon');
-  const guruPlayText = document.getElementById('guru-play-text');
-  const guruCounterEl = document.getElementById('guru-counter');
-  const guruCarousel = document.getElementById('guru-carousel');
-
-  function renderGuruStep(manual = false) {
-    const s = GURU_GUIDE.steps[guruStep];
-    guruStageView.setAttribute('aria-live', manual ? 'polite' : 'off');
-    guruStageView.innerHTML = `
-      <div class="guru-stage-card">
-        <div class="guru-stage-card__head">
-          <span class="guru-step-pill">Langkah ${s.num}</span>
-          <h5 class="guru-stage-card__title">${esc(s.title)}</h5>
-        </div>
-        <div class="guru-stage-card__desc">${s.desc}</div>
-        <div class="guru-stage-card__slot">
-          ${renderSlot(s.slotId, { className: 'guru-step-slot' })}
-        </div>
-      </div>
-    `;
-    resolveSlots(guruStageView);
-    guruCounterEl.textContent = `${guruStep + 1} / ${GURU_GUIDE.steps.length}`;
-    guruStartTime = Date.now();
-    if (guruProgressBar) guruProgressBar.style.width = '0%';
-  }
-
-  function goToGuruStep(stepIndex, manual = false) {
-    if (stepIndex < 0) stepIndex = GURU_GUIDE.steps.length - 1;
-    if (stepIndex >= GURU_GUIDE.steps.length) stepIndex = 0;
-    guruStep = stepIndex;
-    renderGuruStep(manual);
-  }
-
-  function tickGuruAutoplay() {
-    if (guruPlaying && !guruHovered && !guruFocused && guruVisible) {
-      const elapsed = Date.now() - guruStartTime;
-      const pct = Math.min(100, (elapsed / CARA_BERMAIN_CONFIG.guruAutoplayIntervalMs) * 100);
-      if (guruProgressBar) guruProgressBar.style.width = `${pct}%`;
-
-      if (elapsed >= CARA_BERMAIN_CONFIG.guruAutoplayIntervalMs) {
-        goToGuruStep(guruStep + 1, false);
-      }
-    }
-    guruRafId = requestAnimationFrame(tickGuruAutoplay);
-  }
-
-  guruBtnPrev.addEventListener('click', () => {
-    goToGuruStep(guruStep - 1, true);
-  });
-  guruBtnNext.addEventListener('click', () => {
-    goToGuruStep(guruStep + 1, true);
-  });
-  guruBtnPlay.addEventListener('click', () => {
-    guruPlaying = !guruPlaying;
-    guruBtnPlay.setAttribute('aria-pressed', guruPlaying ? 'true' : 'false');
-    guruPlayIcon.innerHTML = renderIcon(guruPlaying ? 'pause' : 'play', { size: 14 });
-    guruPlayText.textContent = guruPlaying ? 'Jeda' : 'Putar';
-    guruStartTime = Date.now();
-  });
-
-  guruCarousel.addEventListener('mouseenter', () => { guruHovered = true; });
-  guruCarousel.addEventListener('mouseleave', () => { guruHovered = false; guruStartTime = Date.now(); });
-  guruCarousel.addEventListener('focusin', () => { guruFocused = true; });
-  guruCarousel.addEventListener('focusout', () => { guruFocused = false; guruStartTime = Date.now(); });
-
-  guruCarousel.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      goToGuruStep(guruStep - 1, true);
-    } else if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      goToGuruStep(guruStep + 1, true);
-    }
-  });
-
-  let guruTouchX = 0;
-  guruCarousel.addEventListener('touchstart', (e) => {
-    guruTouchX = e.changedTouches[0].screenX;
-  }, { passive: true });
-  guruCarousel.addEventListener('touchend', (e) => {
-    const diff = e.changedTouches[0].screenX - guruTouchX;
-    if (Math.abs(diff) > 45) {
-      if (diff > 0) {
-        goToGuruStep(guruStep - 1, true);
-      } else {
-        goToGuruStep(guruStep + 1, true);
-      }
-    }
-  }, { passive: true });
-
-  // Inisialisasi awal
+    // Inisialisasi awal panduan cara bermain
   renderCurrentStep(false);
-  renderGuruStep(false);
-
-  // Mulai RAF
   tickAutoplay();
-  tickGuruAutoplay();
 }

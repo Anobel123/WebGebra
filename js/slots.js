@@ -53,8 +53,9 @@ const BASE_SLOTS = [
   // 6. Media Sosial (Open Graph)
   { id: 'og-image', bagian: 'SEO & Medsos', folder: 'assets/img/og', namaBerkas: 'og-image', rasio: '1.91:1', lebar: 1200, tinggi: 630, ukuranDisarankan: '1200×630 px', alt: 'Thumbnail Pratinjau Sosial Algebra-Mart', wajib: true },
 
-  // 7. Dokumen & Buku Instruksi (3:4, 900x1200)
-  { id: 'buku-sampul', bagian: 'Dokumen', folder: 'assets/img/buku', namaBerkas: 'sampul', rasio: '3:4', lebar: 900, tinggi: 1200, ukuranDisarankan: '900×1200 px', alt: 'Sampul Buku Instruksi Algebra-Mart', wajib: false }
+  // 7. Dokumen, Buku Instruksi & Modul Ajar (3:4, 900x1200)
+  { id: 'buku-sampul', bagian: 'Dokumen', folder: 'assets/img/buku', namaBerkas: 'sampul', rasio: '3:4', lebar: 900, tinggi: 1200, ukuranDisarankan: '900×1200 px', alt: 'Sampul Buku Instruksi Algebra-Mart', wajib: false },
+  { id: 'modul-sampul', bagian: 'Dokumen', folder: 'assets/img/buku', namaBerkas: 'modul-sampul', rasio: '3:4', lebar: 900, tinggi: 1200, ukuranDisarankan: '900×1200 px', alt: 'Sampul Modul Ajar Gim Algebra-Mart', wajib: false }
 ];
 
 /**

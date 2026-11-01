@@ -2163,6 +2163,77 @@ input, select, textarea {
   font-size: 16px !important;
 }
 
+/* ===== Rak Dokumen Berdampingan: Buku Instruksi & Modul Ajar ===== */
+.buku-shelf-section {
+  margin: 3.5rem auto 0;
+  max-width: 1200px;
+}
+.buku-shelf-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+}
+.buku-shelf-grid .buku-card {
+  max-width: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.buku-shelf-grid .buku-card__grid {
+  grid-template-columns: 165px 1fr;
+  gap: 1.8rem;
+  align-items: start;
+}
+.buku-shelf-grid .buku-card__title {
+  font-size: 1.45rem;
+  margin: 0.2rem 0 0.5rem;
+}
+.buku-shelf-grid .buku-card__desc {
+  font-size: 0.94rem;
+  line-height: 1.55;
+  margin-bottom: 1.2rem;
+}
+.buku-shelf-grid .buku-card__actions {
+  margin-top: auto;
+}
+
+@media (max-width: 1040px) {
+  .buku-shelf-grid {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+    margin: 0 auto;
+    gap: 2.2rem;
+  }
+  .buku-shelf-grid .buku-card__grid {
+    grid-template-columns: 180px 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .buku-shelf-grid .buku-card__grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.4rem;
+  }
+  .buku-shelf-grid .buku-card__cover {
+    margin: 0 auto;
+    max-width: 180px;
+  }
+  .buku-shelf-grid .buku-card__header {
+    justify-content: center;
+  }
+  .buku-shelf-grid .buku-card__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .buku-shelf-grid .buku-card__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* ===== Kartu & Sampul Buku Instruksi ===== */
 .buku-card {
   max-width: 920px;
@@ -4167,4 +4238,16 @@ input, select, textarea {
     width: 260px;
     transform: none !important;
   }
+}
+
+.guru-guide-box strong {
+  color: #ffffff !important;
+  font-weight: 800;
+}
+.guru-soon-box p {
+  color: #fde68a !important;
+}
+.guru-soon-box p strong {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
 }
