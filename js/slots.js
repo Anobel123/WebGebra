@@ -18,10 +18,11 @@ export const EXTENSIONS = ['.webp', '.png', '.jpg', '.jpeg', '.svg'];
 // Daftar statis slot sistem
 const BASE_SLOTS = [
   // 1. Hero Screenshots (16:9, 1920x1080)
-  { id: 'hero-1', bagian: 'Hero', folder: 'assets/img/hero', namaBerkas: 'hero-1', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Pratinjau Layar Profil Kasir Algebra-Mart', wajib: true },
-  { id: 'hero-2', bagian: 'Hero', folder: 'assets/img/hero', namaBerkas: 'hero-2', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Pratinjau Layar Peta Tantangan Level', wajib: true },
-  { id: 'hero-3', bagian: 'Hero', folder: 'assets/img/hero', namaBerkas: 'hero-3', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Pratinjau Layar Tutorial Meja Kasir', wajib: true },
-  { id: 'hero-4', bagian: 'Hero', folder: 'assets/img/hero', namaBerkas: 'hero-4', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Pratinjau Layar Transaksi Pelanggan Aktif', wajib: true },
+  { id: 'hero-1', bagian: 'Hero', folder: 'assets/img/hero', namaBerkas: 'hero-1', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Pratinjau Layar Buat Profil Kasir Baru', wajib: true },
+  { id: 'hero-2', bagian: 'Hero', folder: 'assets/img/hero', namaBerkas: 'hero-2', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Pratinjau Layar Profil Kasir & ID Card', wajib: true },
+  { id: 'hero-3', bagian: 'Hero', folder: 'assets/img/hero', namaBerkas: 'hero-3', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Pratinjau Layar Peta Pilihan Tantangan Level', wajib: true },
+  { id: 'hero-4', bagian: 'Hero', folder: 'assets/img/hero', namaBerkas: 'hero-4', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Pratinjau Layar Pengenalan Konsep Aljabar Kasir', wajib: true },
+  { id: 'hero-5', bagian: 'Hero', folder: 'assets/img/hero', namaBerkas: 'hero-5', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Pratinjau Layar Transaksi Pesanan Pelanggan Aktif', wajib: true },
 
   // 2. Cara Bermain (15 Langkah, 16:9, 1920x1080)
   { id: 'langkah-00', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-00', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 0: Pilih Platform & Buka Gim', wajib: true },

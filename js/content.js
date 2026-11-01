@@ -4,10 +4,11 @@ export { LEVELS, QUIZ_SAMPLES, BADGES } from './content-data.js';
 export const MARQUEE = ['Aljabar', 'Literasi Keuangan', 'Kurikulum Merdeka', 'Pembelajaran Mendalam', 'Android & Web', 'LIDM 2026'];
 
 export const SCREENSHOTS = [
-  { src: 'assets/img/hero/hero-1.webp', slotId: 'hero-1', title: 'Profil Saya', alt: 'Layar Profil Saya: pemain mengisi nama, memilih avatar, dan melihat gelar' },
-  { src: 'assets/img/hero/hero-2.webp', slotId: 'hero-2', title: 'Pilih Tantangan', alt: 'Layar Pilih Tantangan: lencana level bernomor dengan bintang' },
-  { src: 'assets/img/hero/hero-3.webp', slotId: 'hero-3', title: 'Layar Kasir', alt: 'Layar Kasir dengan petunjuk tutorial cara bermain' },
-  { src: 'assets/img/hero/hero-4.webp', slotId: 'hero-4', title: 'Pesanan Pelanggan', alt: 'Pesanan pelanggan yang harus diterjemahkan menjadi bentuk aljabar' }
+  { src: 'assets/img/hero/hero-1.webp', slotId: 'hero-1', title: 'Buat Profil Kasir', alt: 'Layar Masuk: pemain membuat profil baru dan menentukan kelas kasir' },
+  { src: 'assets/img/hero/hero-2.webp', slotId: 'hero-2', title: 'Profil Saya', alt: 'Layar Profil Saya: data pemain, kartu pegawai, dan gelar kasir' },
+  { src: 'assets/img/hero/hero-3.webp', slotId: 'hero-3', title: 'Pilih Tantangan', alt: 'Layar Pilih Tantangan: peta level tantangan mudah dan sulit' },
+  { src: 'assets/img/hero/hero-4.webp', slotId: 'hero-4', title: 'Konsep Aljabar Kasir', alt: 'Layar Level 0: simulasi pencocokan kotak belanja dengan nominal uang' },
+  { src: 'assets/img/hero/hero-5.webp', slotId: 'hero-5', title: 'Pesanan Pelanggan', alt: 'Layar Meja Kasir: menerjemahkan pesanan pelanggan dalam bentuk aljabar' }
 ];
 
 export const PHASES = [
