@@ -102,23 +102,17 @@ const REVEAL_SELECTOR = [
 ].join(', ');
 
 const RV = {
-  mode: 'off',       // 'sda' | 'io' | 'off'
+  mode: 'io',        // Gunakan observer dua arah tunggal yang konsisten di semua peramban
   io: null,          // observer dua arah untuk elemen reveal (.is-in)
   canopyIo: null     // observer dua arah untuk kanopi toko (.is-canopy-open)
 };
 
-/** Deteksi dukungan CSS scroll-driven animation (bisa dipaksa cadangan via ?reveal=io). */
+/** Deteksi dukungan CSS scroll-driven animation (dinonaktifkan demi stabilitas dua arah konsisten). */
 export function supportsScrollDrivenReveal() {
-  try {
-    if (/[?&]reveal=io\b/.test(window.location.search || '')) return false;
-    return Boolean(
-      window.CSS && typeof CSS.supports === 'function' &&
-      CSS.supports('animation-timeline: view()') &&
-      CSS.supports('animation-range: entry 0% entry 60%')
-    );
-  } catch {
-    return false;
-  }
+  // Standarisasi pada IntersectionObserver dua arah: terbukti 100% stabil di semua peramban,
+  // tidak terputus oleh overflow layout (clip/hidden), dan menjamin elemen atas tetap tampil
+  // sementara elemen bawah mundur saat scroll ke atas.
+  return false;
 }
 
 /* --- Elemen di dalam scroll container lain (overflow hidden/auto) tidak bisa memakai
@@ -332,20 +326,17 @@ function bindRevealElements(els, { initial }) {
   fresh.forEach((el, k) => {
     el.dataset.rvBound = '1';
     const r = rects[k];
-    // Di lipatan pertama dokumen: tidak mungkin keluar lewat bawah -> cukup fade-in sekali
-    if (initial && r.top + sy < vh * 0.9) {
+    // Di lipatan pertama dokumen saat scroll berada di paling atas: fade-in sekali
+    if (initial && sy === 0 && r.top < vh * 0.9) {
       el.classList.add('rv-static');
       staticEls.push(el);
       return;
     }
-    if (RV.mode === 'sda' && !hasInnerScrollContainer(el) && (initial || r.top >= vh * 0.9)) {
-      el.classList.add('is-in'); // tampilan akhir dikendalikan animasi scroll-driven
-      return;
+    // Jika sudah terlewati di atas layar (mis. muat langsung dengan anchor #hash)
+    if (r.bottom <= 0) {
+      el.classList.add('is-in');
     }
-    // Cadangan IO: browser tanpa view(), elemen di scroll container lain, atau elemen
-    // dinamis yang dibuat langsung di dalam layar (mis. ganti tab Materi) agar tetap fade-in.
-    if (RV.mode === 'sda') el.classList.add('rv-io-el');
-    if (r.bottom <= 0) el.classList.add('is-in'); // sudah terlewati (mis. muat dengan #hash)
+    // Daftarkan ke observer dua arah (show saat masuk bawah, hide saat keluar bawah)
     RV.io.observe(el);
   });
 
@@ -360,16 +351,11 @@ function bindCanopies(panels) {
     if (p.dataset.rvBound === '1') return;
     p.dataset.rvBound = '1';
     const r = rects[k];
-    if (r.top + sy < vh * 0.9) {
+    if (sy === 0 && r.top < vh * 0.9) {
       p.classList.add('rv-static');
       afterTwoFrames(() => p.classList.add('is-canopy-open'));
       return;
     }
-    if (RV.mode === 'sda' && !hasInnerScrollContainer(p)) {
-      p.classList.add('is-canopy-open');
-      return;
-    }
-    if (RV.mode === 'sda') p.classList.add('rv-io-el');
     if (r.bottom <= 0) p.classList.add('is-canopy-open');
     RV.canopyIo.observe(p);
   });
@@ -403,17 +389,18 @@ export function initReveal() {
       return;
     }
 
-    RV.mode = supportsScrollDrivenReveal() ? 'sda' : 'io';
+    RV.mode = 'io';
     RV.io = createTwoWayObserver('is-in');
     RV.canopyIo = createTwoWayObserver('is-canopy-open');
 
     setStaggerIndex(els);
 
     // Ukur dahulu (sebelum kelas penyembunyi aktif), baru pasang kelas mode
-    html.classList.add('js-reveal', RV.mode === 'sda' ? 'rv-sda' : 'rv-io');
+    html.classList.add('js-reveal', 'rv-io');
+    html.classList.remove('rv-sda');
     bindRevealElements(els, { initial: true });
     bindCanopies(panels);
-    html.dataset.revealMode = RV.mode;
+    html.dataset.revealMode = 'io';
 
     initScrollDraw();
 

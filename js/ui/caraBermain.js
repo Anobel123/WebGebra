@@ -247,7 +247,7 @@ export function initCaraBermain() {
       li.setAttribute('aria-current', active ? 'step' : 'false');
       const coin = li.querySelector('.stepper-coin');
       if (coin) coin.classList.toggle('is-lit', idx <= currentStep);
-      if (active) {
+      if (active && manual) {
         li.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
       }
     });
@@ -265,7 +265,7 @@ export function initCaraBermain() {
       const active = idx === currentStep;
       btn.classList.toggle('is-active', active);
       btn.setAttribute('aria-selected', String(active));
-      if (active) {
+      if (active && manual) {
         btn.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
       }
     });
