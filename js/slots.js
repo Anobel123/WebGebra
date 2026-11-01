@@ -24,22 +24,13 @@ const BASE_SLOTS = [
   { id: 'hero-4', bagian: 'Hero', folder: 'assets/img/hero', namaBerkas: 'hero-4', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Pratinjau Layar Pengenalan Konsep Aljabar Kasir', wajib: true },
   { id: 'hero-5', bagian: 'Hero', folder: 'assets/img/hero', namaBerkas: 'hero-5', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Pratinjau Layar Transaksi Pesanan Pelanggan Aktif', wajib: true },
 
-  // 2. Cara Bermain (15 Langkah, 16:9, 1920x1080)
-  { id: 'langkah-00', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-00', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 0: Pilih Platform & Buka Gim', wajib: true },
-  { id: 'langkah-01', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-01', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 1: Gerbang Masuk Toko', wajib: true },
-  { id: 'langkah-02', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-02', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 2: Tambah Profil Kasir Baru', wajib: true },
-  { id: 'langkah-03', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-03', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 3: Pilih Kasir yang Aktif', wajib: true },
-  { id: 'langkah-04', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-04', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 4: Pilih Mode Bermain', wajib: true },
-  { id: 'langkah-05', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-05', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 5: Pelajari Materi & Konsep', wajib: true },
-  { id: 'langkah-06', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-06', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 6: Masuk ke Meja Kasir', wajib: true },
-  { id: 'langkah-07', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-07', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 7: Pilih Level Tantangan', wajib: true },
-  { id: 'langkah-08', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-08', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 8: Baca Pesanan Pelanggan', wajib: true },
-  { id: 'langkah-09', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-09', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 9: Petakan Barang ke Simbol Aljabar', wajib: true },
-  { id: 'langkah-10', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-10', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 10: Susun Persamaan di Keypad Kasir', wajib: true },
-  { id: 'langkah-11', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-11', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 11: Validasi dengan Tombol Sama Dengan & Konfirmasi', wajib: true },
-  { id: 'langkah-12', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-12', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 12: Hitung Uang Pembayaran & Kembalian', wajib: true },
-  { id: 'langkah-13', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-13', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 13: Lihat Evaluasi & Lanjut Level', wajib: true },
-  { id: 'langkah-14', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-14', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 14: Periksa Buku Kas & Koleksi Prestasi', wajib: true },
+  // 2. Cara Bermain (6 Langkah Utama, 16:9, 1920x1080)
+  { id: 'langkah-01', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-01', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 1: Pilih Platform & Buka Gim', wajib: true },
+  { id: 'langkah-02', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-02', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 2: Gerbang Toko & Mulai Permainan', wajib: true },
+  { id: 'langkah-03', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-03', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 3: Tambah Profil Kasir Baru', wajib: true },
+  { id: 'langkah-04', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-04', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 4: Profil Kasir & Mode Kelas', wajib: true },
+  { id: 'langkah-05', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-05', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 5: Pilih Tantangan (Level 0 Pengantar)', wajib: true },
+  { id: 'langkah-06', bagian: 'Cara Bermain', folder: 'assets/img/langkah', namaBerkas: 'langkah-06', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah 6: Layani Pesanan & Susun Rumus Aljabar', wajib: true },
 
   // 3. Panduan Guru & Fasilitator (5 Langkah, 16:9, 1920x1080)
   { id: 'guru-01', bagian: 'Panduan Guru', folder: 'assets/img/guru', namaBerkas: 'guru-01', rasio: '16:9', lebar: 1920, tinggi: 1080, ukuranDisarankan: '1920×1080 px', alt: 'Langkah Guru 1: Buka Pengaturan di Layar Login', wajib: true },

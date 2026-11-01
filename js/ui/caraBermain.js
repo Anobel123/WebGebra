@@ -78,7 +78,7 @@ export function initCaraBermain() {
           </div>
         </div>
 
-        <!-- Kolom Kanan: Daftar 15 Langkah Berurutan dengan Garis Emas Progres Scroll -->
+        <!-- Kolom Kanan: Daftar 6 Langkah Berurutan dengan Garis Emas Progres Scroll -->
         <div class="cara-carousel__sidebar">
           <div class="stepper-draw-wrap" data-reveal="draw">
             <svg class="stepper-draw-svg" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
@@ -87,7 +87,7 @@ export function initCaraBermain() {
             </svg>
             <ol class="stepper-list" id="stepper-list" role="list">
               ${CARA_BERMAIN.map((item, idx) => `
-                <li class="stepper-item ${idx === 0 ? 'is-active' : ''}" data-step="${item.step}" tabindex="0" role="button" aria-current="${idx === 0 ? 'step' : 'false'}">
+                <li class="stepper-item ${idx === 0 ? 'is-active' : ''}" data-step="${idx}" tabindex="0" role="button" aria-current="${idx === 0 ? 'step' : 'false'}">
                   <div class="stepper-coin ${idx === 0 ? 'is-lit' : ''}" aria-hidden="true">${item.step}</div>
                   <div class="stepper-summary">
                     <span class="stepper-step-badge">${esc(item.badge)}</span>
@@ -100,7 +100,7 @@ export function initCaraBermain() {
         </div>
       </div>
 
-      <!-- Ban Berjalan Horizontal (Conveyor Belt) dengan 14 Penanda Langkah Koin -->
+      <!-- Ban Berjalan Horizontal (Conveyor Belt) dengan 6 Penanda Langkah Koin -->
       <div class="conveyor-belt-track" id="conveyor-belt" role="tablist" aria-label="Ban Berjalan Langkah Permainan">
         ${CARA_BERMAIN.map((item, idx) => `
           <button type="button" class="conveyor-step-coin ${idx === 0 ? 'is-active' : ''}" data-step="${idx}" role="tab" aria-selected="${idx === 0}" aria-label="Langkah ${item.step}: ${esc(item.title)}">
@@ -185,7 +185,7 @@ export function initCaraBermain() {
   `;
 
   // =========================================================================
-  // LOGIKA CAROUSEL 1: PANDUAN CARA BERMAIN (15 LANGKAH)
+  // LOGIKA CAROUSEL 1: PANDUAN CARA BERMAIN (6 LANGKAH)
   // =========================================================================
   let currentStep = 0;
   let isPlaying = !prefersReduced;
@@ -217,7 +217,7 @@ export function initCaraBermain() {
       <div class="cara-stage-card">
         <div class="cara-stage-card__head">
           <span class="badge-pill">${esc(item.badge)}</span>
-          <span class="cara-stage-card__step-num">Langkah ${item.step} dari ${CARA_BERMAIN.length - 1}</span>
+          <span class="cara-stage-card__step-num">Langkah ${item.step} dari ${CARA_BERMAIN.length}</span>
         </div>
         <h4 class="cara-stage-card__title">${esc(item.title)}</h4>
         <div class="cara-stage-card__desc">${item.desc}</div>

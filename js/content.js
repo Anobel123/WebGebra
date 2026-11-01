@@ -200,135 +200,62 @@ export const DEVICE_SPECS = {
   ]
 };
 
-// Langkah Cara Bermain (Stepper 0 - 14)
+// Langkah Cara Bermain (6 Langkah Utama Sesuai Infografis)
 export const CARA_BERMAIN_PHASES = [
-  { id: 'tahap-a', title: 'Tahap A · Persiapan', range: [0, 3], desc: 'Memilih platform dan menyiapkan profil kasir' },
-  { id: 'tahap-b', title: 'Tahap B · Memulai Petualangan', range: [4, 6], desc: 'Memilih mode permainan dan pengenalan materi' },
-  { id: 'tahap-c', title: 'Tahap C · Memilih Tantangan', range: [7, 9], desc: 'Menentukan level dan membaca pesanan belanja' },
-  { id: 'tahap-d', title: 'Tahap D · Simulasi Kasir & Selesai', range: [10, 14], desc: 'Menyusun aljabar, menghitung kembalian, dan evaluasi' }
+  { id: 'tahap-a', title: 'Tahap A · Persiapan & Profil', range: [0, 2], desc: 'Pilih platform, buka gim, dan buat profil kasir' },
+  { id: 'tahap-b', title: 'Tahap B · Tantangan & Level', range: [3, 4], desc: 'Atur kelas dan pilih Level 0 Pengantar' },
+  { id: 'tahap-c', title: 'Tahap C · Simulasi Kasir', range: [5, 5], desc: 'Layani pesanan pembeli dan susun rumus aljabar' }
 ];
 
 export const CARA_BERMAIN = [
   {
-    step: 0,
+    step: 1,
     phase: 'tahap-a',
     title: 'Pilih Platform & Buka Gim',
     desc: 'Buka Algebra-Mart langsung melalui peramban web modern di komputer/ponsel, atau pasang aplikasi resminya melalui Google Play Store untuk akses cepat tanpa mengetik URL.',
     badge: 'Persiapan',
-    slotId: 'langkah-00',
+    slotId: 'langkah-01',
     buttonAction: 'playStore'
-  },
-  {
-    step: 1,
-    phase: 'tahap-a',
-    title: 'Gerbang Masuk Toko',
-    desc: 'Pada layar awal selamat datang, tekan tombol <strong>Mulai Game</strong> untuk membuka pintu gerbang toko kelontong Algebra-Mart.',
-    badge: 'Layar Awal',
-    slotId: 'langkah-01'
   },
   {
     step: 2,
     phase: 'tahap-a',
-    title: 'Tambah Profil Kasir Baru',
-    desc: 'Jika baru pertama kali bermain, tekan tombol <strong>Tambah Kasir</strong>. Masukkan nama panggilanmu dan pilih avatar kasir favorit untuk menyimpan rekor belanja.',
-    badge: 'Pendaftaran',
+    title: 'Gerbang Toko & Mulai Permainan',
+    desc: 'Pada layar awal selamat datang Algebra-Mart, tekan tombol <strong>Mulai Game</strong> yang dilingkari untuk membuka pintu gerbang toko kelontong.',
+    badge: 'Layar Awal',
     slotId: 'langkah-02'
   },
   {
     step: 3,
     phase: 'tahap-a',
-    title: 'Pilih Kasir yang Aktif',
-    desc: 'Klik kartu profil kasirmu untuk masuk ke dalam sesi permainan. Kamu dapat melihat gelar kasir, skor akumulasi, dan bintang yang telah diraih.',
-    badge: 'Profil Kasir',
+    title: 'Tambah Profil Kasir Baru',
+    desc: 'Jika baru pertama kali bermain, masukkan nama kasir, pilih jenis kelamin, serta isi kelasmu. Tekan tombol <strong>+ Tambah Kasir</strong> untuk menyimpan profil kasir.',
+    badge: 'Pendaftaran Kasir',
     slotId: 'langkah-03'
   },
   {
     step: 4,
     phase: 'tahap-b',
-    title: 'Pilih Mode Bermain',
-    desc: 'Pilih <strong>Main Solo</strong> untuk berlatih mandiri menaklukkan 20 level, atau gunakan Mode Kelas untuk bergabung ke sesi ruang kompetisi.',
-    badge: 'Pilihan Mode',
+    title: 'Profil Kasir & Mode Kelas',
+    desc: 'Periksa kartu ID pegawai kasirmu, lihat gelar kasir dan rekor belanja. Hubungkan kode Mode Kelas jika ditugaskan guru, lalu tekan tombol <strong>Mulai Permainan</strong>.',
+    badge: 'Profil & Kelas',
     slotId: 'langkah-04'
   },
   {
     step: 5,
     phase: 'tahap-b',
-    title: 'Pelajari Materi & Konsep',
-    desc: 'Sebelum melayani pelanggan, tekan tombol <strong>Mulai Materi</strong> untuk membaca panduan interaktif konsep variabel toko, koefisien, dan contoh soal kontekstual.',
-    badge: 'Edukasi Aljabar',
+    title: 'Pilih Tantangan (Level 0 Pengantar)',
+    desc: 'Pada layar pilihan tantangan, pilih <strong>Level 0 Pengantar</strong> untuk memahami konsep aljabar dasar kasir dan simulasi pencocokan harga sebelum melayani pelanggan.',
+    badge: 'Peta Level',
     slotId: 'langkah-05'
   },
   {
     step: 6,
-    phase: 'tahap-b',
-    title: 'Masuk ke Meja Kasir',
-    desc: 'Setelah memahami aturan main toko, tekan tombol <strong>Mulai Permainan</strong> untuk mulai melayani pelanggan pertama yang mengantre di kasir.',
-    badge: 'Mulai Melayani',
+    phase: 'tahap-c',
+    title: 'Layani Pesanan & Susun Rumus Aljabar',
+    desc: 'Perhatikan balon dialog pesanan pelanggan (mis. harga dodol nanas <em>d</em> rupiah), susun rumus aljabar pada keypad kasir, lalu hitung pembayaran dan berikan kembalian uang tunai.',
+    badge: 'Simulasi Kasir',
     slotId: 'langkah-06'
-  },
-  {
-    step: 7,
-    phase: 'tahap-c',
-    title: 'Pilih Level Tantangan',
-    desc: 'Pilih nomor level yang ingin dimainkan pada peta tantangan. Level 1 dimulai dari konsep variabel tunggal hingga Level 20 untuk ujian akhir sindikat toko.',
-    badge: 'Peta Level',
-    slotId: 'langkah-07'
-  },
-  {
-    step: 8,
-    phase: 'tahap-c',
-    title: 'Baca Pesanan Pelanggan',
-    desc: 'Perhatikan balon dialog pesanan pelanggan di sisi kiri meja kasir. Pelanggan akan menyebutkan daftar belanjaan seperti dodol nanas, beras, atau minyak goreng.',
-    badge: 'Antrean Kasir',
-    slotId: 'langkah-08'
-  },
-  {
-    step: 9,
-    phase: 'tahap-c',
-    title: 'Petakan Barang ke Simbol Aljabar',
-    desc: 'Setiap barang punya huruf variabel sendiri yang tertera di balon pesanan (mis. <em>d</em> untuk dodol nanas, <em>b</em> untuk beras, <em>i</em> untuk minyak goreng, <em>j</em> untuk kue padamaran). Jangan mencampur suku yang berbeda!',
-    badge: 'Penalaran Aljabar',
-    slotId: 'langkah-09'
-  },
-  {
-    step: 10,
-    phase: 'tahap-d',
-    title: 'Susun Persamaan di Keypad Kasir',
-    desc: 'Gunakan tombol angka dan variabel pada keypad kasir untuk menyusun bentuk aljabar yang merepresentasikan total belanjaan pelanggan.',
-    badge: 'Input Kasir',
-    slotId: 'langkah-10'
-  },
-  {
-    step: 11,
-    phase: 'tahap-d',
-    title: 'Validasi dengan Tombol Sama Dengan & Konfirmasi',
-    desc: 'Setelah persamaan aljabar terisi lengkap, tekan tombol <strong>=</strong> untuk menghitung total tagihan, lalu tekan <strong>Konfirmasi</strong> untuk mencetak struk belanja.',
-    badge: 'Hitung Tagihan',
-    slotId: 'langkah-11'
-  },
-  {
-    step: 12,
-    phase: 'tahap-d',
-    title: 'Hitung Uang Pembayaran & Kembalian',
-    desc: 'Pelanggan menyerahkan uang tunai. Masukkan pecahan uang kembalian secara tepat, tekan tombol <strong>Berikan Kembalian</strong>, lalu pilih <strong>Yakin</strong>.',
-    badge: 'Transaksi Berhasil',
-    slotId: 'langkah-12'
-  },
-  {
-    step: 13,
-    phase: 'tahap-d',
-    title: 'Lihat Evaluasi & Lanjut Level',
-    desc: 'Dapatkan 1 sampai 3 bintang berdasarkan akurasi rumus dan kembalian. Tekan tombol <strong>Lanjut</strong> atau <strong>Lanjut Level</strong> untuk membuka tantangan berikutnya.',
-    badge: 'Pencapaian',
-    slotId: 'langkah-13'
-  },
-  {
-    step: 14,
-    phase: 'tahap-d',
-    title: 'Periksa Buku Kas & Koleksi Prestasi',
-    desc: 'Kunjungi menu <strong>Buku Kas</strong> untuk meninjau riwayat transaksi keuangan tokomu, serta menu <strong>Prestasi</strong> untuk melihat 20 lencana medali yang berhasil kamu kumpulkan.',
-    badge: 'Prestasi Kasir',
-    slotId: 'langkah-14'
   }
 ];
 
