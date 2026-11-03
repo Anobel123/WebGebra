@@ -196,7 +196,7 @@ export const KELAS_DATA = [
     id: 19,
     nama: 'Nabila Azzahra',
     inisial: 'NA',
-    tag: 'Main Luring di Android',
+    tag: 'Aplikasi Android',
     bubble: 'Tetap lancar dimainkan walau sinyal susah.',
     cerita: 'Di rumahku kadang sinyal internet suka hilang timbul, tapi waktu sudah dipasang di HP Android, gimnya tetap bisa dimainkan tanpa macet. Progres bintang dan buku kasku juga tetap tersimpan rapi.',
     sumber: 'ilustrasi',

@@ -45,7 +45,7 @@ export function initCaraBermain() {
       </nav>
 
       <!-- Carousel Container: Panel Gambar Besar & Daftar Langkah -->
-      <div class="cara-carousel" id="cara-carousel" tabindex="0" role="region" aria-label="Carousel Panduan Cara Bermain">
+      <div class="cara-carousel" id="cara-carousel" tabindex="0" role="region" aria-label="Panduan Cara Bermain">
         <!-- Kolom Kiri: Panel Gambar Slot & Teks Langkah Aktif -->
         <div class="cara-carousel__stage">
           <div class="cara-carousel__view" id="cara-stage-view" aria-live="off">
@@ -64,7 +64,7 @@ export function initCaraBermain() {
               <span>Sebelumnya</span>
             </button>
 
-            <button type="button" class="carousel-ctrl-btn carousel-ctrl-btn--play" id="cara-btn-play" aria-label="${prefersReduced ? 'Putar carousel' : 'Jeda carousel'}" aria-pressed="${!prefersReduced}">
+            <button type="button" class="carousel-ctrl-btn carousel-ctrl-btn--play" id="cara-btn-play" aria-label="${prefersReduced ? 'Putar otomatis' : 'Jeda otomatis'}" aria-pressed="${!prefersReduced}">
               <span id="cara-play-icon">${renderIcon(prefersReduced ? 'play' : 'pause', { size: 16 })}</span>
               <span id="cara-play-text">${prefersReduced ? 'Putar' : 'Jeda'}</span>
             </button>
@@ -101,7 +101,7 @@ export function initCaraBermain() {
       </div>
 
       <!-- Ban Berjalan Horizontal (Conveyor Belt) dengan 6 Penanda Langkah Koin -->
-      <div class="conveyor-belt-track" id="conveyor-belt" role="tablist" aria-label="Ban Berjalan Langkah Permainan">
+      <div class="conveyor-belt-track" id="conveyor-belt" role="tablist" aria-label="Penanda Langkah Permainan">
         ${CARA_BERMAIN.map((item, idx) => `
           <button type="button" class="conveyor-step-coin ${idx === 0 ? 'is-active' : ''}" data-step="${idx}" role="tab" aria-selected="${idx === 0}" aria-label="Langkah ${item.step}: ${esc(item.title)}">
             ${item.step}
@@ -298,7 +298,7 @@ export function initCaraBermain() {
   function togglePlay(forceState) {
     isPlaying = typeof forceState === 'boolean' ? forceState : !isPlaying;
     btnPlay.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
-    btnPlay.setAttribute('aria-label', isPlaying ? 'Jeda carousel' : 'Putar carousel');
+    btnPlay.setAttribute('aria-label', isPlaying ? 'Jeda putar otomatis' : 'Mulai putar otomatis');
     playIcon.innerHTML = renderIcon(isPlaying ? 'pause' : 'play', { size: 16 });
     playText.textContent = isPlaying ? 'Jeda' : 'Putar';
     stepStartTime = Date.now();

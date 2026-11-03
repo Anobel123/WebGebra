@@ -17,7 +17,7 @@ const PILLAR_SCENARIOS = {
     badge: 'Pilar 02 / 03'
   },
   3: {
-    speaker: 'Etalase Prestasi & Karier Kasir:',
+    speaker: 'Prestasi & Gelar Kasir:',
     dialog: '“Kumpulkan 20 lencana prestasi, raih gelar Sultan Aljabar, dan masuki Papan Kehormatan!”',
     equation: '20 Lencana · 6 Gelar Karier',
     status: 'Gamifikasi & Papan Kehormatan',

@@ -70,7 +70,7 @@ export function initShare() {
       const url = getShareUrl();
       const ok = await copyText(url);
       if (ok) {
-        toast('Tautan berhasil disalin ke clipboard!');
+        toast('Tautan berhasil disalin!');
         closeSharePopover();
       } else {
         toast('Gagal menyalin tautan.');

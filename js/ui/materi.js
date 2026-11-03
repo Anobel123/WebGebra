@@ -33,7 +33,7 @@ export function initMateri() {
         <b>Tujuan Belajar:</b> ${esc(lvl.title)}
       </p>
       <div style="background:var(--am-cream-50);border:1.5px dashed var(--am-amber-600);border-radius:10px;padding:.8rem;font-size:.88rem">
-        <b>Contoh Transaksi di Meja Kasir:</b><br>
+        <b>Contoh Transaksi Pembelian:</b><br>
         “${esc(lvl.example || 'Pelanggan memesan barang dagangan toko kelontong.')}”
       </div>
     `;
@@ -85,13 +85,13 @@ export function initMateri() {
         <div class="shelf-price-tag">
           <span class="shelf-price-tag__phase">${esc(ph.label)}</span>
           <h4 class="shelf-price-tag__title">${esc(ph.mode || ph.note || 'Fase Belanja')}</h4>
-          <p class="shelf-price-tag__desc">${esc(ph.note || 'Tingkat penguasaan konsep aljabar di meja kasir.')}</p>
+          <p class="shelf-price-tag__desc">${esc(ph.note || 'Tingkat penguasaan konsep aljabar dan simulasi transaksi belanja.')}</p>
           <small style="color:var(--am-brown-800);font-weight:800">Klik koin untuk membuka tujuan belajar</small>
         </div>
 
         <!-- Bilah Kayu Rak dengan Koin Berjejer Mendatar -->
         <div class="shelf-plank-wrapper">
-          <div class="shelf-plank-track" tabindex="0" role="region" aria-label="Daftar Koin Level di Rak">
+          <div class="shelf-plank-track" tabindex="0" role="region" aria-label="Daftar Level Pembelajaran">
             ${coinsHtml}
           </div>
         </div>
@@ -104,7 +104,7 @@ export function initMateri() {
         const lvlNo = +btn.dataset.level;
         let lvlData;
         if (lvlNo === 0) {
-          lvlData = { no: 0, title: 'Pengantar Mesin Kasir', bloom: 'Tutorial', example: 'Pemain belajar membaca harga barang dan mengetikkan bentuk aljabar dasar.' };
+          lvlData = { no: 0, title: 'Pengenalan Konsep Aljabar Kasir', bloom: 'Tutorial', example: 'Pemain belajar membaca harga barang dan mengetikkan bentuk aljabar dasar.' };
         } else {
           lvlData = LEVELS.find((l) => l.no === lvlNo);
         }

@@ -329,7 +329,7 @@ export async function createQR(url, options = {}) {
     downloadSVG: () => downloadQR(qrType, 'svg', qr, moduleCount, logoImg),
     copyLink: async () => {
       const ok = await copyText(cleanUrl);
-      toast(ok ? 'Tautan berhasil disalin ke clipboard.' : 'Silakan salin tautan secara manual.', 2500);
+      toast(ok ? 'Tautan berhasil disalin.' : 'Silakan salin tautan secara manual.', 2500);
     }
   };
 }
@@ -379,7 +379,7 @@ export async function renderQRCard(container, opts = {}) {
           <button type="button" class="btn btn--small btn--secondary btn-qr-dl-svg" data-action="dl-svg" title="Unduh format vektor SVG untuk cetak atau Canva">
             <span>SVG</span>
           </button>
-          <button type="button" class="btn btn--small btn--secondary btn-qr-copy" data-action="copy" title="Salin tautan ke clipboard">
+          <button type="button" class="btn btn--small btn--secondary btn-qr-copy" data-action="copy" title="Salin tautan">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             <span>Salin</span>
           </button>
@@ -439,3 +439,4 @@ export function initQR() {
   // Preload logo di background tanpa memblokir thread
   getLogoImage().catch(() => {});
 }
+

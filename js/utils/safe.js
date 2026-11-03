@@ -48,7 +48,7 @@ export function attachImgFallback(img, label = '') {
     d.setAttribute('aria-label', img.alt || label);
     const cleanLabel = (label || img.alt || 'AM').replace(/\b(Dr|M\.Kom|M\.Pd)\.?,?/g, '');
     const initials = cleanLabel.split(/\s+/).filter(Boolean).map((w) => w[0]).slice(0, 2).join('').toUpperCase();
-    d.innerHTML = img.dataset.round ? '' : `<span>${esc(label || img.alt || '')}</span><small>TODO: gambar belum ditambahkan</small>`;
+    d.innerHTML = img.dataset.round ? '' : `<span>${esc(label || img.alt || '')}</span><small>Gambar sedang dipersiapkan</small>`;
     if (img.dataset.round) d.textContent = initials;
     img.replaceWith(d);
   };

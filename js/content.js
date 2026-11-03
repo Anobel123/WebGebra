@@ -169,33 +169,35 @@ export const INSTITUTION = {
 export const DEVICE_SPECS = {
   landscapeNotice: {
     title: "Putar Perangkat ke Mode Lanskap (Mendatar)",
-    desc: "Algebra-Mart dirancang untuk rasio layar 16:9 agar simulasi meja kasir, struk belanja, rak barang, dan kalkulator aljabar dapat dioperasikan secara leluasa dan nyaman."
+    desc: "Algebra-Mart dirancang untuk rasio layar 16:9 agar simulasi meja kasir, struk transaksi, dan kalkulator aljabar dapat dioperasikan secara leluasa dan nyaman."
   },
+  intro: "Gim berjalan langsung di peramban tanpa instalasi tambahan, dan tersedia sebagai aplikasi Android.",
+  note: "Sinkronisasi Mode Kelas membutuhkan koneksi internet.",
   specs: [
     {
-      category: "Laptop / Komputer (PC)",
-      min: "Intel Celeron / Core i3, RAM 2 GB, Resolusi layar 1366×768",
-      opt: "Intel Core i5 / AMD Ryzen, RAM 4 GB+, Resolusi Full HD 1920×1080"
+      component: "Perangkat",
+      min: "Laptop, PC desktop, tablet, atau ponsel",
+      rec: "PC/laptop atau tablet layar lebar (≥ 10 inci)"
     },
     {
-      category: "Tablet / Smartphone",
-      min: "Android 7.0 (Nougat), RAM 2 GB, Layar 5.5 inci",
-      opt: "Android 10+, RAM 4 GB+, Tablet 10 inci untuk ruang kasir leluasa"
+      component: "Sistem operasi",
+      min: "Windows 10, Android 8.0, iOS 12, atau macOS",
+      rec: "Windows 11, Android 11+, atau iPadOS"
     },
     {
-      category: "Peramban Web (Browser)",
-      min: "Chrome 90+, Edge 90+, Firefox 88+, Safari 14+",
-      opt: "Google Chrome atau Microsoft Edge versi terbaru"
+      component: "Peramban",
+      min: "Google Chrome v90+, Mozilla Firefox, atau Safari",
+      rec: "Google Chrome versi terbaru atau Microsoft Edge"
     },
     {
-      category: "Koneksi Internet",
-      min: "Offline untuk Mode Solo (setelah aset termuat); 512 Kbps untuk Mode Kelas",
-      opt: "1–2 Mbps stabil untuk sinkronisasi nilai & papan peringkat real-time"
+      component: "Koneksi internet",
+      min: "512 Kbps (mode daring)",
+      rec: "1 Mbps stabil untuk sinkronisasi kode ruang"
     },
     {
-      category: "Orientasi Layar",
-      min: "Lanskap (Mendatar)",
-      opt: "Lanskap Layar Penuh (Fullscreen)"
+      component: "Orientasi layar",
+      min: "Lanskap (wajib)",
+      rec: "Lanskap, resolusi minimal 1280 x 720 px"
     }
   ]
 };
@@ -319,8 +321,8 @@ export const GURU_GUIDE = {
 export const FAQ = [
   {
     id: 1,
-    q: 'Apakah Algebra-Mart dapat dimainkan secara offline tanpa koneksi internet?',
-    a: 'Ya! Seluruh permainan mandiri (Solo), materi pembelajaran, dan data progres tersimpan di penyimpanan lokal perangkat (localStorage). Koneksi internet hanya dibutuhkan saat pertama kali membuka web atau saat menggunakan Mode Kelas untuk sinkronisasi nilai dengan guru.'
+    q: 'Apakah Algebra-Mart membutuhkan koneksi internet?',
+    a: 'Bermain di aplikasi Android dapat dilakukan tanpa internet setelah dipasang karena seluruh level dan aset tersimpan lokal di perangkat. Sementara itu, versi web peramban dan sinkronisasi Mode Kelas membutuhkan koneksi internet.'
   },
   {
     id: 2,
@@ -335,7 +337,7 @@ export const FAQ = [
   {
     id: 4,
     q: 'Bagaimana cara guru memantau perkembangan siswa di kelas secara langsung?',
-    a: 'Guru dapat masuk ke menu Mode Kelas dengan memasukkan PIN fasilitator (1234) untuk membuat ruang kelas. Setelah siswa memasukkan kode ruang, guru dapat memantau perolehan bintang, skor kasir, dan tingkat kesulitan siswa secara langsung di papan leaderboard.'
+    a: 'Guru dapat masuk ke menu Fasilitator dengan memasukkan PIN untuk membuat sesi kelas daring. Setelah siswa memasukkan kode ruang 6 karakter berawalan ALJ, guru dapat memantau perolehan bintang, skor kasir, dan capaian siswa secara langsung di Papan Kehormatan.'
   },
   {
     id: 5,
