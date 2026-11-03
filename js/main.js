@@ -19,6 +19,7 @@ const MODULES = [
   ['kelas', './ui/kelas.js', (m) => m.initKelas()],
   ['materi', './ui/materi.js', (m) => m.initMateri()],
   ['features', './ui/features.js', (m) => m.initFeatures()],
+  ['qr', './ui/qr.js', (m) => m.initQR?.()],
   ['access', './ui/access.js', (m) => m.initAccess()],
   ['caraBermain', './ui/caraBermain.js', (m) => m.initCaraBermain()],
   ['bukuInstruksi', './ui/bukuInstruksi.js', (m) => m.initBukuInstruksi()],
@@ -56,7 +57,7 @@ const MODULES = [
 
 (async () => {
   // reveal harus dipasang setelah konten dinamis; urutan: konten dulu, lalu reveal
-  const order = ['config', 'content', 'sparkFx', 'opening', 'audio', 'nav', 'scrollProgress', 'effects', 'carousel', 'aboutScrolly', 'demo', 'kelas', 'features', 'materi', 'access', 'caraBermain', 'bukuInstruksi', 'deviceGuide', 'faq', 'share', 'team', 'feedback', 'lightbox', 'hoverFx', 'year', 'reveal', 'floaters'];
+  const order = ['config', 'content', 'sparkFx', 'opening', 'audio', 'nav', 'scrollProgress', 'effects', 'carousel', 'aboutScrolly', 'demo', 'kelas', 'features', 'materi', 'qr', 'access', 'caraBermain', 'bukuInstruksi', 'deviceGuide', 'faq', 'share', 'team', 'feedback', 'lightbox', 'hoverFx', 'year', 'reveal', 'floaters'];
   for (const name of order) {
     const [, path, run] = MODULES.find((m) => m[0] === name);
     await new Promise((res) => {

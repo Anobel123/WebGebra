@@ -288,7 +288,7 @@
   border: 4px solid var(--am-amber-600);
   box-shadow: 0 10px 0 var(--am-brown-800), 0 22px 40px -10px rgba(120, 53, 15, .38);
 }
-.qr-box { width: 210px; height: 210px; padding: 10px; border-radius: 22px; background: #fff8e1; border: 3.5px solid var(--am-brown-800); display: grid; place-items: center; box-shadow: 0 5px 0 rgba(120, 53, 15, .2); }
+.qr-box { width: 230px; height: 230px; padding: 10px; border-radius: 22px; background: #fff8e1; border: 3.5px solid var(--am-brown-800); display: grid; place-items: center; box-shadow: 0 5px 0 rgba(120, 53, 15, .2); }
 .qr-box canvas, .qr-box svg { width: 100%; height: 100%; border-radius: 12px; }
 .access-url {
   background: var(--am-brown-900); color: var(--am-amber-400); padding: .3em .85em;
@@ -3920,14 +3920,98 @@ input, select, textarea {
 .hanging-receipt-qr {
   background: #fffdf5;
   border: 2px dashed rgba(120, 53, 15, .4);
-  border-radius: 12px;
-  padding: 1.4rem;
-  margin-top: 1.5rem;
-  box-shadow: 0 6px 14px rgba(69, 26, 3, .15);
+  border-radius: 14px;
+  padding: 1.2rem;
+  margin-top: 1.2rem;
+  box-shadow: 0 6px 14px rgba(69, 26, 3, .12);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  transform: rotate(-1deg);
+  justify-content: center;
+  transform: rotate(-0.8deg);
+  transition: transform .25s var(--ease);
+}
+.hanging-receipt-qr:hover {
+  transform: rotate(0deg) scale(1.01);
+}
+.hanging-receipt-qr--web {
+  transform: rotate(0.8deg);
+}
+.hanging-receipt-qr--buku {
+  transform: rotate(0deg);
+  background: #fffdf5;
+}
+
+/* Kartu Struk QR & Kontrol Segmented */
+.receipt-qr-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.qr-segmented-control {
+  display: inline-flex;
+  background: #fef3c7;
+  border: 2px solid #b45309;
+  border-radius: 9999px;
+  padding: 3px;
+  gap: 4px;
+}
+.qr-seg-btn {
+  border: none;
+  background: transparent;
+  color: #78350f;
+  font: 700 0.82rem var(--font, system-ui, sans-serif);
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background .2s var(--ease), color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.qr-seg-btn:hover {
+  color: #451a03;
+}
+.qr-seg-btn.is-active {
+  background: #451a03;
+  color: #fffdf6;
+  box-shadow: 0 2px 6px rgba(69, 26, 3, .3);
+}
+
+.qr-actions {
+  display: flex;
+  gap: 0.45rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.qr-actions .btn {
+  min-height: 38px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Panel Lipat QR Repositori & APK (Selalu Lipat Baik Desktop Maupun Mobile) */
+details.qr-disclosure--repo > summary {
+  display: inline-flex !important;
+  width: auto !important;
+  margin: 0 !important;
+}
+details.qr-disclosure--repo:not([open]) > .qr-disclosure__content {
+  display: none !important;
+}
+details.qr-disclosure--repo[open] > summary {
+  margin-bottom: 0.6rem !important;
+}
+
+@media (max-width: 640px) {
+  .qr-box {
+    width: 200px !important;
+    height: 200px !important;
+    padding: 8px !important;
+    border-radius: 16px !important;
+  }
 }
 
 /* Baris Tautan APK & Repositori Titik-Titik di Bawah */

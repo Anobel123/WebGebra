@@ -3,6 +3,7 @@ import { SITE_CONFIG, isValidUrl } from '../config.js';
 import { renderIcon } from './icons.js';
 import { renderSlot, resolveSlots, shouldShowEmptySlots } from '../slots.js';
 import { esc } from '../utils/safe.js';
+import { renderQRCard } from './qr.js';
 
 function formatBytesToMB(bytes) {
   if (!bytes || isNaN(bytes)) return '';
@@ -154,6 +155,22 @@ export async function initBukuInstruksi() {
                   </a>
                 ` : ''}
               </div>
+
+              <!-- Panel Struk QR Buku Instruksi (Pilihan Baca Online vs Unduh PDF) -->
+              <div class="buku-card__qr-section" style="margin-top:1.4rem">
+                <details class="qr-disclosure">
+                  <summary class="qr-disclosure__trigger">
+                    <svg class="qr-disclosure__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    <span>Tampilkan QR (untuk perangkat lain)</span>
+                    <span class="qr-disclosure__arrow" aria-hidden="true">&darr;</span>
+                  </summary>
+                  <div class="qr-disclosure__content" style="padding:.8rem 0">
+                    <div class="hanging-receipt-qr hanging-receipt-qr--buku" style="margin-top:0">
+                      <div id="buku-qr-container" style="width:100%"></div>
+                    </div>
+                  </div>
+                </details>
+              </div>
             </div>
           </div>
         </article>
@@ -216,6 +233,70 @@ export async function initBukuInstruksi() {
   if (figModul && figModul.classList.contains('is-empty') && !shouldShowEmptySlots()) {
     figModul.innerHTML = renderCssBookCover(modulTitle, true);
     figModul.style.display = 'block';
+  }
+
+  // Inisialisasi QR Buku Instruksi dengan Segmented Control (Baca Online vs Unduh PDF)
+  const bukuQrWrap = container.querySelector('#buku-qr-container');
+  if (bukuQrWrap) {
+    const hasBaca = isBukuBacaOnlineValid;
+    const rawUnduhUrl = bukuFileUrl;
+    const absoluteUnduhUrl = rawUnduhUrl ? new URL(rawUnduhUrl, SITE_CONFIG.siteUrl || window.location.href).href : '';
+    const isUnduhValid = isValidUrl(absoluteUnduhUrl);
+
+    const showSegment = hasBaca && isUnduhValid;
+    let currentMode = hasBaca ? 'baca' : (isUnduhValid ? 'unduh' : '');
+
+    const renderSelectedQR = () => {
+      if (!currentMode) return;
+      const isBaca = currentMode === 'baca';
+      const activeUrl = isBaca ? bukuBacaOnlineUrl : absoluteUnduhUrl;
+      const activeType = isBaca ? 'buku-baca' : 'buku-unduh';
+      const activeCaption = isBaca ? 'Pindai untuk membaca buku' : 'Pindai untuk mengunduh buku';
+      const activeAlt = isBaca ? 'QR untuk membaca Buku Instruksi Algebra-Mart secara online' : 'QR untuk mengunduh berkas PDF Buku Instruksi Algebra-Mart';
+
+      bukuQrWrap.innerHTML = `
+        ${showSegment ? `
+          <div style="display:flex;justify-content:center;margin-bottom:.8rem">
+            <div class="qr-segmented-control" role="tablist" aria-label="Pilihan Tujuan QR Buku Instruksi">
+              <button type="button" class="qr-seg-btn ${isBaca ? 'is-active' : ''}" role="tab" aria-selected="${isBaca}" data-buku-seg="baca">
+                <span>Baca Online</span>
+              </button>
+              <button type="button" class="qr-seg-btn ${!isBaca ? 'is-active' : ''}" role="tab" aria-selected="${!isBaca}" data-buku-seg="unduh">
+                <span>Unduh PDF</span>
+              </button>
+            </div>
+          </div>
+        ` : ''}
+        <div id="buku-qr-card-target"></div>
+      `;
+
+      const target = bukuQrWrap.querySelector('#buku-qr-card-target');
+      if (target) {
+        renderQRCard(target, {
+          url: activeUrl,
+          type: activeType,
+          caption: activeCaption,
+          alt: activeAlt
+        });
+      }
+
+      if (showSegment) {
+        bukuQrWrap.querySelectorAll('[data-buku-seg]').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const mode = btn.dataset.bukuSeg;
+            if (mode && mode !== currentMode) {
+              currentMode = mode;
+              renderSelectedQR();
+            }
+          });
+        });
+      }
+    };
+
+    if (currentMode) {
+      renderSelectedQR();
+    }
   }
 
   // Hook scroll halus untuk semua tautan ke #buku-instruksi dan #modul-ajar
