@@ -22,7 +22,7 @@ export function initAccess() {
   const isRepoOk = isValidUrl(repoUrl);
 
   wrap.innerHTML = `
-    <!-- Kartu Google Play Store Dominan di Kiri Atas dengan Struk QR Tergantung -->
+    <!-- Kartu Google Play Store Dominan di Kiri Atas -->
     <article class="access-card--playstore card reveal" data-reveal="shelf" data-key="playStore">
       <div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:.6rem;flex-wrap:wrap">
@@ -34,27 +34,27 @@ export function initAccess() {
           Pasang langsung di gawai Android siswa atau tablet sekolah. Seluruh level dan aset suara dibundel lokal untuk penggunaan luring.
         </p>
 
-        <div style="margin:1.4rem 0" class="access-primary-action">
+        <div style="margin:1.4rem 0 1rem" class="access-primary-action">
           <a class="store-badge" data-burst data-fx="cta magnetic store-apk" aria-label="Buka di Play Store" ${isPlayStoreOk ? `href="${esc(playStoreUrl)}" target="_blank" rel="noopener"` : 'aria-disabled="true" tabindex="-1"'}>
-            <svg class="btn__swing-icon" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path fill="#34d399" d="M3 2l11 10L3 22z"/><path fill="#fbbf24" d="M14 12l4-3.600 3 1.700c1 .6 1 1.800 0 2.400l-3 1.700z"/><path fill="#60a5fa" d="M3 2l15 8.400-4 1.600z"/><path fill="#f87171" d="M3 22l15-8.400-4-1.600z"/></svg>
+            <svg class="btn__swing-icon" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path fill="#34d399" d="M3 2l11 10L3 22z"/><path fill="#fbbf24" d="M14 12l4-3.600 3 1.700c1 .6 1 1.800 0 2.400l-3 1.700z"/><path fill="#60a5fa" d="M3 2l15 8.400-4 1.600z"/><path fill="#f87171" d="M3 2l15-8.400-4-1.600z"/></svg>
             <span><small>Tersedia di</small>Google Play</span>
           </a>
         </div>
       </div>
 
-      <!-- Panel Struk QR Play Store (Selalu Buka di Desktop, Lipat di Mobile) -->
-      <details class="qr-disclosure">
-        <summary class="qr-disclosure__trigger">
-          <svg class="qr-disclosure__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          <span>Tampilkan QR (untuk perangkat lain)</span>
-          <span class="qr-disclosure__arrow" aria-hidden="true">&darr;</span>
-        </summary>
-        <div class="qr-disclosure__content">
-          <div class="hanging-receipt-qr">
-            <div id="qr-playstore-target" style="width:100%"></div>
+      <!-- Panel Lipat QR Play Store (Jenis Sama dengan QR Repositori) -->
+      ${isPlayStoreOk ? `
+        <details class="qr-disclosure qr-disclosure--repo">
+          <summary class="qr-disclosure__trigger" style="margin-top:.4rem;padding:.42rem .85rem;font-size:.84rem">
+            <svg class="qr-disclosure__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span>Tampilkan QR Play Store</span>
+            <span class="qr-disclosure__arrow" aria-hidden="true">&darr;</span>
+          </summary>
+          <div class="qr-disclosure__content" style="padding:.6rem 0">
+            <div id="qr-playstore-target" style="max-width:280px;margin:0 auto"></div>
           </div>
-        </div>
-      </details>
+        </details>
+      ` : ''}
     </article>
 
     <!-- Kartu Web Browser Kompak di Kanan Atas -->
@@ -69,26 +69,26 @@ export function initAccess() {
           Langsung uji coba mesin kasir di Chrome, Firefox, Safari, atau Edge tanpa perlu instalasi aplikasi apa pun.
         </p>
 
-        <div style="margin-bottom:1.2rem" class="access-primary-action">
+        <div style="margin-bottom:1rem" class="access-primary-action">
           <a class="btn btn--green" data-burst data-fx="cta magnetic" data-hover="Ayo Mulai!" aria-label="Mainkan di Browser" ${isWebOk ? `href="${esc(webUrl)}" target="_blank" rel="noopener"` : 'aria-disabled="true" tabindex="-1"'}>
             Mainkan di Browser
           </a>
         </div>
       </div>
 
-      <!-- Panel Struk QR Web Game (Selalu Buka di Desktop, Lipat di Mobile) -->
-      <details class="qr-disclosure">
-        <summary class="qr-disclosure__trigger">
-          <svg class="qr-disclosure__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          <span>Tampilkan QR (untuk perangkat lain)</span>
-          <span class="qr-disclosure__arrow" aria-hidden="true">&darr;</span>
-        </summary>
-        <div class="qr-disclosure__content" style="padding:.8rem 0">
-          <div class="hanging-receipt-qr hanging-receipt-qr--web" style="margin-top:0">
-            <div id="qr-web-target" style="width:100%"></div>
+      <!-- Panel Lipat QR Web Game (Jenis Sama dengan QR Repositori) -->
+      ${isWebOk ? `
+        <details class="qr-disclosure qr-disclosure--repo">
+          <summary class="qr-disclosure__trigger" style="margin-top:.4rem;padding:.42rem .85rem;font-size:.84rem">
+            <svg class="qr-disclosure__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span>Tampilkan QR Web Game</span>
+            <span class="qr-disclosure__arrow" aria-hidden="true">&darr;</span>
+          </summary>
+          <div class="qr-disclosure__content" style="padding:.6rem 0">
+            <div id="qr-web-target" style="max-width:280px;margin:0 auto"></div>
           </div>
-        </div>
-      </details>
+        </details>
+      ` : ''}
     </article>
 
     <!-- Baris Tautan APK & Repositori Bergaris Titik-Titik di Bawah (Grid Kolom Penuh) -->
@@ -102,7 +102,16 @@ export function initAccess() {
           </a>
         </div>
         ${isApkOk ? `
-          <div id="qr-apk-target" style="margin-top:.4rem"></div>
+          <details class="qr-disclosure qr-disclosure--repo">
+            <summary class="qr-disclosure__trigger" style="margin-top:.3rem;padding:.4rem .8rem;font-size:.82rem">
+              <svg class="qr-disclosure__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <span>Tampilkan QR APK</span>
+              <span class="qr-disclosure__arrow" aria-hidden="true">&darr;</span>
+            </summary>
+            <div class="qr-disclosure__content" style="padding:.6rem 0">
+              <div id="qr-apk-target" style="max-width:280px;margin:0 auto"></div>
+            </div>
+          </details>
         ` : ''}
       </div>
 
@@ -117,7 +126,7 @@ export function initAccess() {
         ${isRepoOk ? `
           <details class="qr-disclosure qr-disclosure--repo">
             <summary class="qr-disclosure__trigger" style="margin-top:.3rem;padding:.4rem .8rem;font-size:.82rem">
-              <svg class="qr-disclosure__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <svg class="qr-disclosure__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
               <span>Tampilkan QR Repositori</span>
               <span class="qr-disclosure__arrow" aria-hidden="true">&darr;</span>
             </summary>
@@ -164,9 +173,7 @@ export function initAccess() {
         url: apkUrl,
         type: 'apk',
         caption: 'Pindai untuk mengunduh APK',
-        alt: 'QR menuju unduh berkas APK Algebra-Mart',
-        isCollapsible: true,
-        collapsibleTitle: 'Tampilkan QR APK'
+        alt: 'QR menuju unduh berkas APK Algebra-Mart'
       });
     }
   }

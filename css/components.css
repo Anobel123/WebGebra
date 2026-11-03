@@ -2104,38 +2104,68 @@ body.lightbox-open {
   object-fit: contain; display: block;
 }
 
-/* ===== 9. COLLAPSIBLE QR ACCORDION & MOBILE ACCESS CTA ===== */
-/* Desktop (default): QR selalu terbuka secara utuh seperti semula */
-details.qr-disclosure {
-  display: block; width: 100%;
+/* ===== 9. COLLAPSIBLE QR ACCORDION & ACCESS CTA ===== */
+details.qr-disclosure,
+details.qr-disclosure--repo {
+  display: block;
+  width: 100%;
 }
-details.qr-disclosure > summary {
+details.qr-disclosure > summary,
+details.qr-disclosure--repo > summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .45rem .95rem;
+  border-radius: 12px;
+  background: #fef3c7;
+  border: 1.5px solid #d97706;
+  color: #78350f;
+  font: 700 .85rem var(--font, system-ui, sans-serif);
+  cursor: pointer;
+  list-style: none;
+  transition: background .2s var(--ease), border-color .2s var(--ease), transform .15s ease;
+  user-select: none;
+}
+details.qr-disclosure > summary::-webkit-details-marker,
+details.qr-disclosure--repo > summary::-webkit-details-marker {
   display: none;
 }
-details.qr-disclosure > .qr-disclosure__content {
+details.qr-disclosure > summary:hover,
+details.qr-disclosure--repo > summary:hover {
+  background: #fde68a;
+  border-color: #b45309;
+}
+details.qr-disclosure[open] > summary,
+details.qr-disclosure--repo[open] > summary {
+  background: #fde68a;
+  border-color: #b45309;
+  margin-bottom: 0.6rem;
+}
+.qr-disclosure__arrow {
+  transition: transform .25s var(--ease);
+  margin-left: 0.35rem;
+}
+details[open] .qr-disclosure__arrow {
+  transform: rotate(180deg);
+}
+
+details.qr-disclosure:not([open]) > .qr-disclosure__content,
+details.qr-disclosure--repo:not([open]) > .qr-disclosure__content {
+  display: none !important;
+}
+details.qr-disclosure[open] > .qr-disclosure__content,
+details.qr-disclosure--repo[open] > .qr-disclosure__content {
   display: block !important;
 }
 
-/* Mobile: QR diringkas dalam akordeon lipat */
 @media (max-width: 768px) {
-  details.qr-disclosure > summary {
-    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-    width: 100%; padding: .65rem 1rem; border-radius: 14px;
-    background: #fef3c7; border: 2px solid #d97706;
-    color: #78350f; font: 700 .9rem var(--font); cursor: pointer;
-    list-style: none; margin: .85rem 0 .5rem;
-    transition: background .2s, border-color .2s;
-  }
-  details.qr-disclosure > summary::-webkit-details-marker { display: none; }
-  details.qr-disclosure[open] > summary {
-    background: #fde68a; border-color: #b45309;
-  }
-  .qr-disclosure__arrow {
-    transition: transform .25s var(--ease);
-    margin-left: auto;
-  }
-  details.qr-disclosure[open] .qr-disclosure__arrow {
-    transform: rotate(180deg);
+  details.qr-disclosure > summary,
+  details.qr-disclosure--repo > summary {
+    width: 100%;
+    padding: .65rem 1rem;
+    font-size: .9rem;
+    margin: .85rem 0 .5rem;
   }
   .access-primary-action .btn,
   .access-primary-action .store-badge {
