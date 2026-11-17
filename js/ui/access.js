@@ -23,7 +23,7 @@ export function initAccess() {
 
   wrap.innerHTML = `
     <!-- Kartu Google Play -->
-    <article class="card access-card access-card--equal reveal" data-reveal="shelf" data-key="playStore">
+    <article class="card access-card access-card--equal reveal" data-reveal="fade" data-key="playStore">
       <div class="access-card__head">
         <span class="chip chip--gold">Android</span>
         <h3 class="access-card__title">Google Play</h3>
@@ -41,7 +41,7 @@ export function initAccess() {
     </article>
 
     <!-- Kartu Main di Browser -->
-    <article class="card access-card access-card--equal reveal" data-reveal="shelf" data-key="webGame">
+    <article class="card access-card access-card--equal reveal" data-reveal="fade" data-key="webGame">
       <div class="access-card__head">
         <span class="chip chip--green">Browser</span>
         <h3 class="access-card__title">Main di browser</h3>

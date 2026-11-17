@@ -156,20 +156,9 @@ export async function initBukuInstruksi() {
                 ` : ''}
               </div>
 
-              <!-- Panel Struk QR Buku Instruksi (Pilihan Baca Online vs Unduh PDF) -->
+              <!-- QR Buku Instruksi (Pilihan Baca Online vs Unduh PDF) -->
               <div class="buku-card__qr-section" style="margin-top:1.4rem">
-                <details class="qr-disclosure">
-                  <summary class="qr-disclosure__trigger">
-                    <svg class="qr-disclosure__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                    <span>Tampilkan QR (untuk perangkat lain)</span>
-                    <span class="qr-disclosure__arrow" aria-hidden="true">&darr;</span>
-                  </summary>
-                  <div class="qr-disclosure__content" style="padding:.8rem 0">
-                    <div class="hanging-receipt-qr hanging-receipt-qr--buku" style="margin-top:0">
-                      <div id="buku-qr-container" style="width:100%"></div>
-                    </div>
-                  </div>
-                </details>
+                <div id="buku-qr-container" style="width:100%"></div>
               </div>
             </div>
           </div>
