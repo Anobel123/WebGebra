@@ -60,6 +60,36 @@ export function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+/**
+ * Render teks aman dari data tanpa HTML:
+ * hanya mengubah pola [teks](#jangkar) atau [teks](https://...) menjadi <a> aman,
+ * dan meng-escape seluruh karakter HTML lainnya.
+ */
+export function renderRichText(s) {
+  const raw = String(s ?? '');
+  const linkRe = /\[([^\]]+)\]\(((?:#[a-zA-Z0-9_-]+|https:\/\/[^\s)]+))\)/g;
+  let out = '';
+  let last = 0;
+  let m;
+  while ((m = linkRe.exec(raw)) !== null) {
+    out += esc(raw.slice(last, m.index));
+    const label = esc(m[1]);
+    const href = esc(m[2]);
+    const isExt = href.startsWith('https://');
+    out += isExt
+      ? `<a href="${href}" target="_blank" rel="noopener noreferrer">${label}</a>`
+      : `<a href="${href}">${label}</a>`;
+    last = linkRe.lastIndex;
+  }
+  out += esc(raw.slice(last));
+  return out;
+}
+
+/** Versi teks polos (tautan [teks](url) menjadi teks saja) untuk JSON-LD. */
+export function stripRichText(s) {
+  return String(s ?? '').replace(/\[([^\]]+)\]\((?:#[a-zA-Z0-9_-]+|https:\/\/[^\s)]+)\)/g, '$1');
+}
+
 /** Salin teks; fallback execCommand, lalu pilih teks otomatis. */
 export async function copyText(text) {
   try {

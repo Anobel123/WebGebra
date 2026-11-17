@@ -362,7 +362,7 @@ export const FAQ = [
   {
     id: 9,
     q: 'Di mana saya bisa mendapat panduan lengkap?',
-    a: 'Anda dapat membaca Buku Instruksi secara online melalui tautan interaktif atau mengunduhnya dalam format PDF pada kartu <a href="#buku-instruksi">Buku Instruksi</a> di bagian Akses Game untuk panduan menyeluruh mulai dari instalasi hingga strategi menyelesaikan level.'
+    a: 'Buku Instruksi bisa dibaca online atau diunduh sebagai PDF. Lihat [kartu Buku Instruksi](#buku-instruksi) di bagian Akses Game.'
   },
   // Pertanyaan 10 & 11 jika kosong/tampil:false otomatis disembunyikan oleh sistem FAQ
   {

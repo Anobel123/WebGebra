@@ -1,6 +1,6 @@
 // js/ui/faq.js — Modul FAQ Format Daftar Belanja Bergaris Dua Kolom (Sticky) & Skema SEO JSON-LD
 import { FAQ } from '../content.js';
-import { esc } from '../utils/safe.js';
+import { esc, renderRichText, stripRichText } from '../utils/safe.js';
 import { playSfx } from './audio.js';
 import { renderIcon } from './icons.js';
 
@@ -37,7 +37,7 @@ export function initFaq() {
       'name': f.q,
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': f.a
+        'text': stripRichText(f.a)
       }
     }))
   };
@@ -70,7 +70,7 @@ export function initFaq() {
             </button>
             <div class="faq-answer" id="faq-ans-${idx}" role="region" aria-labelledby="faq-btn-${idx}" ${idx === 0 ? '' : 'hidden'}>
               <div class="faq-answer-inner">
-                <p>${esc(f.a)}</p>
+                <p>${renderRichText(f.a)}</p>
               </div>
             </div>
           </div>
