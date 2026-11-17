@@ -191,7 +191,7 @@ function initQuiz() {
     el.innerHTML = `
       <div class="quiz-toolbar reveal" style="grid-column: 1 / -1; margin-bottom: 1rem;">
         <span class="chip chip--green" id="quiz-score-badge">Skor Kuis Kamu: 0 / ${QUIZ_SAMPLES.length} Benar</span>
-        <span class="quiz-toolbar__hint">Klik langsung pilihan A, B, C, atau D pada struk kasir!</span>
+        <span class="quiz-toolbar__hint">Pilih jawaban A, B, C, atau D.</span>
         <button class="btn btn--small btn--secondary" type="button" id="quiz-reset">Ulangi Kuis</button>
       </div>` +
       QUIZ_SAMPLES.map((q, i) => `

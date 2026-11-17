@@ -15,7 +15,7 @@ export function initDeviceGuide() {
         <h3 class="specs-heading">
           ${renderIcon('laptop-code', { size: 22 })} Spesifikasi Perangkat
         </h3>
-        <p class="specs-subheading">${esc(intro || 'Gim berjalan langsung di peramban tanpa instalasi tambahan, dan tersedia sebagai aplikasi Android.')}</p>
+        <p class="specs-subheading">${esc(intro || 'Gim berjalan di peramban tanpa instalasi tambahan, dan tersedia sebagai aplikasi Android.')}</p>
       </div>
 
       <div class="specs-table-wrapper">

@@ -112,7 +112,7 @@ export async function initBukuInstruksi() {
           Dokumen &amp; Perangkat Pembelajaran
         </span>
         <h3 style="font:900 2rem var(--font-display);color:var(--am-brown-900);margin:.5rem 0 .4rem">Buku Instruksi &amp; Modul Ajar Resmi</h3>
-        <p style="font-size:1.02rem;color:var(--am-brown-800);max-width:680px;margin:0 auto">Pelajari panduan teknis permainan secara menyeluruh atau unduh modul ajar Matematika SMP berbasis Deep Learning (PBL) untuk implementasi di kelas.</p>
+        <p style="font-size:1.02rem;color:var(--am-brown-800);max-width:680px;margin:0 auto">Pelajari panduan permainan atau unduh modul ajar Matematika SMP Fase D untuk kelas.</p>
       </div>
 
       <!-- Grid Rak 2 Dokumen Berdampingan -->

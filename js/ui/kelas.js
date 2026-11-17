@@ -169,7 +169,7 @@ export function validateKelasData(rawList) {
       id,
       nama,
       inisial: inisial || nama.split(/\s+/).map((w) => w[0]).join('').slice(0, 3).toUpperCase(),
-      tag: String(item.tag || 'Pengalaman Bermain').trim(),
+      tag: String(item.tag || 'Skenario Siswa').trim(),
       bubble: safeBubble,
       cerita,
       sumber: item.sumber === 'nyata' ? 'nyata' : (KELAS_SUMBER_DEFAULT === 'nyata' ? 'nyata' : 'ilustrasi'),

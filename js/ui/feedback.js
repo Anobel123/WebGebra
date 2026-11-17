@@ -31,7 +31,7 @@ export function initFeedback() {
       </div>
 
       <div class="field">
-        <span class="field__label" id="fb-rating-label">Rating pengalaman kamu</span>
+        <span class="field__label" id="fb-rating-label">Rating kamu</span>
         <div class="rating-group" role="radiogroup" aria-labelledby="fb-rating-label">
           ${[1, 2, 3, 4, 5].map((n) => `
             <button type="button" class="rating-star ${n <= currentRating ? 'is-on' : ''}" role="radio" aria-checked="${n === currentRating}" data-rate="${n}" aria-label="${n} Bintang">
@@ -45,7 +45,7 @@ export function initFeedback() {
 
       <div class="field">
         <label for="fb-message">Kritik &amp; saran</label>
-        <textarea id="fb-message" name="message" rows="4" placeholder="Tulis kritik, saran, atau pengalaman kamu mencoba Algebra-Mart..." required></textarea>
+        <textarea id="fb-message" name="message" rows="4" placeholder="Tulis kritik atau saran kamu tentang Algebra-Mart..." required></textarea>
       </div>
 
       <div class="feedback-form__actions">

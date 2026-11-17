@@ -66,7 +66,7 @@ export const FEATURES = [
     id: 'mode-kelas',
     size: 'compact',
     t: 'Mode Kelas & Kode Ruang Fasilitator',
-    d: 'Guru dapat membuat kode ruang belajar 4 angka (PIN 1234), memantau ketuntasan level siswa secara langsung, dan mengunduh rekap rapor asesmen formatif.',
+    d: 'Guru masuk memakai PIN 1234 untuk membuat kode ruang kelas 6 karakter. Guru memantau ketuntasan level siswa dan mengunduh rekap nilai.',
     badge: 'Fasilitator'
   },
   {
@@ -171,7 +171,7 @@ export const DEVICE_SPECS = {
     title: "Putar Perangkat ke Mode Lanskap (Mendatar)",
     desc: "Algebra-Mart dirancang untuk rasio layar 16:9 agar simulasi meja kasir, struk transaksi, dan kalkulator aljabar dapat dioperasikan secara leluasa dan nyaman."
   },
-  intro: "Gim berjalan langsung di peramban tanpa instalasi tambahan, dan tersedia sebagai aplikasi Android.",
+  intro: "Gim berjalan di peramban tanpa instalasi tambahan, dan tersedia sebagai aplikasi Android.",
   note: "Sinkronisasi Mode Kelas membutuhkan koneksi internet.",
   specs: [
     {
@@ -214,7 +214,7 @@ export const CARA_BERMAIN = [
     step: 1,
     phase: 'tahap-a',
     title: 'Pilih Platform & Buka Gim',
-    desc: 'Buka Algebra-Mart langsung melalui peramban web modern di komputer/ponsel, atau pasang aplikasi resminya melalui Google Play Store untuk akses cepat tanpa mengetik URL.',
+    desc: 'Buka Algebra-Mart di peramban web komputer atau ponsel. Kamu juga bisa memasang aplikasi dari Google Play Store.',
     badge: 'Persiapan',
     slotId: 'langkah-01',
     buttonAction: 'playStore'
@@ -275,7 +275,7 @@ export const TIPS_BERMAIN = [
   {
     icon: 'book-open',
     title: 'Pelajari Konsep di Level 0',
-    desc: 'Level 0 memuat pengantar interaktif konsep aljabar (koefisien pesanan, variabel harga barang, dan konstanta biaya kemasan) dengan tempo santai tanpa terburu-buru antrean, dianjurkan dicoba sebelum melayani pelanggan.'
+    desc: 'Level 0 berisi latihan awal konsep variabel, koefisien, dan konstanta tanpa batas waktu antrean. Coba tahap ini sebelum melayani pelanggan.'
   }
 ];
 
@@ -336,23 +336,23 @@ export const FAQ = [
   },
   {
     id: 4,
-    q: 'Bagaimana cara guru memantau perkembangan siswa di kelas secara langsung?',
-    a: 'Guru dapat masuk ke menu Fasilitator dengan memasukkan PIN untuk membuat sesi kelas daring. Setelah siswa memasukkan kode ruang 6 karakter berawalan ALJ, guru dapat memantau perolehan bintang, skor kasir, dan capaian siswa secara langsung di Papan Kehormatan.'
+    q: 'Bagaimana cara guru memantau perkembangan siswa di kelas?',
+    a: 'Guru masuk ke menu Fasilitator memakai PIN untuk membuat ruang kelas daring. Siswa memasukkan kode ruang 6 karakter berawalan ALJ, lalu guru melihat bintang dan skor di Papan Kehormatan.'
   },
   {
     id: 5,
     q: 'Apa saja cakupan materi matematika yang dipelajari di dalam 20 level?',
-    a: 'Materi terstruktur berjenjang dari C1 sampai C6 taksonomi Bloom: Level 1-3 (variabel tunggal & koefisien), Level 4-7 (dua variabel & suku sejenis), Level 8-10 (sifat komutatif & koefisien nol), Level 11-15 (substitusi nilai riil HOTS), hingga Level 16-20 (sifat distributif paket hajatan).'
+    a: 'Materi dibagi menjadi 20 level dari C1 sampai C6. Kamu berlatih variabel tunggal, suku sejenis, sifat komutatif, substitusi harga, hingga sifat distributif.'
   },
   {
     id: 6,
     q: 'Di mana saya dapat mengunduh atau memainkan gim ini?',
-    a: 'Anda dapat langsung memainkannya melalui peramban web modern di komputer maupun ponsel, atau mengunduh aplikasi resminya melalui tautan Google Play Store yang tersedia di bagian Akses Gim.'
+    a: 'Buka gim lewat peramban web di komputer atau ponsel. Kamu juga bisa memasang aplikasi Android dari Google Play di bagian Akses Game.'
   },
   {
     id: 7,
     q: 'Mengapa layar gim meminta saya untuk memutar perangkat ke mode lanskap?',
-    a: 'Tata letak antarmuka meja kasir dioptimalkan pada aspek rasio 16:9 agar simulasi kalkulator kasir, struk belanja, dan dialog pesanan pelanggan dapat terbaca secara proporsional dan nyaman diklik.'
+    a: 'Tampilan gim memakai rasio 16:9 agar kalkulator kasir, daftar pesanan, dan tombol angka mudah terbaca.'
   },
   {
     id: 8,

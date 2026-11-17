@@ -7,7 +7,7 @@
 export const KELAS_SUMBER_DEFAULT = 'ilustrasi';
 
 export const KELAS_LABELS = {
-  ilustrasi: 'Karakter dan kutipan ini ilustrasi untuk menggambarkan pengalaman bermain, bukan testimoni siswa.',
+  ilustrasi: 'Karakter dan kutipan ini ilustrasi alur bermain, bukan testimoni siswa.',
   nyata: 'Masukan dari pemain uji coba Algebra-Mart.'
 };
 

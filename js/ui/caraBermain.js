@@ -113,7 +113,7 @@ export function initCaraBermain() {
       ${demoRoom ? `
         <div class="demo-room-box">
           <div class="demo-room-badge">${renderIcon('chalkboard-user', { size: 16 })} Kode Ruang Uji Coba Guru / Juri</div>
-          <p class="demo-room-text">Gunakan kode ruang berikut untuk langsung bergabung ke sesi simulasi Mode Kelas:</p>
+          <p class="demo-room-text">Gunakan kode ruang berikut untuk bergabung ke sesi simulasi Mode Kelas:</p>
           <div class="demo-room-code-tag">
             <span class="code-val">${esc(demoRoom)}</span>
             <button class="btn btn--small btn--secondary" type="button" data-copy="${esc(demoRoom)}">Salin Kode</button>
@@ -146,9 +146,8 @@ export function initCaraBermain() {
           <div class="guru-guide-icon">${renderIcon('chalkboard-user', { size: 30 })}</div>
           <div style="flex:1">
             <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
-              <span class="guru-guide-badge">${esc(GURU_GUIDE.badge)}</span>
               <span class="chip chip--gold" style="font-weight:800;font-size:.76rem;background:#fef3c7;color:#78350f;border:1.5px solid #d97706;padding:.2rem .65rem;border-radius:999px">
-                ${renderIcon('sparkles', { size: 13 })} Segera Hadir · Soon Added
+                Segera Hadir
               </span>
             </div>
             <h4 class="guru-guide-title">${esc(GURU_GUIDE.title)}</h4>
@@ -156,15 +155,10 @@ export function initCaraBermain() {
           </div>
         </div>
 
-        <!-- Wadah Segera Hadir Guru (Soon Added) -->
         <div class="guru-soon-box" style="background:rgba(0,0,0,0.22);border:2px dashed rgba(251,191,36,0.45);border-radius:20px;padding:2.2rem 1.8rem;text-align:center;color:#fffdf5">
-          <div style="width:60px;height:60px;margin:0 auto 1rem;border-radius:50%;background:rgba(251,191,36,0.18);display:grid;place-items:center;border:2px solid #fbbf24;color:#fbbf24">
-            ${renderIcon('sparkles', { size: 28 })}
-          </div>
-          <span class="badge-pill" style="background:#fbbf24;color:#451a03;font-weight:900;font-size:.78rem;margin-bottom:.6rem;display:inline-block">PANDUAN INTERAKTIF GURU</span>
-          <h5 style="font:800 1.35rem var(--font-display);color:#fef3c7;margin:.3rem 0 .6rem">Tangkapan Layar &amp; Panduan Fasilitator Segera Hadir</h5>
+          <h5 style="font:800 1.35rem var(--font-display);color:#fef3c7;margin:.3rem 0 .6rem">Panduan Ruang Fasilitator Segera Hadir</h5>
           <p style="max-width:620px;margin:0 auto 1.4rem;color:#fde68a;font-size:.95rem;line-height:1.6">
-            Panduan interaktif langkah demi langkah untuk Ruang Fasilitator (pembuatan sesi kelas online, PIN pengawas, dan pemantauan statistik EWS) sedang dipersiapkan. Untuk saat ini, Bapak/Ibu Guru dan juri dapat mengunduh serta membaca <strong>Modul Ajar Matematika (RPP &amp; Soal)</strong> dan <strong>Buku Instruksi</strong> resmi pada bagian di bawah ini.
+            Panduan langkah demi langkah untuk Ruang Fasilitator sedang disiapkan. Sementara itu, Bapak/Ibu Guru bisa mengunduh <strong>Modul Ajar</strong> dan Buku Instruksi di bawah ini.
           </p>
           <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap">
             <a href="#buku-instruksi" class="btn btn--gold" style="min-height:44px;color:#451a03">
