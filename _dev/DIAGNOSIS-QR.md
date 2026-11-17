@@ -26,3 +26,4 @@ Semua target URL di `js/config.js` telah diuji dekode melalui generator `js/ui/q
   2. Kartu memiliki 2 pil berulang (*"Aplikasi Resmi Android"*, *"Tersedia di Store"*, *"Akses Instan Peramban"*, *"Tanpa Pasang"*).  
   3. Tombol Play Store memakai SVG tiruan lencana Google Play padahal berkas resmi `assets/img/badge-google-play.*` belum ada.  
   4. Tombol Web memakai warna hijau dengan ikon koin dekoratif, bukan amber (`#f59e0b`) teks cokelat tua dengan tulisan *"Mainkan sekarang"*.
+
