@@ -161,7 +161,7 @@ export const INSTITUTION = {
     { key: 'algebramart', title: 'Logo Algebra-Mart', badge: 'AM', src: 'assets/logo/logo-algebra-mart.png', alt: 'Logo produk Algebra-Mart', desc: 'Identitas resmi gim edukasi Algebra-Mart' },
     { key: 'tim', title: 'Logo Tim Pengembang', badge: 'TIM', src: 'assets/logo/logo-tim.png', alt: 'Logo Tim Pengembang Algebra-Mart', desc: 'Identitas tim pengembang LIDM 2026' },
     { key: 'kampus', title: 'Logo Universitas Jambi', badge: 'UNJA', src: 'assets/logo/logo-kampus.png', alt: 'Logo Universitas Jambi', desc: 'Perguruan tinggi asal tim pengembang' },
-    { key: 'lidm', title: 'Logo LIDM 2026', badge: 'LIDM', src: 'assets/logo/logo-lidm.png', alt: 'Logo Lomba Inovasi Digital Mahasiswa 2026', desc: 'Ajang kompetisi nasional' }
+    { key: 'lidm', title: 'Logo LIDM 2026', badge: 'LIDM', src: 'assets/logo/logo-lidm.png?v=20261117', alt: 'Logo LIDM 2026', desc: 'Ajang kompetisi nasional' }
   ]
 };
 

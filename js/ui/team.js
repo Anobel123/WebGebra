@@ -76,7 +76,9 @@ export function initTeam() {
   const inst = document.getElementById('institution');
   if (inst) {
     const logosHtml = INSTITUTION.logos.map((lg) => `
-      <img src="${esc(lg.src)}" alt="${esc(lg.alt)}" title="${esc(lg.title)}" width="64" height="64" loading="lazy" onerror="this.style.display='none'">
+      <span class="logo-plate">
+        <img src="${esc(lg.src)}" alt="${esc(lg.alt)}" title="${esc(lg.title)}" loading="lazy" onerror="this.closest('.logo-plate').style.display='none'">
+      </span>
     `).join('');
 
     const comp = SITE_CONFIG.competition || {};
