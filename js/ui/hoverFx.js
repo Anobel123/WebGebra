@@ -165,13 +165,6 @@ export function upgradeHoverElements(root = document) {
       if (existingSvg) existingSvg.remove();
 
       btn.textContent = '';
-      // Koin kecil 3D di dalam tombol
-      const coin = document.createElement('span');
-      coin.className = 'btn__coin';
-      coin.setAttribute('aria-hidden', 'true');
-      coin.textContent = 'x';
-      btn.appendChild(coin);
-
       if (existingSvg) btn.appendChild(existingSvg);
 
       // Pembungkus label bergeser

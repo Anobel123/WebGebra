@@ -2104,72 +2104,10 @@ body.lightbox-open {
   object-fit: contain; display: block;
 }
 
-/* ===== 9. COLLAPSIBLE QR ACCORDION & ACCESS CTA ===== */
-details.qr-disclosure,
-details.qr-disclosure--repo {
-  display: block;
-  width: 100%;
-}
-details.qr-disclosure > summary,
-details.qr-disclosure--repo > summary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-  padding: .45rem .95rem;
-  border-radius: 12px;
-  background: #fef3c7;
-  border: 1.5px solid #d97706;
-  color: #78350f;
-  font: 700 .85rem var(--font, system-ui, sans-serif);
-  cursor: pointer;
-  list-style: none;
-  transition: background .2s var(--ease), border-color .2s var(--ease), transform .15s ease;
-  user-select: none;
-}
-details.qr-disclosure > summary::-webkit-details-marker,
-details.qr-disclosure--repo > summary::-webkit-details-marker {
-  display: none;
-}
-details.qr-disclosure > summary:hover,
-details.qr-disclosure--repo > summary:hover {
-  background: #fde68a;
-  border-color: #b45309;
-}
-details.qr-disclosure[open] > summary,
-details.qr-disclosure--repo[open] > summary {
-  background: #fde68a;
-  border-color: #b45309;
-  margin-bottom: 0.6rem;
-}
-.qr-disclosure__arrow {
-  transition: transform .25s var(--ease);
-  margin-left: 0.35rem;
-}
-details[open] .qr-disclosure__arrow {
-  transform: rotate(180deg);
-}
-
-details.qr-disclosure:not([open]) > .qr-disclosure__content,
-details.qr-disclosure--repo:not([open]) > .qr-disclosure__content {
-  display: none !important;
-}
-details.qr-disclosure[open] > .qr-disclosure__content,
-details.qr-disclosure--repo[open] > .qr-disclosure__content {
-  display: block !important;
-}
-
+/* ===== 9. MOBILE ACCESS CTA ===== */
 @media (max-width: 768px) {
-  details.qr-disclosure > summary,
-  details.qr-disclosure--repo > summary {
-    width: 100%;
-    padding: .65rem 1rem;
-    font-size: .9rem;
-    margin: .85rem 0 .5rem;
-  }
-  .access-primary-action .btn,
-  .access-primary-action .store-badge {
-    width: 100%; min-height: 52px; font-size: 1.1rem; justify-content: center;
+  .access-primary-action .btn {
+    width: 100%; min-height: 48px; font-size: 1.05rem; justify-content: center;
   }
 }
 
@@ -3924,55 +3862,72 @@ input, select, textarea {
 }
 
 /* --------------------------------------------------------------------------
-   4. AKSES GAME: HUB MEJA TRANSAKSI ASIMETRIS (DIAGONAL CUT)
+   4. AKSES GAME: DUA KARTU SEJAJAR & QR LANGSUNG
    -------------------------------------------------------------------------- */
 .access-hub-asymmetric {
   display: grid;
-  grid-template-columns: 1.35fr 0.95fr;
-  gap: 2.2rem;
-  margin: 2.5rem 0 2rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2.2rem 0 2rem;
   align-items: stretch;
 }
 
-/* Kartu Google Play Store Terbesar di Kiri Atas */
-.access-card--playstore {
+.access-card--equal {
   background: var(--am-card);
-  border: 4px solid var(--am-brown-800);
+  border: 3.5px solid var(--am-brown-800);
   border-radius: 24px;
-  padding: 2rem;
+  padding: 1.8rem;
   box-shadow: var(--shadow-timber);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  gap: 1.2rem;
 }
 
-/* Struk Gantung Berisi Kode QR */
-.hanging-receipt-qr {
-  background: #fffdf5;
-  border: 2px dashed rgba(120, 53, 15, .4);
-  border-radius: 14px;
-  padding: 1.2rem;
-  margin-top: 1.2rem;
-  box-shadow: 0 6px 14px rgba(69, 26, 3, .12);
+.access-card__head {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  transform: rotate(-0.8deg);
-  transition: transform .25s var(--ease);
-}
-.hanging-receipt-qr:hover {
-  transform: rotate(0deg) scale(1.01);
-}
-.hanging-receipt-qr--web {
-  transform: rotate(0.8deg);
-}
-.hanging-receipt-qr--buku {
-  transform: rotate(0deg);
-  background: #fffdf5;
+  gap: .55rem;
 }
 
-/* Kartu Struk QR & Kontrol Segmented */
+.access-card__title {
+  margin: .3rem 0 0;
+  font-size: 1.4rem;
+  color: var(--am-brown-900);
+}
+
+.access-card__desc {
+  margin: 0;
+  font-size: .96rem;
+  color: var(--am-ink);
+  line-height: 1.5;
+  max-width: 34ch;
+}
+
+.access-primary-action {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.access-main-btn {
+  background: #f59e0b !important;
+  color: #451a03 !important;
+  border: 2.5px solid #451a03 !important;
+  font-weight: 800 !important;
+  min-width: 210px;
+}
+
+.access-qr-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Kartu QR & Kontrol Segmented */
 .receipt-qr-card {
   width: 100%;
   display: flex;
@@ -4013,7 +3968,7 @@ input, select, textarea {
   flex-wrap: wrap;
 }
 .qr-actions .btn {
-  min-height: 38px;
+  min-height: 36px;
   padding: 0.35rem 0.75rem;
   font-size: 0.8rem;
   font-weight: 700;
@@ -4022,40 +3977,49 @@ input, select, textarea {
   gap: 0.35rem;
 }
 
-/* Panel Lipat QR Repositori & APK (Selalu Lipat Baik Desktop Maupun Mobile) */
-details.qr-disclosure--repo > summary {
-  display: inline-flex !important;
-  width: auto !important;
-  margin: 0 !important;
-}
-details.qr-disclosure--repo:not([open]) > .qr-disclosure__content {
-  display: none !important;
-}
-details.qr-disclosure--repo[open] > summary {
-  margin-bottom: 0.6rem !important;
-}
-
 @media (max-width: 640px) {
   .qr-box {
-    width: 200px !important;
-    height: 200px !important;
+    width: 176px !important;
+    height: 176px !important;
     padding: 8px !important;
     border-radius: 16px !important;
   }
 }
 
-/* Baris Tautan APK & Repositori Titik-Titik di Bawah */
+/* Baris Tautan APK & Repositori */
 .inventory-links-strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   background: var(--am-cream-50);
   border: 2px dashed var(--am-amber-600);
   border-radius: 16px;
-  padding: 1.2rem 1.8rem;
-  margin: 2rem 0;
+  padding: 1.4rem 1.8rem;
+  margin: 0.5rem 0 0;
+  align-items: start;
+}
+.inventory-link-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.8rem;
+}
+.inventory-link-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+.access-strip-qr {
+  width: 100%;
+  max-width: 240px;
+}
+@media (max-width: 768px) {
+  .inventory-links-strip {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Buku Instruksi 3D Bersandar di Meja */

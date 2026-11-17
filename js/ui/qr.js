@@ -25,24 +25,23 @@ export const QR_CONFIG = {
   geometry: {
     quietZone: 4,             // Zona tenang minimal 4 modul di tiap sisi
     displaySizeDesktop: 220,  // Ukuran minimal layar desktop >= 200px
-    displaySizeMobile: 180,   // Ukuran minimal layar mobile >= 176px
+    displaySizeMobile: 176,   // Ukuran layar mobile ±176px
     downloadResolution: 2048  // PNG unduhan standar cetak 2048 x 2048 px
   }
 };
 
 let cachedLogoImage = null;
-let logoLoadAttempted = false;
+let logoLoadPromise = null;
 
 /**
- * Memuat berkas logo Algebra-Mart secara aman (singleton).
- * Fallback anggun: jika berkas hilang atau korup, otomatis return null tanpa console error.
+ * Memuat berkas logo Algebra-Mart secara aman (singleton berbasis Promise).
+ * Memastikan seluruh pemanggil paralel menunggu pemuatan yang sama selesai.
  */
 export async function getLogoImage() {
   if (cachedLogoImage) return cachedLogoImage;
-  if (logoLoadAttempted) return null;
-  logoLoadAttempted = true;
+  if (logoLoadPromise) return logoLoadPromise;
 
-  return new Promise((resolve) => {
+  logoLoadPromise = new Promise((resolve) => {
     try {
       const img = new Image();
       img.crossOrigin = 'anonymous';
@@ -51,7 +50,6 @@ export async function getLogoImage() {
         resolve(img);
       };
       img.onerror = () => {
-        // Fallback otomatis tanpa melempar error
         cachedLogoImage = null;
         resolve(null);
       };
@@ -60,6 +58,8 @@ export async function getLogoImage() {
       resolve(null);
     }
   });
+
+  return logoLoadPromise;
 }
 
 /**
@@ -342,16 +342,14 @@ export async function renderQRCard(container, opts = {}) {
   const {
     url,
     type = 'akses',
-    caption = 'Pindai untuk membuka',
-    alt = 'QR menuju Algebra-Mart',
-    isCollapsible = false,
-    collapsibleTitle = 'Tampilkan QR'
+    caption = 'Pindai dengan kamera ponsel',
+    alt = 'QR menuju Algebra-Mart'
   } = opts;
 
   if (!url || !isValidUrl(url)) {
     container.innerHTML = `
       <div class="qr-placeholder" style="padding:1.5rem;text-align:center;color:var(--am-muted);font-size:.9rem">
-        <span>Segera Hadir</span>
+        <span>Segera hadir</span>
       </div>
     `;
     return null;
@@ -367,42 +365,23 @@ export async function renderQRCard(container, opts = {}) {
 
     const cardHtml = `
       <div class="receipt-qr-card" data-qr-type="${esc(type)}">
-        <div class="qr-box" style="margin:0 auto">
-          <!-- Canvas di-inject di sini -->
-        </div>
+        <div class="qr-box" style="margin:0 auto"></div>
         <p class="qr-caption" style="margin:.6rem 0 .7rem;font-size:.85rem;color:var(--am-brown-900);font-weight:700;text-align:center">${esc(caption)}</p>
         <div class="qr-actions" style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap">
-          <button type="button" class="btn btn--small btn--secondary btn-qr-dl-png" data-action="dl-png" title="Unduh resolusi tinggi 2048x2048 solid krem">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span>Unduh (PNG)</span>
+          <button type="button" class="btn btn--small btn--secondary btn-qr-dl-png" data-action="dl-png" title="Unduh resolusi tinggi 2048x2048">
+            <span>Unduh PNG</span>
           </button>
-          <button type="button" class="btn btn--small btn--secondary btn-qr-dl-svg" data-action="dl-svg" title="Unduh format vektor SVG untuk cetak atau Canva">
+          <button type="button" class="btn btn--small btn--secondary btn-qr-dl-svg" data-action="dl-svg" title="Unduh format vektor SVG">
             <span>SVG</span>
           </button>
           <button type="button" class="btn btn--small btn--secondary btn-qr-copy" data-action="copy" title="Salin tautan">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             <span>Salin</span>
           </button>
         </div>
       </div>
     `;
 
-    if (isCollapsible) {
-      container.innerHTML = `
-        <details class="qr-disclosure">
-          <summary class="qr-disclosure__trigger">
-            <svg class="qr-disclosure__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            <span>${esc(collapsibleTitle)}</span>
-            <span class="qr-disclosure__arrow" aria-hidden="true">&darr;</span>
-          </summary>
-          <div class="qr-disclosure__content" style="padding:.8rem 0">
-            ${cardHtml}
-          </div>
-        </details>
-      `;
-    } else {
-      container.innerHTML = cardHtml;
-    }
+    container.innerHTML = cardHtml;
 
     const box = container.querySelector('.qr-box');
     if (box) {
