@@ -2147,25 +2147,61 @@ input, select, textarea {
   margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
 }
 .buku-shelf-grid .buku-card__grid {
   grid-template-columns: 165px 1fr;
-  gap: 1.8rem;
-  align-items: start;
+  gap: 1.6rem;
+  align-items: stretch;
+  height: 100%;
+}
+.buku-card__info {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.buku-card__top {
+  flex: 1;
 }
 .buku-shelf-grid .buku-card__title {
-  font-size: 1.45rem;
-  margin: 0.2rem 0 0.5rem;
+  font-size: 1.38rem;
+  margin: 0 0 0.25rem;
+}
+.buku-card__meta {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--am-muted);
+  margin: 0 0 0.7rem;
 }
 .buku-shelf-grid .buku-card__desc {
   font-size: 0.94rem;
   line-height: 1.55;
-  margin-bottom: 1.2rem;
+  margin: 0 0 1.1rem;
 }
 .buku-shelf-grid .buku-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
   margin-top: auto;
+}
+.buku-btn-unduh {
+  background: #f59e0b !important;
+  color: #451a03 !important;
+  border: 2px solid #451a03 !important;
+  min-height: 44px;
+}
+.buku-btn-baca {
+  min-height: 44px;
+}
+.buku-card__qr-section {
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1.5px dashed rgba(120, 53, 15, 0.22);
+}
+.doc-qr-seg-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.8rem;
 }
 
 @media (max-width: 1040px) {
@@ -2179,6 +2215,16 @@ input, select, textarea {
     grid-template-columns: 180px 1fr;
   }
 }
+@media (max-width: 768px) {
+  .buku-shelf-grid .buku-card__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .buku-shelf-grid .buku-card__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
 @media (max-width: 640px) {
   .buku-shelf-grid .buku-card__grid {
     grid-template-columns: 1fr;
@@ -2189,16 +2235,8 @@ input, select, textarea {
     margin: 0 auto;
     max-width: 180px;
   }
-  .buku-shelf-grid .buku-card__header {
-    justify-content: center;
-  }
-  .buku-shelf-grid .buku-card__actions {
-    flex-direction: column;
-    width: 100%;
-  }
-  .buku-shelf-grid .buku-card__actions .btn {
-    width: 100%;
-    justify-content: center;
+  .buku-shelf-grid .buku-card__meta {
+    text-align: center;
   }
 }
 
