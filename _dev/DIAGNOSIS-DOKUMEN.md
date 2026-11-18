@@ -27,3 +27,4 @@ Sebelumnya `js/ui/bukuInstruksi.js` merender kartu Buku dan kartu Modul melalui 
 - Kedua kartu memakai dua pil berulang (*"Buku Panduan Gim"*, *"Perangkat Ajar · RPP & Soal"*, dan pil ukuran).
 
 Solusi: `SITE_CONFIG.dokumen` diubah menjadi array `dokumen[]` berisi `{ id, judul, deskripsi, sampul, berkas, bacaOnlineUrl, namaUnduh, versi, labelUnduh, qrNoun }`, dan `js/ui/bukuInstruksi.js` merender seluruh kartu melalui **satu** fungsi komponen data-driven.
+
